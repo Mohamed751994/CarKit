@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "77a1147f-4e8b-4023-9bc9-a47ee070180c",
+		"name": "CarKit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vendor Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/api/vendor/register?name=معرض Bmw للسيارات&email=vendor@vendor.com&phone=+201098541100&password=12345678&password_confirmation=12345678",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"vendor",
+						"register"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "معرض Bmw للسيارات"
+						},
+						{
+							"key": "email",
+							"value": "vendor@vendor.com"
+						},
+						{
+							"key": "phone",
+							"value": "+201098541100"
+						},
+						{
+							"key": "password",
+							"value": "12345678"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "12345678"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{domain}}/api/vendor/login?email=vendor@vendor.com&password=12345678",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"vendor",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "vendor@vendor.com"
+						},
+						{
+							"key": "password",
+							"value": "12345678"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|zo1vwphvZmUJx3RMKy9nKT2dbWjVPQUsN3XaqMz902b1215f",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/api/vendor/logout",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"vendor",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vendor Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "معرض تبارك للسيارات",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "شارع الجيزة أمام حديقة الحيوان",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/user/Desktop/car.jpg"
+						},
+						{
+							"key": "google_map",
+							"value": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.4287779153333!2d31.34872607470742!3d30.05324161815539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e79b3555a13%3A0x31ecb84b283a8f3d!2s6%20Assem%20Abdelhameed%2C%20Al%20Manteqah%20Ath%20Thamenah%2C%20Nasr%20City%2C%20Cairo%20Governorate%204441590!5e0!3m2!1sen!2seg!4v1694867946836!5m2!1sen!2seg",
+							"type": "text"
+						},
+						{
+							"key": "working_hours",
+							"value": "9:00 am - 11:00 pm",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/api/vendor/update-vendor-details",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"vendor",
+						"update-vendor-details"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "معرض تبارك للسيارات",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "26 شارع الجيزة أمام حديقة الحيوان",
+							"disabled": true
+						},
+						{
+							"key": "image",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor Creat New Car",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "brand",
+							"value": "Kia",
+							"type": "text"
+						},
+						{
+							"key": "model",
+							"value": "Pride",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2006",
+							"type": "text"
+						},
+						{
+							"key": "fuel_type",
+							"value": "بنزين",
+							"type": "text"
+						},
+						{
+							"key": "motor_type",
+							"value": "مانوال",
+							"type": "text"
+						},
+						{
+							"key": "cc",
+							"value": "1300",
+							"type": "text"
+						},
+						{
+							"key": "kilometers",
+							"value": "150000",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "أحمر",
+							"type": "text"
+						},
+						{
+							"key": "seats",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "doors",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "outside_look",
+							"value": "سيدان",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/user/Desktop/kia.jpg"
+						},
+						{
+							"key": "price_per_day",
+							"value": "400",
+							"type": "text"
+						},
+						{
+							"key": "central_point_pickup",
+							"value": "نقطة التسليم والاستلام : أمام المعرض",
+							"type": "text"
+						},
+						{
+							"key": "additions[0]",
+							"value": "تكييف",
+							"type": "text"
+						},
+						{
+							"key": "additions[1]",
+							"value": "سماعات",
+							"type": "text"
+						},
+						{
+							"key": "features[0]",
+							"value": "الغاء حجز",
+							"type": "text"
+						},
+						{
+							"key": "features[1]",
+							"value": "بنزين ممتلئ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/api/vendor/create-new-car",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"api",
+						"vendor",
+						"create-new-car"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
