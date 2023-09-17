@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vendor extends Model
 {
@@ -12,7 +13,11 @@ class Vendor extends Model
 
     public function user()
     {
-       return  $this->belongsTo('App\Models\User', 'user_id');
+        return  $this->belongsTo('App\Models\User', 'user_id');
     }
 
+    public function car(): HasMany
+    {
+        return $this->hasMany(Car::class);
+    }
 }

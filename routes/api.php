@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VendorControllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/cars', [CarController::class, 'get_all_cars'])->name('vendor.get_all_cars');
+Route::get('/cars/{car_id}', [CarController::class, 'get_single_car'])->name('vendor.get_single_car');
