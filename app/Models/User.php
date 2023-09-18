@@ -58,4 +58,9 @@ class User extends Authenticatable
        return $this->hasOne('App\Models\Vendor', 'user_id');
     }
 
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class, 'user_id');
+    }
 }

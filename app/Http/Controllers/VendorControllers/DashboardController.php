@@ -5,6 +5,7 @@ namespace App\Http\Controllers\VendorControllers;
 use App\Http\Requests\VendorDetailsRequest;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Models\Tanant;
 use App\Traits\MainTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,16 +26,27 @@ class DashboardController extends Controller
                 $image = $this->uploadFile($request,'image', 'uploads/');
                 $data['image'] = $image;
             }
-            Vendor::where('user_id',$this->user_id())->update($data);
-            return $this->successResponse('تم تعديل بيانات المعرض بنجاح', []);
+            $vendor = Vendor::where('user_id',$this->user_id())->update($data);
+            return $this->successResponse('تم تعديل بيانات المعرض بنجاح', $vendor);
         } catch (\Throwable $th) {
         return $this->errorResponse($th->getMessage());
         }
     }
 
+    public function get_vendor_cars_reservation()
+    {
+        try {
+            $reservations = Tanant::latest()->where('vendor_user_id',$this->user_id())->get();
 
+            foreach ($reservations as $key => $reservation) {
+                $reservation['car_details'] = json_decode($reservation['car_details']);
+            }
 
-
+            return $this->successResponse('تم تعديل بيانات المعرض بنجاح', $reservations);
+        } catch (\Throwable $th) {
+        return $this->errorResponse($th->getMessage());
+        }
+    }
 
 
 

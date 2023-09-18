@@ -43,12 +43,9 @@ class CarController extends Controller
             $user_id = $this->user_id();
             $cars = Car::where('user_id', $user_id)->latest()->get();
 
-            if (!$cars->isEmpty()) {
-                $vendor_name = Auth::user()->name;
-                return $this->successResponse("سيارات التاجر ($vendor_name)", $cars);
-            } else {
-                return $this->errorResponse('لايوجد سيارات لهذا التاجر', 404);
-            }
+            $vendor_name = Auth::user()->name;
+            return $this->successResponse("سيارات التاجر ($vendor_name)", $cars);
+  
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
@@ -60,11 +57,8 @@ class CarController extends Controller
 
             $cars = Car::latest()->get();
 
-            if (!$cars->isEmpty()) {
-                return $this->successResponse('جميع السيارات', $cars);
-            } else {
-                return $this->errorResponse('لايوجد سيارات حاليا', 404);
-            }
+            return $this->successResponse('جميع السيارات', $cars);
+
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
@@ -76,11 +70,8 @@ class CarController extends Controller
 
             $car = Car::find($id)->with('vendor')->get();
 
-            if (!$car->isEmpty()) {
-                return $this->successResponse('بيانات السيارة', $car);
-            } else {
-                return $this->errorResponse('معرف السيارة غير صحيح', 400);
-            }
+            return $this->successResponse('بيانات السيارة', $car);
+
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }

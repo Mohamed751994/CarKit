@@ -12,8 +12,8 @@ class Car extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function vendor(): belongsTo
+    public function user(): belongsTo
     {
-        return $this->belongsTo(Vendor::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

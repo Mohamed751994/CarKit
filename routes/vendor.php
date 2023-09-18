@@ -29,5 +29,6 @@ Route::namespace('App\Http\Controllers\VendorControllers')->group(function () {
         Route::post('/update-vendor-details', [DashboardController::class, 'update_vendor_details'])->name('vendor.update.details');
         Route::post('/create-new-car', [CarController::class, 'create_new_car'])->name('vendor.create_new_car');
         Route::get('/get-vendor-cars', [CarController::class, 'get_vendor_cars'])->name('vendor.get_vendor_cars');
+        Route::get('/cars-reservations', [DashboardController::class, 'get_vendor_cars_reservation'])->name('vendor.get_vendor_cars_reservation');
     });
 });

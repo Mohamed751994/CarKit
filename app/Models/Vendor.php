@@ -16,8 +16,4 @@ class Vendor extends Model
         return  $this->belongsTo('App\Models\User', 'user_id');
     }
 
-    public function car(): HasMany
-    {
-        return $this->hasMany(Car::class);
-    }
 }

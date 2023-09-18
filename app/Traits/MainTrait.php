@@ -45,7 +45,7 @@ trait MainTrait
     //Full image path
     public function image_full_path($image)
     {
-        return asset('/store/'. $image);
+        return asset('/uploads/'. $image);
     }
 
     //Save Vendor Details when User Register
