@@ -27,7 +27,7 @@ class CarReservationRequest extends FormRequest
             'lname' => 'required|max:255',
             'age'=> 'required|gt:17|lte:100',
             'email'=> 'required|max:255',
-            'phone'=> 'required|max:255',
+            'phone'=> 'required|regex:/(^01[0125][0-9]{8}$)/',
             'trip_num'=> 'required|max:6|unique:tanants',
             'nid_img'=> 'required|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
             'license_img'=> 'required|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
