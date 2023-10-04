@@ -14,4 +14,4 @@ jobs:
           server: ftp.nama-taiba.com
           username: carkit@carkitapi.nama-taiba.com
           password: JDDIAvrEAwIq
-          server-dir: /carkitapi.nama-taiba.com
+          server-dir: /carkitapi.nama-taiba.com/
