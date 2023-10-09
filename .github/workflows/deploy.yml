@@ -15,7 +15,5 @@ jobs:
           username: carkit@carkitapi.nama-taiba.com
           password: JDDIAvrEAwIq
           server-dir: /
-
-    tasks:
-      deploy:
-        - artisan:migrate
+script:
+  - php artisan migrate
