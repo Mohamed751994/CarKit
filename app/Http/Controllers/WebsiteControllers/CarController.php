@@ -7,6 +7,8 @@ use App\Http\Requests\CarReservationRequest;
 
 
 use App\Models\Car;
+use App\Models\CarsBrand;
+use App\Models\CarsModel;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Tanant;
@@ -21,6 +23,31 @@ use Illuminate\Support\Str;
 class CarController extends Controller
 {
     use MainTrait;
+
+
+    public function get_all_cars_brands()
+    {
+        try {
+            $brands = CarsBrand::orderBy('brand_name')->get();
+            return $this->successResponse('جميع الماركات', $brands);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+
+    public function get_all_cars_brand_models()
+    {
+        try {
+            $models = CarsModel::where('brand_id',\request('brand_id'))->orderBy('brand_name')->get();
+            return $this->successResponse('الموديلات', $models);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
 
     public function get_all_cars()
     {

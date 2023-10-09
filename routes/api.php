@@ -19,6 +19,11 @@ use App\Http\Controllers\WebsiteControllers\CarController;
 Route::get('/cars', [CarController::class, 'get_all_cars'])->name('vendor.get_all_cars');
 Route::get('/car/{car_id}', [CarController::class, 'get_single_car'])->name('vendor.get_single_car');
 Route::post('/reserve', [CarController::class, 'reserve_car'])->name('user.reserve_car');
+
+
+Route::get('/get-all-cars-brands', [CarController::class, 'get_all_cars_brands'])->name('vendor.get_all_cars_brands');
+Route::get('/get-all-cars-brand-models', [CarController::class, 'get_all_cars_brand_models'])->name('vendor.get_all_brand_models');
+
 // Route::post('/reserve', function () {
 //     return '123';
 // });
