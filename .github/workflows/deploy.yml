@@ -17,5 +17,5 @@ jobs:
           server-dir: /
 
       - name: 🔨 Build Project
-          run:
+          runs:
             php artisan migrate
