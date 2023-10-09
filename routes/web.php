@@ -18,9 +18,9 @@ Route::get('/', function () {
 /*------------------------------------------
 All Normal Users Routes List
 --------------------------------------------*/
-//Route::middleware(['auth', 'user-access:user'])->group(function () {
-//    Route::get('/user', function () {
-//        return 'user';
-//    });
-//});
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/user', function () {
+        return 'user';
+    });
+});
 
