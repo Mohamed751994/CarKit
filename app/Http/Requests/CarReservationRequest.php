@@ -51,14 +51,17 @@ class CarReservationRequest extends FormRequest
             'age.lte' => 'العمر  يجب ان يكون اقل من او يساوي 100 سنه',
             'email.required' => ' البريد الالكتروني  مطلوب',
             'phone.required' => 'الهاتف مطلوب',
+            'phone.regex' => 'ادخل رقم الهاتف بطريقة صحيحة يجب أن يكون رقم مصري  ويبدأ ب 01',
             'address.required' => 'العنوان مطلوب',
             'trip_num.required' => 'رقم الرحلة مطلوب',
 
             'nid_img.required' => 'صوره الهوية الوطنية مطلوبة',
-            'nid_img.required' => 'صوره رخصة القيادة مطلوبة',
+            'license_img.required' => 'صوره رخصة القيادة مطلوبة',
 
-            'image.mimes' => 'يجب أن تكون صيغة الصورة (png - jpg - jpeg - webp - svg - gif) ',
-            'image.max' => 'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
+            'nid_img.mimes' => 'يجب أن تكون صيغة الصورة (png - jpg - jpeg - webp - svg - gif) ',
+            'nid_img.max' => 'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
+            'license_img.mimes' => 'يجب أن تكون صيغة الصورة (png - jpg - jpeg - webp - svg - gif) ',
+            'license_img.max' => 'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
 
             'from_date.required' => ' تاريخ البداية  مطلوب',
             'to_date.required' => ' تاريخ النهاية  مطلوب',

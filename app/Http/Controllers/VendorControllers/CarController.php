@@ -45,7 +45,7 @@ class CarController extends Controller
 
             $vendor_name = Auth::user()->name;
             return $this->successResponse("سيارات التاجر ($vendor_name)", $cars);
-  
+
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
@@ -68,7 +68,7 @@ class CarController extends Controller
     {
         try {
 
-            $car = Car::find($id)->with('vendor')->get();
+            $car = Car::with('vendor')->find($id);
 
             return $this->successResponse('بيانات السيارة', $car);
 
