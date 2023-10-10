@@ -40,7 +40,7 @@ class CarController extends Controller
     public function get_all_cars_brand_models()
     {
         try {
-            $models = CarsModel::where('brand_id',\request('brand_id'))->orderBy('brand_name')->get();
+            $models = CarsModel::where('brand_id',\request('brand_id'))->orderBy('model_name')->get();
             return $this->successResponse('الموديلات', $models);
 
         } catch (\Throwable $th) {

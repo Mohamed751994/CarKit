@@ -62,7 +62,15 @@ class AuthController extends Controller
     }
 
 
-
+    public function vendor()
+    {
+        $vendor = User::with('vendor')->whereId($this->user_id())->first();
+        if(!$vendor)
+        {
+            return $this->errorResponse('التاجر غير موجود');
+        }
+        return $this->successResponse('بيانات التاجر', $vendor);
+    }
 
 
 

@@ -10,6 +10,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait MainTrait
 {
+    public $insertMsg = ' تم إنشاء العنصر بنجاح ';
+    public $updateMsg = 'تم تحديث العنصر بنجاح';
+    public $deleteMsg = 'تم حذف العنصر بنجاح';
+    public $error = 'يوجد مشكلة ما';
+
+    public $paginate = 20;
+
+
     //Success Response
     public function successResponse($message = '',$data = [],$statusCode = Response::HTTP_OK)
     {
