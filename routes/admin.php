@@ -30,6 +30,4 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     Route::post('/changeStatus', [VendorController::class, 'changeStatus'])->name('admin.changeStatus');
 
 
-
-
 });
