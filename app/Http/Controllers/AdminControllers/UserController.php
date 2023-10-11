@@ -7,9 +7,6 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserDataRequest;
 use App\Models\User;
 use App\Traits\MainTrait;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -21,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $content = User::whereType('user')->latest()->paginate($this->paginate);
+        $content = User::whereType(0)->latest()->paginate($this->paginate);
         return view('admin_dashboard.users.index' , compact('content'));
     }
 

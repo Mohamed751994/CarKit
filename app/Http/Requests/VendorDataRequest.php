@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 
-class UserDataRequest extends FormRequest
+class VendorDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -40,6 +40,11 @@ class UserDataRequest extends FormRequest
             'phone' => $phone,
             'password' => $password,
             'type' => 'nullable',
+            'address' => 'required|max:255',
+            'image' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif|max:5000',
+            'google_map' => 'nullable',
+            'working_hours' => 'nullable',
+            'status' => 'nullable',
         ];
     }
 
@@ -58,6 +63,10 @@ class UserDataRequest extends FormRequest
             'password.min' => 'يجب أن يكون كلمة المرور أكبر من أو يساوي 8 أرقام أو حروف',
             'password.max' => 'يجب أن يكون  كلمة المرور أقل من أو يساوي 25 رقم أو حرف',
             'password.confirmed' => 'كلمة المرور غير متطابقة',
+            'address.required' => ' العنوان مطلوب',
+            'image.mimes' =>'يجب أن تكون صيغة الصورة (png - jpg - jpeg - webp - svg - gif) ',
+            'image.max' =>'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
+
 
         ];
     }

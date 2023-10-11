@@ -18,7 +18,13 @@
             </a>
         </li>
 
-
+        <li class="@if(getActiveLink('vendors')) mm-active @endif">
+            <a href="{{ route('vendors.index')  }}">
+                <div class="parent-icon"><i class="lni lni-users"></i>
+                </div>
+                <div class="menu-title">التجار</div>
+            </a>
+        </li>
         <li class="@if(getActiveLink('users')) mm-active @endif">
             <a href="{{ route('users.index')  }}">
                 <div class="parent-icon"><i class="lni lni-users"></i>
