@@ -1,5 +1,5 @@
 @extends('admin_dashboard.layout.master')
-@section('Page_Title')  العملاء @endsection
+@section('Page_Title')  التجار @endsection
 
 @section('content')
 
@@ -7,9 +7,9 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center">
-                <h5 class="mb-0"> <i class="bi bi-grid-fill"></i>  العملاء </h5>
+                <h5 class="mb-0"> <i class="bi bi-grid-fill"></i>  التجار </h5>
                 <div class="ms-auto position-relative">
-                    <a href="{{route('users.create')}}" class="btnIcon btn btn-outline-primary px-5"><i class="lni lni-circle-plus"></i> إنشاء جديد </a>
+                    <a href="{{route('vendors.create')}}" class="btnIcon btn btn-outline-primary px-5"><i class="lni lni-circle-plus"></i> إنشاء جديد </a>
                 </div>
             </div>
 
@@ -18,23 +18,34 @@
                 <table class="table align-middle table-hover">
                     <thead class="table-secondary">
                     <tr>
-                        <th>#</th>
+                        <th>اللوجو</th>
                         <th>الأسم</th>
                         <th>البريد الإلكتروني</th>
                         <th> تاريخ التسجيل</th>
+                        <th> حالة الحساب </th>
                         <th>التحكم</th>
                     </tr>
                     </thead>
                     <tbody>
                         @forelse($content as $key =>$con)
                         <tr>
-                            <td>{{$key+1}}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-3 cursor-pointer">
+                                    <img src="{{ $con->vendor?->image ? assetURLFile($con->vendor?->image) : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageList" alt="">
+                                </div>
+                            </td>
                             <td>{{$con->name}}</td>
                             <td>{{$con->email}}</td>
                             <td>{{date('Y-m-d H:i A', strtotime($con->created_at))}}</td>
                             <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input customSliderCheckbox" type="checkbox"
+                                           name="status" onchange="changeStatus(this,'{{$con->vendor?->id}}', 'Vendor')" id="flexSwitchCheckChecked" @if($con->vendor?->status) value="0" checked="" @else value="1" @endif>
+                                </div>
+                            </td>
+                            <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                    <a href="{{route('users.edit', $con->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                    <a href="{{route('vendors.edit', $con->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                        title="تعديل"><i class="bi bi-pencil-fill"></i></a>
                                     <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#deleteItem{{$con->id}}" class="text-danger" data-bs-toggle="tooltip"
                                        data-bs-placement="bottom" title="حذف"><i class="bi bi-trash-fill"></i></a>
@@ -47,7 +58,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline-default btn-sm me-2" type="button" data-bs-dismiss="modal">لا</button>
-                                                    <form action="{{route('users.destroy',$con->id)}}" method="POST">
+                                                    <form action="{{route('vendors.destroy',$con->id)}}" method="POST">
                                                         @method('DELETE')
                                                         @csrf
                                                         <button type="submit" class="btn btn-outline-danger btn-sm" type="button">نعم</button>
@@ -62,7 +73,7 @@
                         </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">
+                                <td colspan="6" class="text-center">
                                     <p> لا يوجد بيانات </p>
                                 </td>
                             </tr>

@@ -1819,7 +1819,7 @@ a {
 
 }
 
-.error
+label.error
 {
     color: red;
     font-size: 11px;
@@ -1832,7 +1832,45 @@ a {
     padding: 20px;
     border-radius: 5px;
 }
-
+.breadcrumb .text-dark
+{
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+}
+.uploadAndPreviewImage
+{
+    background: white;
+    padding: 30px 5px;
+    margin: 0;
+    border-radius: 5px;
+}
+.previewImage img
+{
+    width: 150px;
+    height: 150px;
+    /* margin: 0 auto; */
+    /* text-align: center; */
+    object-fit: contain;
+}
+.form-switch .customSliderCheckbox
+{
+    width: 70px;
+    height: 28px;
+    background-color: #ff9393;
+    border-color: #ff9393;
+}
+.form-switch .customSliderCheckbox:checked
+{
+    background-color: #25c3b4;
+    border-color: #25c3b4;
+}
+.imageList
+{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {

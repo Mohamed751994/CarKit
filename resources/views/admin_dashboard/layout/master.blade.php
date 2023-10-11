@@ -131,6 +131,33 @@
     },5000);
 
 
+        function changeStatus(element ,id, model)
+        {
+            var val = $(element).val();
+            $.ajax({
+            url: "{{route('admin.changeStatus')}}",
+            type: 'post',
+            data: {_token: '{{csrf_token()}}',id:id, model:model, val:val},
+            success: function(response) {
+            if(response.success)
+        {
+            if(val === '1')
+        {
+            $(element).attr('value', '0');
+        }
+            else
+        {
+            $(element).attr('value', '1');
+        }
+        }
+        },
+            error: function (reject) {
+
+        },
+        });
+        }
+
+
 </script>
 
 </body>

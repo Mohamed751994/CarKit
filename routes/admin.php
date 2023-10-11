@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminControllers\AuthController;
 use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\UserController;
+use App\Http\Controllers\AdminControllers\VendorController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -25,5 +26,8 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     //Users Routes
     Route::resource('users', 'UserController');
     Route::put('/user/update/password/{user_id}', [UserController::class, 'update_password'])->name('users.update.password');
+    Route::resource('vendors', 'VendorController');
+    Route::post('/changeStatus', [VendorController::class, 'changeStatus'])->name('admin.changeStatus');
+
 
 });
