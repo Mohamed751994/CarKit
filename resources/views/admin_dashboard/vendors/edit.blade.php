@@ -1,29 +1,13 @@
 @extends('admin_dashboard.layout.master')
-@section('Page_Title')   التجار | تعديل   @endsection
-<style>
-    .nav
-    {
-        background: #00006c;
-        padding: 10px !important;
-    }
-    .nav-tabs .nav-link
-    {
-        color: #fff !important;
-        border: 3px solid white !important;
-        margin: 0 10px;
-    }
-    .nav-tabs .nav-link.active
-    {
-        color: #00006c !important;
-    }
-</style>
+@section('Page_Title')   أصحاب المعارض | تعديل   @endsection
+
 @section('content')
 
     <div class="row">
         <div class="col-lg-12 mx-auto">
             <div class="breadcrumb d-flex align-items-center justify-content-between">
                 <div class="">
-                    <a class="text-dark" href="{{route('vendors.index')}}">التجار</a>
+                    <a class="text-dark" href="{{route('vendors.index')}}">أصحاب المعارض</a>
                     <span class="mx-2">-</span>
                     <strong class="text-primary">تعديل</strong>
                 </div>
@@ -36,8 +20,20 @@
 
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">البيانات الشخصية</button>
-                                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">تغيير كلمة المرور</button>
+                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-icon"><i class='bx bx-home font-18 me-1'></i>
+                                                </div>
+                                                <div class="tab-title">البيانات الشخصية</div>
+                                            </div>
+                                        </button>
+                                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-icon"><i class='bx bx-lock font-18 me-1'></i>
+                                                </div>
+                                                <div class="tab-title"> تغيير كلمة المرور</div>
+                                            </div>
+                                        </button>
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">

@@ -28,6 +28,6 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     Route::put('/user/update/password/{user_id}', [UserController::class, 'update_password'])->name('users.update.password');
     Route::resource('vendors', 'VendorController');
     Route::post('/changeStatus', [VendorController::class, 'changeStatus'])->name('admin.changeStatus');
-
+    Route::resource('cars', 'CarController');
 
 });

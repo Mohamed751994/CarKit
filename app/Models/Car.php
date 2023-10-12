@@ -18,8 +18,13 @@ class Car extends Model
         return $this->image_full_path($value);
     }
 
-    public function user(): belongsTo
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Tanant::class, 'car_id');
     }
 }

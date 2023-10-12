@@ -1,5 +1,5 @@
 @extends('admin_dashboard.layout.master')
-@section('Page_Title')  التجار @endsection
+@section('Page_Title')  أصحاب المعارض @endsection
 
 @section('content')
 
@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center">
-                <h5 class="mb-0"> <i class="bi bi-grid-fill"></i>  التجار </h5>
+                <h5 class="mb-0"> <i class="bi bi-grid-fill"></i>  أصحاب المعارض </h5>
                 <div class="ms-auto position-relative">
                     <a href="{{route('vendors.create')}}" class="btnIcon btn btn-outline-primary px-5"><i class="lni lni-circle-plus"></i> إنشاء جديد </a>
                 </div>
@@ -20,7 +20,6 @@
                     <tr>
                         <th>اللوجو</th>
                         <th>الأسم</th>
-                        <th>البريد الإلكتروني</th>
                         <th> تاريخ التسجيل</th>
                         <th> حالة الحساب </th>
                         <th>التحكم</th>
@@ -35,7 +34,6 @@
                                 </div>
                             </td>
                             <td>{{$con->name}}</td>
-                            <td>{{$con->email}}</td>
                             <td>{{date('Y-m-d H:i A', strtotime($con->created_at))}}</td>
                             <td>
                                 <div class="form-check form-switch">
@@ -45,8 +43,11 @@
                             </td>
                             <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">
+                                    <a href="{{route('vendors.show', $con->id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                       title="عرض"><i class="lni lni-eye"></i></a>
                                     <a href="{{route('vendors.edit', $con->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                        title="تعديل"><i class="bi bi-pencil-fill"></i></a>
+
                                     <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#deleteItem{{$con->id}}" class="text-danger" data-bs-toggle="tooltip"
                                        data-bs-placement="bottom" title="حذف"><i class="bi bi-trash-fill"></i></a>
                                     <div class="modal fade" id="deleteItem{{$con->id}}" tabindex="-1" aria-labelledby="link{{$con->id}}" aria-hidden="true">

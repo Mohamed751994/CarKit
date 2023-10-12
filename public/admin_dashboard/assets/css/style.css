@@ -1836,7 +1836,6 @@ label.error
 {
     font-weight: bold;
     font-size: 20px;
-    text-decoration: underline;
 }
 .uploadAndPreviewImage
 {
@@ -1870,6 +1869,79 @@ label.error
     width: 80px;
     height: 80px;
     object-fit: contain;
+}
+.imageShow
+{
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    background: #fff;
+}
+.nav
+{
+    background: #ffffff;
+    padding: 25px !important;
+}
+.nav-tabs .nav-link,
+.nav-pills .nav-link
+{
+    color: #00006c !important;
+    font-weight: bold;
+    padding: 20px;
+    border: 2px solid #dcdcdc !important;
+    margin: 0 2px;
+}
+.nav-tabs .nav-link.active,.nav-pills .nav-link.active {
+    color: #ffffff !important;
+    background: #0d6efd;
+}
+.vendorInfo li
+{
+    background: white;
+    padding: 20px;
+    margin: 10px 0;
+}
+.carsCount
+{
+    background: #ffc107;
+    color:#000000;
+    padding: 0 6px;
+    border-radius: 50px;
+}
+.carCard
+{
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #e0e0e0;
+}
+.carCard img
+{
+    border-radius: 5px;
+    height: 100%;
+    object-fit: cover;
+}
+.carCard .carTitle
+{
+    font-weight: bold;
+    color: #000000;
+}
+.carCard .carPrice
+{
+    font-weight: bold;
+    margin: 20px 0;
+    color: #3461ff;
+}
+.carCard .carPrice .currency,
+.carCard .carPrice small
+{
+    font-size: 13px;
+    color: #0a0808;
+}
+.carCard li
+{
+    padding: 7px;
+    margin: 2px 0;
 }
 @media screen and (max-width:520px) {
 	.chat-footer-menu,

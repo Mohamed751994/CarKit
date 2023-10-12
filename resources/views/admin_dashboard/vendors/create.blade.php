@@ -1,5 +1,5 @@
 @extends('admin_dashboard.layout.master')
-@section('Page_Title')   التجار | إضافة   @endsection
+@section('Page_Title')   أصحاب المعارض | إضافة   @endsection
 
 
 @section('content')
@@ -8,7 +8,7 @@
         <div class="col-lg-12 mx-auto">
             <div class="breadcrumb d-flex align-items-center justify-content-between">
                 <div class="">
-                    <a class="text-dark" href="{{route('vendors.index')}}">التجار</a>
+                    <a class="text-dark" href="{{route('vendors.index')}}">أصحاب المعارض</a>
                     <span class="mx-2">-</span>
                     <strong class="text-primary">إنشاء</strong>
                 </div>

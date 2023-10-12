@@ -14,6 +14,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : $this->errorResponse('يجب تسجيل الدخول أولاً');
+        if( $request->is('api/*')){
+            return $request->expectsJson() ? null : $this->errorResponse('يجب تسجيل الدخول أولاً');
+        }else{
+            return $request->expectsJson() ? null : '/';
+        }
     }
 }

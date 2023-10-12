@@ -53,7 +53,7 @@ class CarController extends Controller
     {
         try {
 
-            $cars = Car::latest()->get();
+            $cars = Car::with('user.vendor')->latest()->get();
             return $this->successResponse('جميع السيارات', $cars);
 
         } catch (\Throwable $th) {

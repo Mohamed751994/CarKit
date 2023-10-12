@@ -61,6 +61,13 @@ class VendorController extends Controller
         return view('admin_dashboard.vendors.edit', compact('content'));
     }
 
+
+    public function show(User $vendor)
+    {
+        $content =  User::with(['vendor', 'cars'])->findOrFail($vendor->id);
+        return view('admin_dashboard.vendors.show', compact('content'));
+    }
+
     /**
      * Update the specified resource in storage.
      */

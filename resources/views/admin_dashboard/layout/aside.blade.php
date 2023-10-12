@@ -22,7 +22,7 @@
             <a href="{{ route('vendors.index')  }}">
                 <div class="parent-icon"><i class="lni lni-users"></i>
                 </div>
-                <div class="menu-title">التجار</div>
+                <div class="menu-title">أصحاب المعارض</div>
             </a>
         </li>
         <li class="@if(getActiveLink('users')) mm-active @endif">

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Vendor;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
@@ -15,7 +16,8 @@ trait MainTrait
     public $deleteMsg = 'تم حذف العنصر بنجاح';
     public $error = 'يوجد مشكلة ما';
 
-    public $paginate = 20;
+    public $paginate = 50;
+
 
 
     //Success Response
