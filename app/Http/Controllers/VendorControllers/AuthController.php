@@ -43,6 +43,10 @@ class AuthController extends Controller
             $input_email_or_phone = filter_var($data['email'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
             if(Auth::attempt([$input_email_or_phone => $request->email, 'password' => $request->password])){
                 $vendorDetails = User::with('vendor')->whereId(auth()->user()->id)->first();
+//                if(!$vendorDetails->vendor?->status)
+//                {
+//                    return $this->errorResponse('هذا الحساب غير مفعل , تواصل مع خدمة العملاء', 403);
+//                }
                 return $this->successResponse(
                     'تم تسجيل الدخول بنجاح',
                     ['access_token' =>auth()->user()->createToken("LOGIN TOKEN")->plainTextToken , 'user' => $vendorDetails]
