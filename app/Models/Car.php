@@ -13,9 +13,12 @@ class Car extends Model
     use MainTrait;
     protected $guarded = [];
 
-    Public function getImageAttribute($value)
+    public function getImageAttribute($value)
     {
-        return $this->image_full_path($value);
+        if(!$value)
+            return null;
+        else
+            return $this->image_full_path($value);
     }
 
     public function user()

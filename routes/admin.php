@@ -29,5 +29,7 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     Route::resource('vendors', 'VendorController');
     Route::post('/changeStatus', [VendorController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::resource('cars', 'CarController');
+    Route::resource('brands', 'BrandModelController');
+    Route::get('model_of_brand/destroy/{id}', [\App\Http\Controllers\AdminControllers\BrandModelController::class,'modelDestroy'])->name('model.destroy');
 
 });

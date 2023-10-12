@@ -50,7 +50,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-md-2">
                                                 <div class="vendor-img">
-                                                    <img src="{{ $content->vendor?->image ? assetURLFile($content->vendor?->image) : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageShow" alt="">
+                                                    <img src="{{ $content->vendor?->image ? $content->vendor?->image : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageShow" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
