@@ -14,3 +14,12 @@ if (!function_exists('assetURLFile')) {
         return asset('/uploads/'. $filename);
     }
 }
+
+if (!function_exists('dateDiffInDays')) {
+    function dateDiffInDays($date1, $date2)
+    {
+        $diff = strtotime($date2) - strtotime($date1);
+        return abs(round($diff / 86400)) +1;
+    }
+}
+

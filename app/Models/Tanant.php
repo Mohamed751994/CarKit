@@ -18,12 +18,36 @@ class Tanant extends Model
         'car_details' => 'json'
     ];
 
-    Public function getNidImgAttribute($value)
+    public function getNidImgAttribute($value)
     {
         return $this->image_full_path($value);
     }
-    Public function getLicenseImgAttribute($value)
+    public function getLicenseImgAttribute($value)
     {
         return $this->image_full_path($value);
     }
+
+    public function getStatusAttribute($value)
+    {
+        $item = '';
+        $status = ['pending', 'approved', 'rejected', 'cancelled'];
+        if($status[0])
+        {
+            $item =  '<span class="badge  bg-light-warning text-warning w-50">جاري المراجعة</span>';
+        }
+        elseif($status[1])
+        {
+            $item =  '<span class="badge  bg-light-success text-success w-50">تم التأكيد</span>';
+        }
+        elseif($status[2])
+        {
+            $item =  '<span class="badge  bg-light-danger text-danger w-50">تم الرفض</span>';
+        }
+        elseif($status[3])
+        {
+            $item =  '<span class="badge  bg-light-danger text-danger w-50">ملغي</span>';
+        }
+        return $item;
+    }
+
 }

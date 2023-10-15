@@ -1950,6 +1950,14 @@ label.error
     border-radius: 5px;
     color: #fff;
 }
+.boxImg
+{
+    background: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 7px;
+    border-radius: 3px;
+}
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {

@@ -40,6 +40,14 @@
             </a>
         </li>
 
+        <li class="@if(getActiveLink('tanants')) mm-active @endif">
+            <a href="{{ route('tanants.index')  }}">
+                <div class="parent-icon"><i class="lni lni-offer"></i>
+                </div>
+                <div class="menu-title">الحجوزات</div>
+            </a>
+        </li>
+
 
     </ul>
     <!--end navigation-->
