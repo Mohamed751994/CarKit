@@ -93,8 +93,8 @@
                                         <td>{{$order->created_at->diffForHumans()}}</td>
                                         <td>
                                             <div class="d-flex align-items-center gap-3 fs-6">
-                                                <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                                            </div>
+                                                <a href="{{route('tanants.show', $order->id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                   title="عرض"><i class="bi bi-eye-fill"></i></a>                                            </div>
                                         </td>
                                     </tr>
                                 @empty

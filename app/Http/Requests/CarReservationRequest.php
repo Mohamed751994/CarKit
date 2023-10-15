@@ -64,6 +64,10 @@ class CarReservationRequest extends FormRequest
             'license_img.max' => 'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
 
             'from_date.required' => ' تاريخ البداية  مطلوب',
+            'from_date.date' => ' صيغة تاريخ البداية غير صحيحة  ',
+            'from_date.after' => '  تاريخ البداية يجب أن يكون بعد اليوم  ',
+            'to_date.date' => ' صيغة تاريخ النهاية غير صحيحة  ',
+            'to_date.after' => '  تاريخ النهاية يجب أن يكون بعد تاريخ البداية  ',
             'to_date.required' => ' تاريخ النهاية  مطلوب',
             'car_id.required' => ' معرف السيارة  مطلوب',
         ];

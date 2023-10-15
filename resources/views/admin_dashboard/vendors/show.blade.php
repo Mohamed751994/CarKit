@@ -81,6 +81,7 @@
                                             @if(count($content->cars) > 0)
 
                                                 <div class="col-12">
+                                                    @include('admin_dashboard.includes.live_search')
                                                     <div class="table-responsive mt-4">
                                                         <table class="table align-middle table-hover">
                                                             <thead class="table-secondary">

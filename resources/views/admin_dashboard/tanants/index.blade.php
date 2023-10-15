@@ -11,6 +11,7 @@
             </div>
 
 
+            @include('admin_dashboard.includes.live_search')
             <div class="table-responsive mt-4">
                 <table class="table align-middle mb-0">
                     <thead class="table-light">
