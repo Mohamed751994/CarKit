@@ -21,9 +21,10 @@ class BrandRequest extends FormRequest
      */
     public function rules(): array
     {
+        $model_names = request()->isMethod('put') ? 'required' : 'nullable';
         return [
             'brand_name' => 'required|max:255',
-            'model_name.*' => 'required',
+            'model_name.*' => 'nullable',
         ];
     }
 
@@ -33,7 +34,7 @@ class BrandRequest extends FormRequest
         return [
 
             'brand_name.required' => 'اسم الماركة مطلوب',
-            'model_name.*.required' => 'اسم المويل مطلوب',
+            'model_name.*.required' => 'اسم الموديل مطلوب',
         ];
     }
 

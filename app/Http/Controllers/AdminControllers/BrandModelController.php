@@ -36,7 +36,13 @@ class BrandModelController extends Controller
         try {
             $data = $request->validated();
             $brand = CarsBrand::create($data);
-            $brand->models()->insert(Arr::except($data,['brand_name']));
+            if(isset($data['model_name']))
+            {
+                foreach ($data['model_name'] as $key => $model)
+                {
+                    CarsModel::create(['brand_id'=>$brand->id, 'model_name'=>$model]);
+                }
+            }
             DB::commit();
             Session::flash('success', $this->insertMsg);
             return redirect()->back();
@@ -66,11 +72,14 @@ class BrandModelController extends Controller
         try {
             $data = $request->validated();
             $brand->update($data);
-            $brand->models()->delete();
-            $models=(array)$data['model_name'];
-            $pivotData = array_fill(0, count($models), ['brand_id' => $brand->id, 'created_at' =>date('Y-m-d H:i:s'), 'updated_at' =>date('Y-m-d H:i:s')]);
-            $syncData  = array_combine($models, $pivotData);
-            $brand->models()->insert($syncData);
+             foreach ($data['model_name'] as $key => $model)
+                {
+                    if(!is_null($model))
+                    {
+                        CarsModel::create(['brand_id'=>$brand->id, 'model_name'=>$model]);
+                    }
+                }
+
             DB::commit();
             Session::flash('success', $this->updateMsg);
             return redirect()->back();

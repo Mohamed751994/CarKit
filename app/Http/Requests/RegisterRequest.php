@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email|max:255',
-            'phone' => 'required|min:6|max:20|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
+            'phone' => 'required|min:10|max:15|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
             'password' => 'required|min:8|max:25|confirmed',
             'type' => 'nullable',
         ];
@@ -40,9 +40,10 @@ class RegisterRequest extends FormRequest
             'email.email' => 'صيغة البريد الإلكتروني غير صحيحة',
             'email.unique' => 'البريد الإلكتروني موجود من قبل',
             'phone.required' => 'رقم الهاتف مطلوب',
-            'phone.min' => 'يجب أن يكون رقم الهاتف أكبر من 5 أرقام',
-            'phone.max' => 'يجب أن يكون رقم الهاتف أقل من أو يساوي 20 رقم',
+            'phone.min' => 'يجب أن يكون رقم الهاتف أكبر من 9 أرقام',
+            'phone.max' => 'يجب أن يكون رقم الهاتف أقل من أو يساوي 15 رقم',
             'phone.unique' => 'رقم الهاتف موجود من قبل',
+            'phone.regex' => 'رقم الهاتف يجب أن يكون رقم هاتف مصري',
             'password.required' => 'كلمة المرور مطلوبة',
             'password.min' => 'يجب أن يكون كلمة المرور أكبر من أو يساوي 8 أرقام أو حروف',
             'password.max' => 'يجب أن يكون  كلمة المرور أقل من أو يساوي 25 رقم أو حرف',
@@ -50,15 +51,15 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-//    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-//    {
-//        $response = new JsonResponse([
-//            'success' => false,
-//            'errors' => $validator->errors()
-//        ], 422);
-//
-//        throw new \Illuminate\Validation\ValidationException($validator, $response);
-//    }
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = new JsonResponse([
+            'success' => false,
+            'errors' => $validator->errors()
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
+    }
 
 
 }

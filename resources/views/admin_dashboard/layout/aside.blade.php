@@ -32,13 +32,13 @@
                 <div class="menu-title">العملاء</div>
             </a>
         </li>
-{{--        <li class="@if(getActiveLink('brands')) mm-active @endif">--}}
-{{--            <a href="{{ route('brands.index')  }}">--}}
-{{--                <div class="parent-icon"><i class="bx bx-car"></i>--}}
-{{--                </div>--}}
-{{--                <div class="menu-title">الماركات والموديلات</div>--}}
-{{--            </a>--}}
-{{--        </li>--}}
+        <li class="@if(getActiveLink('brands')) mm-active @endif">
+            <a href="{{ route('brands.index')  }}">
+                <div class="parent-icon"><i class="bx bx-car"></i>
+                </div>
+                <div class="menu-title">الماركات والموديلات</div>
+            </a>
+        </li>
 
 
     </ul>

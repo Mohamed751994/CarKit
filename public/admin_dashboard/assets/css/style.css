@@ -1943,6 +1943,13 @@ label.error
     padding: 7px;
     margin: 2px 0;
 }
+.smallBox
+{
+    background: #0d6efd;
+    padding: 20px 0;
+    border-radius: 5px;
+    color: #fff;
+}
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {

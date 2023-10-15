@@ -30,20 +30,22 @@
 
 
                                         <div class="col-12 my-4">
-                                            <h5 class="mt-4 mb-3">  الملفات المرفوعة مسبقاً :   </h5>
+                                            <h5 class="mt-4 mb-3">  الموديلات المضافة:   </h5>
                                             <div class="row">
                                                 @foreach($content->models as $model)
-                                                    <div class="col-md-4">
-                                                        <div class="box d-flex justify-content-around align-items-center">
+                                                    <div class="col-md-2">
+                                                        <div class="smallBox d-flex justify-content-around align-items-center">
                                                             <strong>
                                                                 {{$model->model_name}}
                                                             </strong>
-                                                            <a data-bs-toggle="modal" data-bs-target="#deleteItem{{$model->id}}" href="javascript:;" class="btn btn-sm btn-danger">حذف</a>
-                                                            <div class="modal fade" id="deleteItem{{$model->id}}" tabindex="-1" aria-labelledby="link{{$fileName->id}}" aria-hidden="true">
+                                                            <a data-bs-toggle="modal" data-bs-target="#deleteItem{{$model->id}}" href="javascript:;" class="btn btn-sm btn-danger">
+                                                                <i class="lni lni-trash m-0"></i>
+                                                            </a>
+                                                            <div class="modal fade" id="deleteItem{{$model->id}}" tabindex="-1" aria-labelledby="link{{$model->id}}" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="link{{$model->id}}">هل أنت متأكد من حذف هذا العنصر ؟</h5>
+                                                                            <h5 class="modal-title text-danger" id="link{{$model->id}}">هل أنت متأكد من حذف هذا العنصر ؟</h5>
                                                                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -63,7 +65,7 @@
 
                                         <div class="col-12 mb-5">
 
-                                            <h5 class="mt-4 mb-3"> المودلات الخاصة بهذه الماركة : <span class="text-danger">*</span>  </h5>
+                                            <h5 class="mt-4 mb-3"> اضافة موديلات أخري : <span class="text-danger">*</span>  </h5>
 
 
                                             <div class="float-end mb-2">
@@ -77,7 +79,7 @@
                                                 <tbody id="lines">
                                                 <tr id="tr">
                                                     <td>
-                                                        <input class="form-control" name="model_name[]" placeholder="ادخل اسم الموديل" required />
+                                                        <input class="form-control" name="model_name[]" placeholder="ادخل اسم الموديل"  />
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-danger removeRow">
@@ -112,62 +114,15 @@
         $(document).ready(function () {
             $("#validateForm").validate({
                 rules: {
-                    name: {
+                    brand_name: {
                         required: true,
-                    },
-                    email: {
-                        required: true,
-                        email:true
-                    },
-                    phone: {
-                        required: true,
-                        minlength:8,
-                        maxlength:25
                     },
 
                 },
                 messages: {
-                    name: {
+                    brand_name: {
                         required: "الحقل مطلوب",
                     },
-                    email: {
-                        required: "الحقل مطلوب",
-                        email:" صيغة البريد الإلكتروني غير صحيحة"
-                    },
-                    phone: {
-                        required: "الحقل مطلوب",
-                        minlength:"رقم الهاتف علي الأقل 8 أرقام",
-                        maxlength:"رقم الهاتف يجب أن لا يتجاوز 25 رقم"
-                    },
-
-                }
-            });
-
-
-            $("#validateFormPass").validate({
-                rules: {
-                    password: {
-                        required: true,
-                        minlength:'8',
-                        maxlength:'25'
-                    },
-                    password_confirmation: {
-                        required: true,
-                        equalTo: '#password'
-                    }
-
-
-                },
-                messages: {
-                    password: {
-                        required: "الحقل مطلوب",
-                        minlength: "كلمة المرور مكونة علي الأقل 8 أحرف",
-                        maxlength: "كلمة المرور مكونة علي الأكثر 25 حرف",
-                    },
-                    password_confirmation: {
-                        required: "الحقل مطلوب",
-                          equalTo: "كلمة المرور غير متطابقة",
-                    }
 
                 }
             });

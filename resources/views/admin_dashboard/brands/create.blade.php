@@ -31,7 +31,7 @@
 
                                         <div class="col-12 mb-5">
 
-                                            <h5 class="mt-4 mb-3"> المودلات الخاصة بهذه الماركة : <span class="text-danger">*</span>  </h5>
+                                            <h5 class="mt-4 mb-3"> الموديلات الخاصة بهذه الماركة : <span class="text-danger">*</span>  </h5>
 
 
                                             <div class="float-end mb-2">
@@ -84,10 +84,16 @@
                 brand_name: {
                     required: true,
                 },
+                'model_name[]': {
+                    required: true,
+                },
 
             },
             messages: {
                 brand_name: {
+                    required: "الحقل مطلوب",
+                },
+                'model_name[]': {
                     required: "الحقل مطلوب",
                 },
 

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class LoginRequest extends FormRequest
 {
@@ -37,5 +39,20 @@ class LoginRequest extends FormRequest
             'password.required' => 'كلمة المرور مطلوبة',
         ];
     }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        if (Request::is('api/*'))
+        {
+            $response = new JsonResponse([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+
+            throw new \Illuminate\Validation\ValidationException($validator, $response);
+        }
+
+    }
+
 
 }
