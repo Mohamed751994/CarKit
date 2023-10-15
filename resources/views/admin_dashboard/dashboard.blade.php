@@ -98,8 +98,8 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="5">لا يوجد حجوزات حتي الآن</td>
+                                    <tr class="text-center">
+                                        <td colspan="6">لا يوجد حجوزات حتي الآن</td>
                                     </tr>
                                 @endforelse
                             </tbody>
