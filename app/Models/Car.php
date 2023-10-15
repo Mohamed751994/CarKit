@@ -31,6 +31,13 @@ class Car extends Model
         return $this->hasMany(Tanant::class, 'car_id');
     }
 
+    public function scopeVendorStatus($query)
+    {
+        return $query->whereHas('user.vendor', function($q) {
+            $q->where('status', 1);
+        });
+    }
+
 
     public function scopeFilter($query, $params)
     {

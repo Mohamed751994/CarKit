@@ -52,11 +52,7 @@ class CarController extends Controller
     public function get_all_cars(Request $request)
     {
         try {
-            $cars = Car::with('user.vendor')->whereHas('user.vendor', function($q) {
-                $q->where('status', 1);
-            })
-            ->filter($request)
-            ->latest()->get();
+            $cars = Car::with('user.vendor')->vendorStatus()->filter($request)->latest()->get();
             return $this->successResponse('جميع السيارات', $cars);
 
         } catch (\Throwable $th) {

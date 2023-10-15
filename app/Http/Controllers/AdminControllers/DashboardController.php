@@ -24,9 +24,7 @@ class DashboardController extends Controller
     {
         $vendors = Vendor::count();
         $users = User::whereType(0)->count();
-        $cars = Car::with('user.vendor')->whereHas('user.vendor', function($q) {
-            $q->where('status', 1);
-        })->count();
+        $cars = Car::with('user.vendor')->vendorStatus()->count();
         $reservations = Tanant::count();
         $latest_10_orders = Tanant::latest()->limit(10)->get();
 
