@@ -72,7 +72,7 @@
                                                         <div class="col-md-4">
                                                             <div class="previewImage text-center">
                                                                 @if($content->vendor?->image)
-                                                                    <img src="{{ assetURLFile($content->vendor?->image)}}">
+                                                                    <img src="{{$content->vendor?->image}}">
                                                                 @else
                                                                     <img src="{{asset('admin_dashboard/assets/images/no_image.png')}}">
                                                                 @endif

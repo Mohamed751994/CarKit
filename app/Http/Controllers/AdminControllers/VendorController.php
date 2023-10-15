@@ -82,6 +82,7 @@ class VendorController extends Controller
                 $data['image'] = $image;
             }
             isset($data['status']) ? $data['status']=1 : $data['status'] = 0;
+            $vendor->update(['name'=>$data['name']]);
             $vendor->vendor()->update(Arr::except($data, ['email', 'password','phone','type']));
             DB::commit();
             Session::flash('success', $this->updateMsg);
