@@ -30,4 +30,31 @@ class Car extends Model
     {
         return $this->hasMany(Tanant::class, 'car_id');
     }
+
+
+    public function scopeFilter($query, $params)
+    {
+        if ( isset($params['user_ids'])) {
+            $query->whereIn('user_id', $params['user_ids']);
+        }
+        if ( isset($params['brand_ids'])) {
+            $query->whereIn('brand', $params['brand_ids']);
+        }
+        if ( isset($params['motor_types'])) {
+            $query->whereIn('motor_type', $params['motor_types']);
+        }
+        if ( isset($params['colors'])) {
+            $query->whereIn('color', $params['colors']);
+        }
+        if ( isset($params['prices'])) {
+            $query->whereBetween('price_per_day', $params['prices']);
+        }
+        if ( isset($params['sortByPrice'])) {
+            $query->orderBy('price_per_day', $params['sortByPrice']); // $params['sortBy'] = ASC or DESC
+        }
+        return $query;
+    }
+
+
+
 }
