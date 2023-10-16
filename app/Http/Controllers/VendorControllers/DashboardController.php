@@ -26,7 +26,10 @@ class DashboardController extends Controller
                 $image = $this->uploadFile($request,'image', 'uploads/');
                 $data['image'] = $image;
             }
-            User::whereId($this->user_id())->update(['name'=>$data['name']]);
+            if(isset($data['name']))
+            {
+                User::whereId($this->user_id())->update(['name'=>$data['name']]);
+            }
             Vendor::where('user_id',$this->user_id())->update($data);
             return $this->successResponse('تم تعديل بيانات المعرض بنجاح');
         } catch (\Throwable $th) {
