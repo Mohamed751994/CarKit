@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 
-class CarRequest extends FormRequest
+class CarUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,21 @@ class CarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'brand' => 'required|max:255',
-            'model' => 'required|max:255',
-            'year'=> 'required|max:255',
-            'fuel_type'=> 'required|max:255',
-            'motor_type'=> 'required|max:255',
-            'cc'=> 'required|max:255',
-            'kilometers'=> 'required|max:255',
-            'color'=> 'required|max:255',
-            'seats'=> 'required|max:255',
-            'doors'=> 'required|max:255',
-            'outside_look'=> 'required|max:255',
+            'brand' => 'nullable|max:255',
+            'model' => 'nullable|max:255',
+            'year'=> 'nullable|max:255',
+            'fuel_type'=> 'nullable|max:255',
+            'motor_type'=> 'nullable|max:255',
+            'cc'=> 'nullable|max:255',
+            'kilometers'=> 'nullable|max:255',
+            'color'=> 'nullable|max:255',
+            'seats'=> 'nullable|max:255',
+            'doors'=> 'nullable|max:255',
+            'outside_look'=> 'nullable|max:255',
             'additions'=> 'nullable|max:255',
-            'image' => 'required|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
-            'price_per_day'=> 'required|max:255',
-            'central_point_pickup'=> 'required|max:255',
+            'image' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
+            'price_per_day'=> 'nullable|max:255',
+            'central_point_pickup'=> 'nullable|max:255',
             'features'=> 'nullable|max:255',
         ];
     }

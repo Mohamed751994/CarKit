@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\VendorControllers;
 
 use App\Http\Requests\CarRequest;
+use App\Http\Requests\CarUpdateRequest;
 use App\Models\Car;
 use App\Models\User;
 use App\Models\Vendor;
@@ -54,7 +55,7 @@ class CarController extends Controller
 
 
     //Vendor Update his car
-    public function vendor_update_his_car(CarRequest $request, $id)
+    public function vendor_update_his_car(CarUpdateRequest $request, $id)
     {
         try {
             $data = $request->validated();
