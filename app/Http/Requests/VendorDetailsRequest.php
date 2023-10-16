@@ -24,7 +24,7 @@ class VendorDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
+            'name' => 'nullable|max:255',
             'address' => 'nullable|max:255',
             'image' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
             'google_map' => 'nullable',

@@ -27,8 +27,8 @@ class DashboardController extends Controller
                 $data['image'] = $image;
             }
             User::whereId($this->user_id())->update(['name'=>$data['name']]);
-            $vendor = Vendor::where('user_id',$this->user_id())->update($data);
-            return $this->successResponse('تم تعديل بيانات المعرض بنجاح', $vendor);
+            Vendor::where('user_id',$this->user_id())->update($data);
+            return $this->successResponse('تم تعديل بيانات المعرض بنجاح');
         } catch (\Throwable $th) {
         return $this->errorResponse($th->getMessage());
         }
