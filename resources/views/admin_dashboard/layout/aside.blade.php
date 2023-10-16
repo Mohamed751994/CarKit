@@ -49,6 +49,27 @@
         </li>
 
 
+        <li class="@if(getActiveLink('settings')) mm-active @endif">
+            <a href="{{ route('settings.index')  }}">
+                <div class="parent-icon"><i class="lni lni-cog"></i>
+                </div>
+                <div class="menu-title">ضبط الإعدادات</div>
+            </a>
+        </li>
+
+        <li class="">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
+                <div class="parent-icon"><i class="bi bi-lock-fill"></i>
+                </div>
+                <div class="menu-title">تسجيل الخروج</div>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </li>
+
+
+
     </ul>
     <!--end navigation-->
 </aside>
