@@ -23,6 +23,7 @@ class CarRequest extends FormRequest
      */
     public function rules(): array
     {
+        $image = request()->isMethod('post') ? 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000': 'required|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000';
         return [
             'brand' => 'required|max:255',
             'model' => 'required|max:255',
@@ -36,7 +37,7 @@ class CarRequest extends FormRequest
             'doors'=> 'required|max:255',
             'outside_look'=> 'required|max:255',
             'additions'=> 'nullable|max:255',
-            'image' => 'required|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
+            'image' => $image,
             'price_per_day'=> 'required|max:255',
             'central_point_pickup'=> 'required|max:255',
             'features'=> 'nullable|max:255',

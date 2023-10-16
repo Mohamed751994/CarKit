@@ -18,6 +18,7 @@ class CarController extends Controller
 {
     use MainTrait;
 
+    //Vendor Create new Car
     public function create_new_car(CarRequest $request)
     {
         try {
@@ -51,29 +52,47 @@ class CarController extends Controller
         }
     }
 
-    public function get_all_cars()
+
+    //Vendor Update his car
+    public function vendor_update_his_car(CarRequest $request, $id)
     {
         try {
-
-            $cars = Car::latest()->get();
-
-            return $this->successResponse('جميع السيارات', $cars);
-
+            $data = $request->validated();
+            if ($request->hasFile('image')) {
+                $image = $this->uploadFile($request, 'image', 'uploads/');
+                $data['image'] = $image;
+            }
+            if(isset($data['additions']))
+            {
+                $data['additions'] = implode(",", $data['additions']);
+            }
+            if(isset($data['features']))
+            {
+                $data['features'] = implode(",", $data['features']);
+            }
+            Car::where('user_id', $this->user_id())->whereId($id)->update($data);
+            return $this->successResponse('تم تعديل السيارة بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
     }
 
-    public function get_single_car($id)
+    //Vendor Delete his car
+    public function vendor_delete_his_car($id)
     {
         try {
-
-            $car = Car::with('vendor')->find($id);
-
-            return $this->successResponse('بيانات السيارة', $car);
-
+            $car = Car::where('user_id', $this->user_id())->find($id);
+            if(!$car)
+            {
+                return $this->errorResponse('هذه السيارة غير موجودة');
+            }
+            $car->delete();
+            return $this->successResponse('تم حذف السيارة بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
     }
+
+
+
 }
