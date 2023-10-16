@@ -52,7 +52,7 @@ class CarController extends Controller
     public function get_all_cars(Request $request)
     {
         try {
-            $cars = Car::with('user.vendor')->vendorStatus()->filter($request)->latest()->get();
+            $cars = Car::with(['user.vendor', 'brands'])->vendorStatus()->filter($request)->latest()->get();
             return $this->successResponse('جميع السيارات', $cars);
 
         } catch (\Throwable $th) {
@@ -64,9 +64,7 @@ class CarController extends Controller
     {
         try {
 
-            $car = Car::with('user.vendor')->whereHas('user.vendor', function($q) {
-                $q->where('status', 1);
-            })->find($id);
+            $car = Car::with(['user.vendor', 'brands'])->vendorStatus()->find($id);
             if(!$car)
             {
                 return $this->errorResponse('هذه العربية غير موجودة');

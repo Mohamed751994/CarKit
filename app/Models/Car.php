@@ -26,6 +26,11 @@ class Car extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function brands()
+    {
+        return $this->belongsTo(CarsBrand::class, 'brand', 'id');
+    }
+
     public function reservations()
     {
         return $this->hasMany(Tanant::class, 'car_id');
@@ -38,7 +43,7 @@ class Car extends Model
         });
     }
 
-
+    //Filtration
     public function scopeFilter($query, $params)
     {
         if ( isset($params['user_ids'])) {
