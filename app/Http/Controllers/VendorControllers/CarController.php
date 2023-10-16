@@ -55,7 +55,7 @@ class CarController extends Controller
 
 
     //Vendor Update his car
-    public function vendor_update_his_car(CarUpdateRequest $request, $id)
+    public function vendor_update_his_car(CarRequest $request, $id)
     {
         try {
             $data = $request->validated();
