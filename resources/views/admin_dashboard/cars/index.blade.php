@@ -43,14 +43,15 @@
                                 <td>{{$key+1}}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-3 cursor-pointer">
-                                        <img src="{{ $con->image }}" class="rounded-circle imageList" alt="">
+                                        <img src="{{ $con->image ? $con->image : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageList" alt="">
                                         <strong class="mx-2">{{$con->brands->brand_name}} {{$con->model}}</strong>
                                     </div>
                                 </td>
 
                                 <td>
                                     <div class="d-flex align-items-center gap-3 cursor-pointer">
-                                        <img src="{{ $con->user?->vendor?->image }}" class="rounded-circle imageList" alt="">
+                                        <img src="{{ $con->user?->vendor?->image ? $con->user?->vendor?->image : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageList" alt="">
+
                                         <strong class="mx-2">{{$con->user?->vendor?->name}}</strong>
                                         <strong class="mx-2 badge @if($con->user?->vendor?->status) bg-light-success text-success @else bg-light-danger text-danger @endif">({{$con->user?->vendor?->status ? 'مفعل' : 'غير مفعل'}})</strong>
                                     </div>
