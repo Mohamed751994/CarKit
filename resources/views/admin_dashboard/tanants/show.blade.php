@@ -20,6 +20,11 @@
                                     <div class="col-12">
                                         <h4>معلومات الحجز : </h4>
                                     </div>
+                                    <div class="col-12 text-center">
+                                        <div class="w-100 py-3">
+                                            {!! $content->status !!}
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
 
                                         <div class="client-info vendorInfo">

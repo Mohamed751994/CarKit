@@ -67,7 +67,7 @@
                                 <th>السيارة</th>
                                 <th>الأسم</th>
                                 <th>رقم الهاتف</th>
-                                <th>تاريخ الحجز</th>
+                                <th> الحالة</th>
                                 <th>التحكم</th>
                             </tr>
                             </thead>
@@ -90,7 +90,7 @@
                                         </td>
                                         <td>{{$order->fname .' '. $order->lname}}</td>
                                         <td>{{$order->phone}}</td>
-                                        <td>{{$order->created_at->diffForHumans()}}</td>
+                                        <td>{!! $order->status !!}</td>
                                         <td>
                                             <div class="d-flex align-items-center gap-3 fs-6">
                                                 <a href="{{route('tanants.show', $order->id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"

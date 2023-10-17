@@ -23,3 +23,9 @@ if (!function_exists('dateDiffInDays')) {
     }
 }
 
+if (!function_exists('tanantsStatusTypeCount')) {
+    function tanantsStatusTypeCount($type)
+    {
+        return \App\Models\Tanant::whereStatus($type)->count();
+    }
+}

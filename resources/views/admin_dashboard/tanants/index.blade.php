@@ -11,6 +11,65 @@
             </div>
 
 
+            <div class="row my-3 align-items-center justify-content-between">
+                <div class="col-6 col-md-2">
+                    <div class="card radius-10">
+                        <div class="card-body text-center">
+                            <div class="widget-icon mx-auto mb-3 bg-light-warning text-warning">
+                                <i class="bi bi-tags-fill"></i>
+                            </div>
+                            <h3>{{tanantsStatusTypeCount('pending')}}</h3>
+                            <p class="mb-0">في الإنتظار</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="card radius-10">
+                        <div class="card-body text-center">
+                            <div class="widget-icon mx-auto mb-3 bg-light-primary text-primary">
+                                <i class="bi bi-tags-fill"></i>
+                            </div>
+                            <h3>{{tanantsStatusTypeCount('payment_pending')}}</h3>
+                            <p class="mb-0">انتظار الدفع</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="card radius-10">
+                        <div class="card-body text-center">
+                            <div class="widget-icon mx-auto mb-3 bg-light-success text-success">
+                                <i class="bi bi-tags-fill"></i>
+                            </div>
+                            <h3>{{tanantsStatusTypeCount('approved')}}</h3>
+                            <p class="mb-0">إتمام الدفع</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="card radius-10">
+                        <div class="card-body text-center">
+                            <div class="widget-icon mx-auto mb-3 bg-light-orange text-orange">
+                                <i class="bi bi-tags-fill"></i>
+                            </div>
+                            <h3>{{tanantsStatusTypeCount('rejected')}}</h3>
+                            <p class="mb-0">مرفوض</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="card radius-10">
+                        <div class="card-body text-center">
+                            <div class="widget-icon mx-auto mb-3 bg-light-danger text-danger">
+                                <i class="bi bi-tags-fill"></i>
+                            </div>
+                            <h3>{{tanantsStatusTypeCount('cancelled')}}</h3>
+                            <p class="mb-0">ملغي</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             @include('admin_dashboard.includes.live_search')
             <div class="table-responsive mt-4">
                 <table class="table align-middle mb-0">
@@ -20,7 +79,6 @@
                         <th>السيارة</th>
                         <th>الأسم</th>
                         <th>رقم الهاتف</th>
-                        <th>تاريخ الحجز</th>
                         <th>الحالة</th>
                         <th>التحكم</th>
                     </tr>
@@ -44,7 +102,6 @@
                             </td>
                             <td>{{$con->fname .' '. $con->lname}}</td>
                             <td>{{$con->phone}}</td>
-                            <td>{{$con->created_at->diffForHumans()}}</td>
                             <td>{!! $con->status !!}</td>
                             <td>
                                 <div class="d-flex align-items-center gap-3 fs-6">
