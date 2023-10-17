@@ -9,9 +9,7 @@
         <div class="col-lg-12 mx-auto">
             <div class="breadcrumb d-flex align-items-center justify-content-between">
                 <div class="">
-                    <a class="text-dark" href="{{route('vendors.index')}}">أصحاب المعارض</a>
-                    <span class="mx-2">-</span>
-                    <a class="text-dark" href="{{route('vendors.show', $content->user_id)}}">أصحاب المعارض</a>
+                    <a class="text-dark" href="{{route('vendors.show', $content->user_id)}}">{{$content->user?->vendor?->name}}</a>
                     <span class="mx-2">-</span>
                     <strong class="text-primary">
                         تفاصيل السيارة
@@ -100,28 +98,49 @@
 
                                                 <div class="col-12">
                                                     <div class="table-responsive mt-4">
-                                                        <table class="table align-middle table-hover">
-                                                            <thead class="table-secondary">
+                                                        <table class="table align-middle mb-0">
+                                                            <thead class="table-light">
                                                             <tr>
-                                                                <th>كود الحجز</th>
-                                                                <th>المستأجر</th>
-                                                                <th> الهاتف</th>
-                                                                <th>من تاريخ</th>
-                                                                <th>إلي تاريخ</th>
+                                                                <th>الكود</th>
+                                                                <th>السيارة</th>
+                                                                <th>الأسم</th>
+                                                                <th>رقم الهاتف</th>
+                                                                <th>الحالة</th>
+                                                                <th>التحكم</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            @foreach($content->reservations as $con)
+                                                            @forelse($content->reservations as $con)
                                                                 <tr>
                                                                     <td>{{$con->trip_num}}</td>
                                                                     <td>
-                                                                        {{$con->fname . ' '. $con->lname}}
+                                                                        <div class="d-flex align-items-center gap-3">
+                                                                            <div class="product-box border">
+                                                                                <img src="{{json_decode($con->car_details)->image}}" alt="">
+                                                                            </div>
+                                                                            <div class="product-info">
+                                                                                <h6 class="product-name mb-1">{{json_decode($con->car_details)->model}}</h6>
+                                                                            </div>
+                                                                            <div class="product-info">
+                                                                                <small class="product-name mb-1">( {{json_decode($con->car_details)->user?->name}} )</small>
+                                                                            </div>
+                                                                        </div>
                                                                     </td>
+                                                                    <td>{{$con->fname .' '. $con->lname}}</td>
                                                                     <td>{{$con->phone}}</td>
-                                                                    <td>{{$con->from_date}}</td>
-                                                                    <td>{{$con->to_date}}</td>
+                                                                    <td>{!! $con->status !!}</td>
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center gap-3 fs-6">
+                                                                            <a href="{{route('tanants.show', $con->id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                               title="عرض"><i class="bi bi-eye-fill"></i></a>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                            @endforeach
+                                                            @empty
+                                                                <tr class="text-center">
+                                                                    <td colspan="6">لا يوجد حجوزات حتي الآن</td>
+                                                                </tr>
+                                                            @endforelse
                                                             </tbody>
                                                         </table>
                                                     </div>

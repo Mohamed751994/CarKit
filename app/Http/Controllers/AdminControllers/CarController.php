@@ -18,6 +18,19 @@ class CarController extends Controller
     use MainTrait;
 
 
+    public function index(Request $request)
+    {
+        $content = Car::with(['user.vendor', 'brands'])->withCount('reservations');
+        if($request->vendor && !is_null($request->vendor))
+        {
+            $content = $content->where('user_id', $request->vendor);
+        }
+        $content = $content->paginate($this->paginate);
+        $vendors = Vendor::pluck('name','user_id');
+        return view('admin_dashboard.cars.index', compact('content','vendors'));
+    }
+
+
     public function show(Car $car)
     {
         $content =  $car;
