@@ -79,7 +79,7 @@ class CarController extends Controller
     }
 
     //Vendor Delete his car
-    public function vendor_delete_his_car($id)
+    public function vendor_delete_his_car(Request $request,$id)
     {
         try {
             $user = User::whereId($this->user_id())->first();
