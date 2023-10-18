@@ -33,7 +33,7 @@
                                             <h5 class="mt-4 mb-3">  الموديلات المضافة:   </h5>
                                             <div class="row">
                                                 @foreach($content->models as $model)
-                                                    <div class="col-md-2">
+                                                    <div class="col-6 col-md-2 mb-2">
                                                         <div class="smallBox d-flex justify-content-around align-items-center">
                                                             <strong>
                                                                 {{$model->model_name}}

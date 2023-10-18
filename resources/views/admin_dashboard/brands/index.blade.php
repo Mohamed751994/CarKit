@@ -2,6 +2,13 @@
 @section('Page_Title')  ماركات السيارات @endsection
 
 @section('content')
+    <style>
+        .models
+        {
+            width: 890px;
+            overflow: hidden;
+        }
+    </style>
 
 
     <div class="card">
@@ -30,11 +37,13 @@
                             <td>{{$key+1}}</td>
                             <td>{{$con->brand_name}}</td>
                             <td>
-                                @if(!empty($con->models))
-                                @foreach($con->models as $model)
-                                    <span class="badge bg-light-primary text-primary">{{$model->model_name}}</span>
-                                @endforeach
+                                <div class="models">
+                                    @if(!empty($con->models))
+                                        @foreach($con->models as $model)
+                                            <span class="badge bg-light-primary text-primary">{{$model->model_name}}</span>
+                                        @endforeach
                                     @endif
+                                </div>
                             </td>
                             <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">
