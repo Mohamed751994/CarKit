@@ -82,12 +82,6 @@ class CarController extends Controller
     public function vendor_delete_his_car(Request $request,$id)
     {
         try {
-            $user = User::whereId($this->user_id())->first();
-            if(!$user)
-            {
-                return $this->errorResponse('هذا التاجر ليس له صلاحية لحذف هذه السيارة لأنها غير خاصة به ');
-
-            }
             $car = Car::where('user_id', $this->user_id())->find($id);
             if(!$car)
             {
