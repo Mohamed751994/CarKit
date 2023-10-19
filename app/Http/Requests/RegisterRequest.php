@@ -28,13 +28,14 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|unique:users,email|max:255',
             'phone' => 'required|min:10|max:15|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
             'password' => 'required|min:8|max:25|confirmed',
-            'type' => 'nullable',
+            'type' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
+            'type.required' => ' نوع الحساب مطلوب ',
             'name.required' => 'الأسم مطلوب',
             'email.required' => 'البريد الإلكتروني مطلوب',
             'email.email' => 'صيغة البريد الإلكتروني غير صحيحة',
