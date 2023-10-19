@@ -22,11 +22,11 @@ class AuthController extends Controller
     {
         try {
             $data = $request->validated();
-            if($data['type'] == 'vendor')
+            if(isset($data['type']) && $data['type'] == 'vendor')
             {
                 $data['type'] = 2;
             }
-            elseif($data['type'] == 'user')
+            elseif(isset($data['type']) && $data['type'] == 'user')
             {
                 $data['type'] = 0;
             }
