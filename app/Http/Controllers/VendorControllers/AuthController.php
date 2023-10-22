@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\VendorControllers;
 
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ForgetPasswordRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -77,6 +79,30 @@ class AuthController extends Controller
         return $this->successResponse('تم تسجيل الخروج بنجاح');
     }
 
+
+    public function forget_password(ForgetPasswordRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            //Send Email Here
+            return $this->successResponse('تم إرسال الكود علي البريد الإلكتروني', []);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+    public function reset_password(ChangePasswordRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            auth()->user()->update(['password' => $data['password']]);
+            return $this->successResponse('تم تغيير كلمة المرور بنجاح', []);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
 
     public function vendor()
     {

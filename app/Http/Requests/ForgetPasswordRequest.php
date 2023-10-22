@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ForgetPasswordEmailRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ForgetPasswordRequest extends FormRequest
@@ -22,7 +23,7 @@ class ForgetPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' =>  ['required','email', new ForgetPasswordEmailRule()],
         ];
     }
 
