@@ -78,17 +78,19 @@ trait MainTrait
 
 
     //Change Status
-    public function changeStatusTrait($request)
+    public function quickChangeTrait($request)
     {
         $model = $request->model;
         $id = $request->id;
         $val = $request->val;
+        $col = $request->col;
         if($model == 'Vendor')
         {
-            Vendor::whereId($id)->update(['status'=> $val]);
+            Vendor::whereId($id)->update([$col=> $val]);
         }
         return response()->json(['success'=>true]);
     }
+
 
 
     //Sendgrid api emails

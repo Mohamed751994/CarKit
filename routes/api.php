@@ -27,7 +27,6 @@ Route::post('/reserve', [CarController::class, 'reserve_car'])->name('user.reser
 
 //Vendors In Website
 Route::get('/get-all-vendors', [VendorController::class, 'get_all_vendors'])->name('vendor.get_all_vendors');
+Route::get('/get-all-featured-vendors', [VendorController::class, 'get_all_featured_vendors'])->name('vendor.get_all_featured_vendors');
+Route::get('/get-single-featured-vendor/{id}', [VendorController::class, 'get_single_featured_vendor'])->name('vendor.get_single_featured_vendor');
 
-// Route::post('/reserve', function () {
-//     return '123';
-// });

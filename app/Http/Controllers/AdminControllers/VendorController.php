@@ -121,10 +121,11 @@ class VendorController extends Controller
 
 
     //changeStatus
-    public function changeStatus(Request $request)
+    public function quickChange(Request $request)
     {
-        return $this->changeStatusTrait($request);
+        return $this->quickChangeTrait($request);
     }
+
 
 
 }

@@ -22,6 +22,7 @@
                         <th>الأسم</th>
                         <th> تاريخ التسجيل</th>
                         <th> حالة الحساب </th>
+                        <th> مميز </th>
                         <th>التحكم</th>
                     </tr>
                     </thead>
@@ -38,7 +39,13 @@
                             <td>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input customSliderCheckbox" type="checkbox"
-                                           name="status" onchange="changeStatus(this,'{{$con->vendor?->id}}', 'Vendor')" id="flexSwitchCheckChecked" @if($con->vendor?->status) value="0" checked="" @else value="1" @endif>
+                                           name="status" onchange="quickChange(this,'{{$con->vendor?->id}}', 'Vendor', 'status')" id="flexSwitchCheckChecked" @if($con->vendor?->status) value="0" checked="" @else value="1" @endif>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input customSliderCheckbox" type="checkbox"
+                                           name="featured" onchange="quickChange(this,'{{$con->vendor?->id}}', 'Vendor', 'featured')" id="flexSwitchCheckChecked" @if($con->vendor?->featured) value="0" checked="" @else value="1" @endif>
                                 </div>
                             </td>
                             <td>
@@ -90,4 +97,3 @@
 
 
 @endsection
-

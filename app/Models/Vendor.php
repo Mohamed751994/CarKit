@@ -26,4 +26,13 @@ class Vendor extends Model
             return $this->image_full_path($value);
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->whereFeatured(1);
+    }
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(1);
+    }
+
 }

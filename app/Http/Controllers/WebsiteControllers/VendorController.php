@@ -29,8 +29,37 @@ class VendorController extends Controller
     public function get_all_vendors()
     {
         try {
-            $vendors = Vendor::whereStatus(1)->orderBy('name')->select('user_id AS id', 'name')->get();
+            $vendors = Vendor::active()->orderBy('name')->select('user_id AS id', 'name')->get();
             return $this->successResponse('جميع المعارض', $vendors);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+
+    //Get All Featured Vendors
+    public function get_all_featured_vendors()
+    {
+        try {
+            $vendors = Vendor::active()->featured()->get();
+            return $this->successResponse('جميع المعارض المميزة', $vendors);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+    //Get Single Featured Vendor
+    public function get_single_featured_vendor($id)
+    {
+        try {
+            $vendor = Vendor::with('user.cars')->active()->featured()->whereId($id)->first();
+            if(!$vendor)
+            {
+                return $this->errorResponse('الصفحة غير موجودة',404);
+            }
+            return $this->successResponse('صفحة المعرض المميزة', $vendor);
 
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());

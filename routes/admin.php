@@ -27,7 +27,7 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     Route::resource('users', 'UserController');
     Route::put('/user/update/password/{user_id}', [UserController::class, 'update_password'])->name('users.update.password');
     Route::resource('vendors', 'VendorController');
-    Route::post('/changeStatus', [VendorController::class, 'changeStatus'])->name('admin.changeStatus');
+    Route::post('/quickChange', [VendorController::class, 'quickChange'])->name('admin.quickChange');
     Route::resource('cars', 'CarController');
     Route::resource('brands', 'BrandModelController');
     Route::get('model_of_brand/destroy/{id}', [\App\Http\Controllers\AdminControllers\BrandModelController::class,'modelDestroy'])->name('model.destroy');

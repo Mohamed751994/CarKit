@@ -131,29 +131,29 @@
     },5000);
 
 
-    function changeStatus(element ,id, model)
+    function quickChange(element ,id, model, col)
     {
         var val = $(element).val();
         $.ajax({
-        url: "{{route('admin.changeStatus')}}",
+        url: "{{route('admin.quickChange')}}",
         type: 'post',
-        data: {_token: '{{csrf_token()}}',id:id, model:model, val:val},
+        data: {_token: '{{csrf_token()}}',id:id, model:model, val:val, col:col},
         success: function(response) {
         if(response.success)
-    {
-        if(val === '1')
-    {
-        $(element).attr('value', '0');
-    }
-        else
-    {
-        $(element).attr('value', '1');
-    }
-    }
-    },
-        error: function (reject) {
+        {
+            if(val === '1')
+            {
+                $(element).attr('value', '0');
+            }
+            else
+            {
+                $(element).attr('value', '1');
+            }
+        }
+        },
+            error: function (reject) {
 
-    },
+        },
     });
     }
 
