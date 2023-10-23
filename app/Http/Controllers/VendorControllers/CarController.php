@@ -54,6 +54,22 @@ class CarController extends Controller
     }
 
 
+    public function get_single_car($id)
+    {
+        try {
+            $car = Car::with(['user.vendor', 'brands'])->find($id);
+            if(!$car)
+            {
+                return $this->errorResponse('هذه العربية غير موجودة');
+            }
+            return $this->successResponse('بيانات السيارة', $car);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+
     //Vendor Update his car
     public function vendor_update_his_car(CarUpdateRequest $request, $id)
     {
