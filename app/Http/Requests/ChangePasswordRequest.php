@@ -22,6 +22,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'encrypt_user_id' =>'nullable',
             'password' => 'required|min:8|max:25|confirmed',
         ];
     }

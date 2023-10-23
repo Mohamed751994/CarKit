@@ -29,3 +29,9 @@ if (!function_exists('tanantsStatusTypeCount')) {
         return \App\Models\Tanant::whereStatus($type)->count();
     }
 }
+if (!function_exists('getSettings')) {
+    function getSettings($col)
+    {
+        return \App\Models\Setting::first()?->$col;
+    }
+}

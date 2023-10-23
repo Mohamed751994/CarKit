@@ -94,49 +94,48 @@ trait MainTrait
 
 
     //Sendgrid api emails
-//    public function send_email_to_user($email, $name, $body, $subject)
-//    {
-//
-//        $headers = array(
-//            'Authorization: Bearer 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' ,
-//            'Content-Type: application/json'
-//        );
-//
-//        $data = array(
-//            "personalizations" => array(
-//                array(
-//                    "to" => array(
-//                        array(
-//                            "email" => $email,
-//                            "name" => $name
-//                        ),
-//                    )
-//
-//                )
-//            ),
-//            "from" => array(
-//                "email" =>"mohamednaser@spcd.psu.edu.eg"
-//            ),
-//            "subject" => $subject,
-//            "content" => array(
-//                array(
-//                    "type" => "text/html",
-//                    "value" => $body
-//                )
-//            )
-//        );
-//
-//        $ch = curl_init();
-//        curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
-//        curl_setopt($ch, CURLOPT_POST, 1);
-//        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-//        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//        $response = curl_exec($ch);
-//        curl_close($ch);
-//        return $response;
-//    }
+    public function sendEmail($email, $name, $body, $subject)
+    {
+
+        $headers = array(
+            'Authorization: Bearer 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' ,
+            'Content-Type: application/json'
+        );
+
+        $data = array(
+            "personalizations" => array(
+                array(
+                    "to" => array(
+                        array(
+                            "email" => $email,
+                            "name" => $name
+                        ),
+                    )
+
+                )
+            ),
+            "from" => array(
+                "email" =>"mohamed.gamal@khomrigroup.com"
+            ),
+            "subject" => $subject,
+            "content" => array(
+                array(
+                    "type" => "text/html",
+                    "value" => $body
+                )
+            )
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+    }
 
 
 

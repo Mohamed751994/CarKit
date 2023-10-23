@@ -54,7 +54,7 @@ class VendorController extends Controller
     public function get_single_featured_vendor($id)
     {
         try {
-            $vendor = Vendor::with('user.cars')->active()->featured()->whereId($id)->first();
+            $vendor = Vendor::with('user.cars')->active()->whereId($id)->first();
             if(!$vendor)
             {
                 return $this->errorResponse('الصفحة غير موجودة',404);

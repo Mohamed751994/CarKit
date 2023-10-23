@@ -28,6 +28,11 @@
                         <textarea class="form-control ckeditor" name="policy">{!! $content->policy !!}</textarea>
                     </div>
 
+                    <div class="col-md-12">
+                        <label class="form-label">  رابط الموقع  </label>
+                        <input type="url" dir="ltr" class="form-control" name="website_url" value="{{$content->website_url}}" />
+                    </div>
+
 
 
                     @include('admin_dashboard.inputs.edit_btn')
