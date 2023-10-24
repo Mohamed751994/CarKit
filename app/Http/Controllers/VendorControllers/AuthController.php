@@ -91,6 +91,9 @@ class AuthController extends Controller
             $data = $request->validated();
             //Send Email Here
             $user = User::whereEmail($data['email'])->first();
+            if (!$user) {
+                return $this->errorResponse('البريد الإلكتروني غير موجود');
+            }
             $encrypt = Crypt::encryptString($user->id);
             $link =  getSettings('website_url').'/reset-password/'.$encrypt;
             $html = view('emails.forget_password', compact('user', 'link'))->render();
