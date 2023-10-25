@@ -18,13 +18,13 @@
     <div class="container">
         <div class="row align-items-center justify-content-center" style="height: 100vh">
             <div class="col-md-8 mx-auto mt-5">
-                <div class="row m-0 boxMail" style="background: white;padding: 45px 0;">
-                    <div class="col-md-10 mx-auto">
-                        <img src="{{asset('admin_dashboard/assets/images/logo.png')}}" width="50%" />
+                <div class="row m-0 boxMail" style="background: white;padding: 45px; margin: 30px">
+                    <div class="col-md-10 mx-auto" style="text-align: center;font-family: 'Roboto';font-weight: bold;direction: rtl;font-size: 18px;">
+                        <img src="{{asset('admin_dashboard/assets/images/logo.png')}}" width="30%" />
                         <h4 class="my-3 text-center">مرحباً {{$user->name}} .</h4>
                         <strong>لقد تلقينا طلبًا لإعادة تعيين كلمة المرور الخاصة بك.
                             إذا لم تطلب ذلك، فيرجى تجاهل هذه الرسالة. إذا كنت ترغب في المتابعة : </strong>
-                        <a href="{{$link}}" style="display: block; margin: 30px 0; background: #f94a29; padding: 20px;color: #fff; text-decoration: auto;font-weight: bold;">إعادة تعيين كلمة المرور</a>
+                        <a href="{{$link}}" style="width:50%;margin: 30px auto;display: block; background: #f94a29; padding: 20px;color: #fff; text-decoration: auto;font-weight: bold;">إعادة تعيين كلمة المرور</a>
                         <p style=" font-size: 14px;color: #858585;">ستنتهي صلاحية هذا الرابط عند تغييرك لكلمة المرور. لطلب رابط جديد
                             أو إذا انتهت صلاحية الرابط الخاص بك، يمكنك طلب رابط جديد عبر نسيت كلمة المرور من خلال الموقع.</p>
                         <div style="" class="footer">
