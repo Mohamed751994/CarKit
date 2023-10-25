@@ -74,6 +74,7 @@ class UserProfileController extends Controller
             {
                 return $this->errorResponse('الحجز غير موجود');
             }
+            $reservation['car_details'] = json_decode($reservation['car_details']);
             return $this->successResponse('حجوزاتي ', $reservation);
 
         } catch (\Throwable $th) {
