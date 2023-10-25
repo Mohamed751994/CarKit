@@ -39,5 +39,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user-profile', [UserProfileController::class, 'profile'])->name('user.profile');
     Route::post('/user-change-password', [UserProfileController::class, 'user_change_password'])->name('user.user_change_password');
     Route::get('/user-reservations', [UserProfileController::class, 'my_reservations'])->name('user.my_reservations');
+    Route::get('/user-reserve/{id}', [UserProfileController::class, 'my_single_reserve'])->name('user.my_single_reserve');
 
 });
