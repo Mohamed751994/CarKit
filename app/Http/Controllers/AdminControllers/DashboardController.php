@@ -30,9 +30,8 @@ class DashboardController extends Controller
         $latest_10_orders = Tanant::latest()->limit(10)->get();
 
         //Most Reserve Cars
-        $most_reserve_cars = Tanant::with(['car.user:id,name', 'car.brands'])
-            ->select('car_id', \DB::raw('COUNT(*) as `count`'))
-            ->groupBy('car_id')
+      $most_reserve_cars = Tanant::select('car_id', \DB::raw('COUNT(*) as `count`'), 'car_details')
+            ->groupBy('car_id', 'car_details')
             ->orderBy('count', 'DESC')
             ->limit(5)
             ->get();

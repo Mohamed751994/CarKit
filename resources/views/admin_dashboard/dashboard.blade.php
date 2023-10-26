@@ -69,7 +69,7 @@
                             <div class="best-product-item">
                             <div class="d-flex align-items-center gap-3">
                                 <div class="product-box border">
-                                    <img src="{{$val->car?->image}}" alt="">
+                                    <img src="{{json_decode($val->car_details)->image}}" alt="">
                                 </div>
                                 <div class="product-info flex-grow-1">
                                     <div class="progress-wrapper">
@@ -80,7 +80,7 @@
                                                  @elseif($key == 4)  style="width: 40%;" @endif></div>
                                         </div>
                                     </div>
-                                    <p class="product-name mb-0 mt-2 fs-6">{{$val->car?->brands?->brand_name . ' ' . $val->car?->model}} <small>( {{$val->car?->user?->name}} )</small> <span class="float-end">{{$val->count}}</span></p>
+                                    <p class="product-name mb-0 mt-2 fs-6">{{json_decode($val->car_details)->model}} <small>( {{json_decode($val->car_details)->user?->name}} )</small> <span class="float-end">{{$val->count}}</span></p>
                                 </div>
                             </div>
                         </div>
