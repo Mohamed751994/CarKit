@@ -23,17 +23,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-md-2">
-                    <div class="card radius-10">
-                        <div class="card-body text-center">
-                            <div class="widget-icon mx-auto mb-3 bg-light-primary text-primary">
-                                <i class="bi bi-tags-fill"></i>
-                            </div>
-                            <h3>{{tanantsStatusTypeCount('payment_pending')}}</h3>
-                            <p class="mb-0">انتظار الدفع</p>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-6 col-md-2">--}}
+{{--                    <div class="card radius-10">--}}
+{{--                        <div class="card-body text-center">--}}
+{{--                            <div class="widget-icon mx-auto mb-3 bg-light-primary text-primary">--}}
+{{--                                <i class="bi bi-tags-fill"></i>--}}
+{{--                            </div>--}}
+{{--                            <h3>{{tanantsStatusTypeCount('payment_pending')}}</h3>--}}
+{{--                            <p class="mb-0">انتظار الدفع</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="col-6 col-md-2">
                     <div class="card radius-10">
                         <div class="card-body text-center">
@@ -41,7 +41,7 @@
                                 <i class="bi bi-tags-fill"></i>
                             </div>
                             <h3>{{tanantsStatusTypeCount('approved')}}</h3>
-                            <p class="mb-0">إتمام الدفع</p>
+                            <p class="mb-0">تم التأكيد</p>
                         </div>
                     </div>
                 </div>
@@ -56,17 +56,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-md-2">
-                    <div class="card radius-10">
-                        <div class="card-body text-center">
-                            <div class="widget-icon mx-auto mb-3 bg-light-danger text-danger">
-                                <i class="bi bi-tags-fill"></i>
-                            </div>
-                            <h3>{{tanantsStatusTypeCount('cancelled')}}</h3>
-                            <p class="mb-0">ملغي</p>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-6 col-md-2">--}}
+{{--                    <div class="card radius-10">--}}
+{{--                        <div class="card-body text-center">--}}
+{{--                            <div class="widget-icon mx-auto mb-3 bg-light-danger text-danger">--}}
+{{--                                <i class="bi bi-tags-fill"></i>--}}
+{{--                            </div>--}}
+{{--                            <h3>{{tanantsStatusTypeCount('cancelled')}}</h3>--}}
+{{--                            <p class="mb-0">ملغي</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
 
 
