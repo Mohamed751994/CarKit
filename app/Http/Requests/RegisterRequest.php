@@ -39,7 +39,7 @@ class RegisterRequest extends FormRequest
         return [
             'type.required' => ' نوع الحساب مطلوب ',
             'name.required' => 'الأسم مطلوب',
-            'name.regex' => 'الأسم يجب أن يكون حروف أو حروف مع أرقام ',
+            'name.regex' => 'الأسم يجب أن يكون حروف فقط ',
             'name.max' => 'الأسم عدد الحروف لا تتجاوز 255 حرف',
             'email.required' => 'البريد الإلكتروني مطلوب',
             'email.email' => 'صيغة البريد الإلكتروني غير صحيحة',
