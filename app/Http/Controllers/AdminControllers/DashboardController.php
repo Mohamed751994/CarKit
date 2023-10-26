@@ -22,14 +22,23 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        //Stats
         $vendors = Vendor::count();
         $users = User::whereType(0)->count();
         $cars = Car::with('user.vendor')->vendorStatus()->count();
         $reservations = Tanant::count();
         $latest_10_orders = Tanant::latest()->limit(10)->get();
 
-        $allCounts = ['vendors' ,'users','cars','reservations','latest_10_orders'];
-        return view('admin_dashboard.dashboard', compact($allCounts));
+        //Most Reserve Cars
+        $most_reserve_cars = Tanant::with(['car.user:id,name', 'car.brands'])
+            ->select('car_id', \DB::raw('COUNT(*) as `count`'))
+            ->groupBy('car_id')
+            ->orderBy('count', 'DESC')
+            ->limit(5)
+            ->get();
+
+        $data = ['vendors' ,'users','cars','reservations','most_reserve_cars','latest_10_orders'];
+        return view('admin_dashboard.dashboard', compact($data));
     }
 
 }

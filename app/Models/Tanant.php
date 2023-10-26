@@ -18,6 +18,11 @@ class Tanant extends Model
         'car_details' => 'json'
     ];
 
+    public function car()
+    {
+        return $this->belongsTo(Car::class, 'car_id');
+    }
+
     public function getNidImgAttribute($value)
     {
         return $this->image_full_path($value);

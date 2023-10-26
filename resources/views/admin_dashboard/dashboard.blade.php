@@ -52,6 +52,73 @@
 
     </div>
 
+
+    <div class="row mb-5">
+        <div class="col-12 col-lg-6 d-flex">
+            <div class="card rounded-4 w-100">
+                <div class="card-header bg-transparent border-0">
+                    <div class="row g-3 align-items-center">
+                        <div class="col">
+                            <h6 class="mb-0 mt-3">السيارات الأكثر حجزاً</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="best-product p-2 mb-3">
+                        @forelse($most_reserve_cars as $key => $val)
+                            <div class="best-product-item">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="product-box border">
+                                    <img src="{{$val->car?->image}}" alt="">
+                                </div>
+                                <div class="product-info flex-grow-1">
+                                    <div class="progress-wrapper">
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar bg-primary" role="progressbar" @if($key == 0) style="width: 80%;"
+                                                 @elseif($key ==1)  style="width: 70%;" @elseif($key == 2)  style="width: 60%;"
+                                                 @elseif($key == 3)  style="width: 50%;"
+                                                 @elseif($key == 4)  style="width: 40%;" @endif></div>
+                                        </div>
+                                    </div>
+                                    <p class="product-name mb-0 mt-2 fs-6">{{$val->car?->brands?->brand_name . ' ' . $val->car?->model}} <small>( {{$val->car?->user?->name}} )</small> <span class="float-end">{{$val->count}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                            <strong>لا يوجد حجوزات حتي الآن</strong>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 d-flex">
+            <div class="col d-flex">
+                <div class="card rounded-4 overflow-hidden w-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <h6 class="mb-0">المعارض الأكثر عرضاً</h6>
+                        </div>
+                        <div class="by-device-container p-3">
+
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-top">
+                            <i class="bi bi-tablet-landscape-fill me-2 text-primary"></i> <span>Tablet - </span> <span>22.5%</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent">
+                            <i class="bi bi-phone-fill me-2 text-primary-2"></i> <span>Mobile - </span> <span>62.3%</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent">
+                            <i class="bi bi-display-fill me-2 text-primary-3"></i> <span>Desktop - </span> <span>15.2%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!--end row-->
+
+
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-12 d-flex">
             <div class="card radius-10 w-100">
@@ -110,5 +177,8 @@
         </div>
     </div>
 
+
 @endsection
 
+@push('scripts')
+@endpush

@@ -29,11 +29,11 @@ Route::get('/get-all-vendors', [VendorController::class, 'get_all_vendors'])->na
 Route::get('/get-all-featured-vendors', [VendorController::class, 'get_all_featured_vendors'])->name('vendor.get_all_featured_vendors');
 Route::get('/get-single-featured-vendor/{id}', [VendorController::class, 'get_single_featured_vendor'])->name('vendor.get_single_featured_vendor');
 
-//Reserve Car
-Route::post('/reserve', [CarController::class, 'reserve_car'])->name('user.reserve_car');
 
 //User Profile
 Route::middleware(['auth:sanctum'])->group(function () {
+    //Reserve Car
+    Route::post('/reserve', [CarController::class, 'reserve_car'])->name('user.reserve_car');
 
     //user profile my reservations
     Route::get('/user-profile', [UserProfileController::class, 'profile'])->name('user.profile');
