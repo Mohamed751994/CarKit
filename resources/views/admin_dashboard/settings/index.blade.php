@@ -33,6 +33,10 @@
                         <input type="url" dir="ltr" class="form-control" name="website_url" value="{{$content->website_url}}" />
                     </div>
 
+                    <div class="col-md-12">
+                        <label class="form-label">  نسبة الخصم علي الحجز (%)  </label>
+                        <input type="number" min="0" max="100" class="form-control" name="discount_percentage" value="{{$content->discount_percentage}}" />
+                    </div>
 
 
                     @include('admin_dashboard.inputs.edit_btn')

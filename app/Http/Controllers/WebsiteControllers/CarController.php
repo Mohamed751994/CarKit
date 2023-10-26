@@ -88,19 +88,18 @@ class CarController extends Controller
                 $image = $this->uploadFile($request, 'license_img', 'uploads/');
                 $data['license_img'] = $image;
             }
-
             $data['user_id'] = (Auth::user())? Auth::user()->id : null;
             $data['status'] = 'pending';
-
             $car = Car::with('user.vendor')->findOrFail($data['car_id']);
-
             if(empty($car)){
                 return $this->errorResponse('اختيار غير صحيح للسيارة');
             }
-
+            //Some Inputs like : days and total amount and discount
+            $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
+            $data['discount_percentage'] =  getSettings('discount_percentage');
+            $data['total_amount'] = ($data['days'] * $car->price_per_day);
             $data['vendor_user_id'] = $car->user_id;
             $data['car_details'] = json_encode($car);
-
             $tanant = Tanant::create($data);
             $tanant['car_details'] =json_decode($tanant['car_details']);
             return $this->successResponse('تم إضافة الطلب بنجاح', $tanant);
