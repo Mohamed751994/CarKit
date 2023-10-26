@@ -3,7 +3,15 @@
 @section('Page_Title')  لوحة التحكم @endsection
 
 @section('content')
-
+    <style>
+        .mostVendorImg
+        {
+            background: #efefef;
+            display: inline-block;
+            border-radius: 5px;
+            margin: 5px;
+        }
+    </style>
     <div class="row mb-5">
         <div class="col-6 col-lg-3">
             <div class="card radius-10 bg-tiffany">
@@ -67,14 +75,14 @@
                     <div class="best-product p-2 mb-3">
                         @forelse($most_reserve_cars as $key => $val)
                             <div class="best-product-item">
-                            <div class="d-flex align-items-center gap-3">
+                            <a href="{{route('cars.show', $val->car_id)}}" class="d-flex align-items-center gap-3">
                                 <div class="product-box border">
                                     <img src="{{json_decode($val->car_details)->image}}" alt="">
                                 </div>
                                 <div class="product-info flex-grow-1">
                                     <div class="progress-wrapper">
                                         <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-primary" role="progressbar" @if($key == 0) style="width: 80%;"
+                                            <div class="progress-bar bg-success" role="progressbar" @if($key == 0) style="width: 80%;"
                                                  @elseif($key ==1)  style="width: 70%;" @elseif($key == 2)  style="width: 60%;"
                                                  @elseif($key == 3)  style="width: 50%;"
                                                  @elseif($key == 4)  style="width: 40%;" @endif></div>
@@ -82,7 +90,7 @@
                                     </div>
                                     <p class="product-name mb-0 mt-2 fs-6">{{json_decode($val->car_details)->model}} <small>( {{json_decode($val->car_details)->user?->name}} )</small> <span class="float-end">{{$val->count}}</span></p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         @empty
                             <strong>لا يوجد حجوزات حتي الآن</strong>
@@ -96,22 +104,28 @@
                 <div class="card rounded-4 overflow-hidden w-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h6 class="mb-0">المعارض الأكثر عرضاً</h6>
+                            <h6 class="mb-0">المعارض الأكثر حجزاً</h6>
                         </div>
                         <div class="by-device-container p-3">
-
+                            @foreach($most_reserve_vendors as $vendorImg)
+                                <div class="mostVendorImg">
+                                    <a href="{{route('vendors.show', $vendorImg->vendor_user_id)}}">
+                                    <img style="height: 100px;width: 100px;object-fit: contain" src="{{$vendorImg->vendor_user?->vendor?->image ? $vendorImg->vendor_user?->vendor?->image : '/admin_dashboard/assets/images/no_image.png'}}">
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-top">
-                            <i class="bi bi-tablet-landscape-fill me-2 text-primary"></i> <span>Tablet - </span> <span>22.5%</span>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent">
-                            <i class="bi bi-phone-fill me-2 text-primary-2"></i> <span>Mobile - </span> <span>62.3%</span>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent">
-                            <i class="bi bi-display-fill me-2 text-primary-3"></i> <span>Desktop - </span> <span>15.2%</span>
-                        </li>
+                        @forelse($most_reserve_vendors as $vendor)
+                            <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-top">
+                                <i class="bi bi-tablet-landscape-fill me-2 text-primary"></i> <span>{{$vendor->vendor_user?->name}} - </span> <span>{{$vendor->count}} حجز</span>
+                            </li>
+                        @empty
+                            <li class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-top">
+                                لا يوجد بيانات
+                            </li>
+                        @endforelse
                     </ul>
                 </div>
             </div>

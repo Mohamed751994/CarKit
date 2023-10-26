@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[a-zA-Z\p{Arabic}0-9\s\-]+$/u',
             'email' => 'required|email|unique:users,email|max:255',
             'phone' => 'required|min:10|max:15|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
             'password' => 'required|min:8|max:25|confirmed',
@@ -37,6 +37,8 @@ class RegisterRequest extends FormRequest
         return [
             'type.required' => ' نوع الحساب مطلوب ',
             'name.required' => 'الأسم مطلوب',
+            'name.regex' => 'الأسم يجب أن يكون حروف أو حروف مع أرقام ',
+            'name.max' => 'الأسم عدد الحروف لا تتجاوز 255 حرف',
             'email.required' => 'البريد الإلكتروني مطلوب',
             'email.email' => 'صيغة البريد الإلكتروني غير صحيحة',
             'email.unique' => 'البريد الإلكتروني موجود من قبل',
@@ -52,15 +54,15 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = new JsonResponse([
-            'success' => false,
-            'errors' => $validator->errors()
-        ], 422);
-
-        throw new \Illuminate\Validation\ValidationException($validator, $response);
-    }
+//    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+//    {
+//        $response = new JsonResponse([
+//            'success' => false,
+//            'errors' => $validator->errors()
+//        ], 422);
+//
+//        throw new \Illuminate\Validation\ValidationException($validator, $response);
+//    }
 
 
 }

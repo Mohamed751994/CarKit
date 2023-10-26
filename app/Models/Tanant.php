@@ -22,6 +22,10 @@ class Tanant extends Model
     {
         return $this->belongsTo(Car::class, 'car_id');
     }
+    public function vendor_user()
+    {
+        return $this->belongsTo(User::class, 'vendor_user_id');
+    }
 
     public function getNidImgAttribute($value)
     {
