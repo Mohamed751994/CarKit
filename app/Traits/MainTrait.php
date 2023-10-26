@@ -76,6 +76,18 @@ trait MainTrait
         return auth()->user()->id;
     }
 
+    //return total amount
+    public function get_total_amount($days, $price_per_day)
+    {
+        return ($days * $price_per_day);
+    }
+
+    //return total amount after discount
+    public function get_total_amount_after_discount($total_amount, $discount)
+    {
+        return  $total_amount - ($total_amount * $discount / 100);
+    }
+
 
     //Change Status
     public function quickChangeTrait($request)

@@ -97,7 +97,8 @@ class CarController extends Controller
             //Some Inputs like : days and total amount and discount
             $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
             $data['discount_percentage'] =  getSettings('discount_percentage');
-            $data['total_amount'] = ($data['days'] * $car->price_per_day);
+            $data['total_amount'] = $this->get_total_amount($data['days'] , $car->price_per_day);
+            $data['total_amount_after_discount'] = $this->get_total_amount_after_discount($data['total_amount'], $data['discount_percentage']);
             $data['vendor_user_id'] = $car->user_id;
             $data['car_details'] = json_encode($car);
             $tanant = Tanant::create($data);
