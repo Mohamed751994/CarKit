@@ -37,5 +37,6 @@ Route::namespace('App\Http\Controllers\VendorControllers')->group(function () {
         Route::post('/delete-his-car/{id}', [CarController::class, 'vendor_delete_his_car'])->name('vendor.vendor_delete_his_car');
         Route::get('/get-vendor-cars', [CarController::class, 'get_vendor_cars'])->name('vendor.get_vendor_cars');
         Route::get('/cars-reservations', [DashboardController::class, 'get_vendor_cars_reservation'])->name('vendor.get_vendor_cars_reservation');
+        Route::post('/change-reservation-status/{id}', [DashboardController::class, 'change_reservation_status'])->name('vendor.change_reservation_status');
     });
 });

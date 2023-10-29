@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\VendorControllers;
 
+use App\Http\Requests\ChangeReservationStatusRequest;
 use App\Http\Requests\VendorDetailsRequest;
 use App\Models\User;
 use App\Models\Vendor;
@@ -53,6 +54,28 @@ class DashboardController extends Controller
     }
 
 
+    public function change_reservation_status(ChangeReservationStatusRequest $request, $id)
+    {
+        try {
+            $status = $request->status;
+            $tanant = Tanant::with('normal_user')->whereId($id)->where('vendor_user_id', $this->user_id())->first();
+            if(!$tanant)
+            {
+                return $this->errorResponse('هذا الحجز غير موجود');
+            }
+            if($tanant->status != 'pending')
+            {
+                return $this->errorResponse('عفواً تم تغيير الحالة من قبل');
+            }
+            $tanant->update(['status'=>$status]);
+            $type = 'user';
+            $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
+            $this->sendEmail($tanant->normal_user?->email,'CarKits',$html, 'CarKits | Reservation Status');
+            return $this->successResponse('تم تعديل حالة الحجز بنجاح');
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
 
 
 }

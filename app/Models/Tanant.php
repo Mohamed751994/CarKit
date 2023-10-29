@@ -27,6 +27,11 @@ class Tanant extends Model
         return $this->belongsTo(User::class, 'vendor_user_id');
     }
 
+    public function normal_user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function getNidImgAttribute($value)
     {
         return $this->image_full_path($value);

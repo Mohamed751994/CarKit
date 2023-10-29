@@ -104,7 +104,7 @@
                 <div class="card rounded-4 overflow-hidden w-100">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h6 class="mb-0">المعارض الأكثر حجزاً</h6>
+                            <h6 class="mb-0">المعارض الأكثر تأجيراً</h6>
                         </div>
                         <div class="by-device-container p-3">
                             @foreach($most_reserve_vendors as $vendorImg)
