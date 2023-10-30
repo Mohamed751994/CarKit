@@ -44,6 +44,12 @@ class UserController extends Controller
     }
 
 
+    public function show(User $user)
+    {
+        $content =  $user;
+        return view('admin_dashboard.users.show', compact('content'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

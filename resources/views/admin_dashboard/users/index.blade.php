@@ -34,6 +34,8 @@
                             <td>{{date('Y-m-d H:i A', strtotime($con->created_at))}}</td>
                             <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">
+                                    <a href="{{route('users.show', $con->id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                       title="الحجوزات"><i class="lni lni-eye"></i></a>
                                     <a href="{{route('users.edit', $con->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                        title="تعديل"><i class="bi bi-pencil-fill"></i></a>
                                     <a href="javascript:;"  data-bs-toggle="modal" data-bs-target="#deleteItem{{$con->id}}" class="text-danger" data-bs-toggle="tooltip"

@@ -63,4 +63,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Car::class, 'user_id');
     }
+
+
+    //Normal User Reservations
+    public function reservations()
+    {
+        return $this->hasMany('App\Models\Tanant', 'user_id');
+    }
+
 }
