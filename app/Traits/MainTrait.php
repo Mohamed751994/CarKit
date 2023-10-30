@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Rating;
 use App\Models\Tanant;
 use App\Models\Vendor;
 use Carbon\Carbon;
@@ -103,6 +104,12 @@ trait MainTrait
             Vendor::whereId($id)->update([$col=> $val]);
         }
         return response()->json(['success'=>true]);
+    }
+
+    //Average Rating
+    public function rating($id, $type)
+    {
+        return Rating::where(['type_id'=> $id, 'type' =>$type])->avg('rate');
     }
 
 

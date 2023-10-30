@@ -12,7 +12,7 @@ class Vendor extends Model
     use MainTrait;
     use HasFactory;
     protected $guarded = [];
-
+    protected $appends = ['rate'];
     public function user()
     {
         return  $this->belongsTo('App\Models\User', 'user_id');
@@ -33,6 +33,12 @@ class Vendor extends Model
     public function scopeActive($query)
     {
         return $query->whereStatus(1);
+    }
+
+    //Avg Rating
+    public function getRateAttribute()
+    {
+        return floatval($this->rating($this->user_id, 'vendor'));
     }
 
 }

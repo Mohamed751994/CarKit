@@ -7,9 +7,11 @@ use App\Http\Requests\CarReservationRequest;
 
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\RatingRequest;
 use App\Models\Car;
 use App\Models\CarsBrand;
 use App\Models\CarsModel;
+use App\Models\Rating;
 use App\Models\Reset;
 use App\Models\User;
 use App\Models\Vendor;
@@ -77,6 +79,29 @@ class UserProfileController extends Controller
             $reservation['car_details'] = json_decode($reservation['car_details']);
             return $this->successResponse('حجوزاتي ', $reservation);
 
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+
+    //Rating
+    public function user_rate(RatingRequest $request)
+    {
+        try {
+            $data =$request->validated();
+            //Check if user rate this type before or not
+            $check = Rating::where(['user_id' => $this->user_id(), 'type' => $data['type'], 'type_id'=>$data['type_id']])->first();
+            if($check)
+            {
+                $check->update(['rate' =>$data['rate']]);
+            }
+            else
+            {
+                $data['user_id'] = $this->user_id();
+                Rating::create($data);
+            }
+            return $this->successResponse('تم التقييم بنجاح', []);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }

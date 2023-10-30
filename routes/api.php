@@ -35,4 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user-reservations', [UserProfileController::class, 'my_reservations'])->name('user.my_reservations');
     Route::get('/user-reserve/{id}', [UserProfileController::class, 'my_single_reserve'])->name('user.my_single_reserve');
 
+    //User Rate Vendor or Car
+    Route::post('/rate', [UserProfileController::class, 'user_rate'])->name('user.user_rate');
+
 });
