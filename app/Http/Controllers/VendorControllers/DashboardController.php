@@ -53,7 +53,22 @@ class DashboardController extends Controller
         }
     }
 
+    //get_vendor_single_reserve
+    public function get_vendor_single_reserve($id)
+    {
+        try {
+            $reservation = Tanant::where('vendor_user_id', $this->user_id())->whereId($id)->first();
+            if(!$reservation)
+            {
+                return $this->errorResponse('الحجز غير موجود');
+            }
+            $reservation['car_details'] = json_decode($reservation['car_details']);
+            return $this->successResponse('حجوزاتي ', $reservation);
 
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
     public function change_reservation_status(ChangeReservationStatusRequest $request, $id)
     {
         try {
