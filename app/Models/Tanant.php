@@ -74,26 +74,26 @@ class Tanant extends Model
         return $item;
     }
 
-    public function getStatusArrayAttribute($value)
+    public function getStatusArrayAttribute()
     {
-        $item = '';
-        if($value == 'pending')
+        $item = [];
+        if($this->status == 'pending')
         {
             $item =  ['color'=>'orange', 'status' =>' في الإنتظار'];
         }
-        elseif($value == 'payment_pending')
+        elseif($this->status == 'payment_pending')
         {
             $item =  ['color'=>'lightblue', 'status' =>'بإنتظار الدفع '];
         }
-        elseif($value == 'approved')
+        elseif($this->status == 'approved')
         {
             $item =  ['color'=>'green', 'status' =>'تم التأكيد '];
         }
-        elseif($value == 'rejected')
+        elseif($this->status == 'rejected')
         {
             $item =  ['color'=>'red', 'status' =>'تم الرفض '];
         }
-        elseif($value == 'cancelled')
+        elseif($this->status == 'cancelled')
         {
             $item =  ['color'=>'red', 'status' =>'تم الإلغاء '];
         }
