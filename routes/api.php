@@ -5,22 +5,11 @@ use App\Http\Controllers\WebsiteControllers\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteControllers\CarController;
-use \App\Traits\MainTrait;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::post('/check', function (Request $request){
-    $car = \App\Models\Car::find(1);
-    return  check_if_car_reserved_or_not($request, $car);
-});
+
+//Search in Home Page
+Route::get('/search-cars', [CarController::class, 'search_cars'])->name('vendor.search_cars');
+
 
 //Cars in website
 Route::get('/cars', [CarController::class, 'get_all_cars'])->name('vendor.get_all_cars');

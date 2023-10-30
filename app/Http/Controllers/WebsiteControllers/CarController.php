@@ -25,6 +25,7 @@ class CarController extends Controller
     use MainTrait;
 
 
+    //Brands
     public function get_all_cars_brands()
     {
         try {
@@ -36,7 +37,7 @@ class CarController extends Controller
         }
     }
 
-
+    //Models
     public function get_all_cars_brand_models()
     {
         try {
@@ -48,7 +49,7 @@ class CarController extends Controller
         }
     }
 
-
+    //Get all cars
     public function get_all_cars(Request $request)
     {
         try {
@@ -60,6 +61,7 @@ class CarController extends Controller
         }
     }
 
+    //Get Single Car
     public function get_single_car($id)
     {
         try {
@@ -76,6 +78,7 @@ class CarController extends Controller
         }
     }
 
+    //User Reserve car
     public function reserve_car(CarReservationRequest $request){
         try {
 
@@ -112,4 +115,14 @@ class CarController extends Controller
             return $this->errorResponse($th->getMessage());
         }
     }
+
+
+    //search_cars_in_home_page
+    public function search_cars(Request $request)
+    {
+        $cars = Car::search($request)->latest()->get();
+        return $this->successResponse('السيارات المتاحة', $cars);
+    }
+
+
 }

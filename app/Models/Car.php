@@ -68,5 +68,14 @@ class Car extends Model
     }
 
 
+    //Search
+    public function scopeSearch($query, $params)
+    {
+        return $query->where(
+            [
+                'brand' =>$params['brand_id'],
+                'motor_type' =>$params['motor_type']
+            ])->whereBetween('price_per_day', [$params['price_from'], $params['price_to']]);
+    }
 
 }
