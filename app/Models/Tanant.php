@@ -49,24 +49,23 @@ class Tanant extends Model
         }
         else
         {
-            $status = ['pending', 'payment_pending','approved', 'rejected', 'cancelled'];
-            if($status[0])
+            if($value == 'pending')
             {
                 $item =  '<span class="badge  bg-light-warning text-warning w-50"> في الإنتظار</span>';
             }
-            elseif($status[1])
+            elseif($value == 'payment_pending')
             {
                 $item =  '<span class="badge  bg-light-success text-success w-50">بإنتظار الدفع </span>';
             }
-            elseif($status[2])
+            elseif($value == 'approved')
             {
                 $item =  '<span class="badge  bg-light-success text-success w-50">تم التأكيد</span>';
             }
-            elseif($status[3])
+            elseif($value == 'rejected')
             {
                 $item =  '<span class="badge  bg-light-danger text-danger w-50">تم الرفض</span>';
             }
-            elseif($status[4])
+            elseif($value == 'cancelled')
             {
                 $item =  '<span class="badge  bg-light-danger text-danger w-50">ملغي</span>';
             }
