@@ -12,6 +12,7 @@ class Tanant extends Model
     use HasFactory;
     use MainTrait;
     protected $guarded = ['id'];
+    protected $appends = ['status_array'];
 
 
     protected $casts = [
@@ -70,6 +71,33 @@ class Tanant extends Model
                 $item =  '<span class="badge  bg-light-danger text-danger w-50">ملغي</span>';
             }
         }
+        return $item;
+    }
+
+    public function getStatusArrayAttribute($value)
+    {
+        $item = '';
+        if($value == 'pending')
+        {
+            $item =  ['color'=>'orange', 'status' =>' في الإنتظار'];
+        }
+        elseif($value == 'payment_pending')
+        {
+            $item =  ['color'=>'lightblue', 'status' =>'بإنتظار الدفع '];
+        }
+        elseif($value == 'approved')
+        {
+            $item =  ['color'=>'green', 'status' =>'تم التأكيد '];
+        }
+        elseif($value == 'rejected')
+        {
+            $item =  ['color'=>'red', 'status' =>'تم الرفض '];
+        }
+        elseif($value == 'cancelled')
+        {
+            $item =  ['color'=>'red', 'status' =>'تم الإلغاء '];
+        }
+
         return $item;
     }
 
