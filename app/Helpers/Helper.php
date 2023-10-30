@@ -1,6 +1,9 @@
 <?php
 
 
+use App\Models\Tanant;
+use Carbon\CarbonPeriod;
+
 if (!function_exists('getActiveLink'))
 {
     function getActiveLink($segment)
