@@ -27,10 +27,10 @@ class RegisterRequest extends FormRequest
             'name' => 'required|max:255|regex:/^[\pL\s-]+$/u',
             //regex:/^[a-zA-Z\p{Arabic}0-9\s\-]+$/u for accept letters or numbers only
             //regex:/^[\pL\s-]+$/u not accept numbers
-            'email' => 'required|email|unique:users,email|max:255',
+            'email' => 'required|email:rfc,dns|unique:users,email|max:255',
             'phone' => 'required|min:10|max:15|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
             'password' => 'required|min:8|max:25|confirmed',
-            'type' => 'required',
+            'type' => 'required|in:user,vendor',
         ];
     }
 
@@ -38,6 +38,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'type.required' => ' نوع الحساب مطلوب ',
+            'type.in' => ' نوع الحساب يجب أن يكون حساب عميل أو حساب تاجر ',
             'name.required' => 'الأسم مطلوب',
             'name.regex' => 'الأسم يجب أن يكون حروف فقط ',
             'name.max' => 'الأسم عدد الحروف لا تتجاوز 255 حرف',

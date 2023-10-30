@@ -29,19 +29,7 @@ class AuthController extends Controller
     {
         try {
             $data = $request->validated();
-            if(isset($data['type']) && $data['type'] == 'vendor')
-            {
-                $data['type'] = 2;
-            }
-            elseif(isset($data['type']) && $data['type'] == 'user')
-            {
-                $data['type'] = 0;
-            }
-            else
-            {
-                return $this->errorResponse(' نوع الحساب مطلوب ');
-            }
-
+            $data['type'] = ($data['type'] == 'vendor') ? 2 : 0;
             $user = User::create($data);
             $this->save_new_vendor_details($user);
             $vendorDetails = User::with('vendor')->whereId($user->id)->first();
