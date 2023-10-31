@@ -110,6 +110,13 @@ class CarController extends Controller
             $data['car_details'] = json_encode($car);
             $tanant = Tanant::create($data);
             $tanant['car_details'] =json_decode($tanant['car_details']);
+
+            //Send Mail to Vendor
+            $type = 'vendor';
+            $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
+            $this->sendEmail($tanant->vendor_user?->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
+
+
             return $this->successResponse('تم إضافة الطلب بنجاح', $tanant);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());

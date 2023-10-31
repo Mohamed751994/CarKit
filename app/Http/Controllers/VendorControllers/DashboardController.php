@@ -90,10 +90,14 @@ class DashboardController extends Controller
                 $this->check_if_car_reserved_or_not($tanant->from_date, $tanant->to_date,$tanant->car_id);
             }
             $tanant->update(['status'=>$status]);
+
+            //Send Mail To User
             $type = 'user';
             $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
             $subject = ($status == 'approved') ? 'تم قبول طلب الحجز الخاص بك' : 'تم رفض طلب الحجز الخاص بك ';
-            $this->sendEmail($tanant->normal_user?->email,'CarKits',$html, "CarKits | $subject");
+            $this->sendEmail($tanant->normal_user?->email,'كاركيتس',$html, "كاركيتس | $subject");
+
+
             return $this->successResponse('تم تعديل حالة الحجز بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
