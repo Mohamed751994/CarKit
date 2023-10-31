@@ -32,10 +32,12 @@ class AuthController extends Controller
             $data['type'] = ($data['type'] == 'vendor') ? 2 : 0;
             $user = User::create($data);
             $this->save_new_vendor_details($user);
-            $vendorDetails = User::with('vendor')->whereId($user->id)->first();
+            //Send Mail to Vendor
+            $link = url('/verification-email'). '/'.  Crypt::encryptString($user->id);
+            $html = view('emails.verification_email', compact('user', 'link'))->render();
+            $this->sendEmail($user->email,'كاركيتس',$html, "كاركيتس | التحقق من البريد الإلكتروني");
             return $this->successResponse(
-                'تم إنشاء الحساب بنجاح',
-                ['user' => $vendorDetails, 'access_token' =>$user->createToken("REGISTER TOKEN")->plainTextToken]
+                'تم إرسال رابط التحقق علي بريدك الإلكتروني'
             );
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
@@ -47,19 +49,19 @@ class AuthController extends Controller
     {
         try {
             $data = $request->validated();
-            $input_email_or_phone = filter_var($data['email'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
-            if(Auth::attempt([$input_email_or_phone => $request->email, 'password' => $request->password])){
-                $vendorDetails = User::with('vendor')->whereId(auth()->user()->id)->first();
-//                if(!$vendorDetails->vendor?->status)
-//                {
-//                    return $this->errorResponse('هذا الحساب غير مفعل , تواصل مع خدمة العملاء', 403);
-//                }
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                $vendorDetails = User::with('vendor')->whereId($this->user_id())->first();
+                if(is_null(auth()->user()->email_verified_at))
+                {
+                    return $this->errorResponse('الحساب غير مفعل , برجاء التحقق من البريد الإلكتروني', 403);
+                }
                 return $this->successResponse(
                     'تم تسجيل الدخول بنجاح',
                     ['access_token' =>auth()->user()->createToken("LOGIN TOKEN")->plainTextToken , 'user' => $vendorDetails]
                 );
             }
-            return $this->errorResponse('بيانات تسجيل الدخول غير صحيحة', 403);
+            return $this->errorResponse('بيانات تسجيل الدخول غير صحيحة ', 403);
 
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
@@ -118,6 +120,7 @@ class AuthController extends Controller
         }
     }
 
+    //Get Vendor Details
     public function vendor()
     {
         $vendor = User::with('vendor')->whereId($this->user_id())->first();
@@ -129,6 +132,21 @@ class AuthController extends Controller
     }
 
 
+    //Verification Email
+    public function verification_email($id)
+    {
+        $user = User::find($id);
+        if($user && is_null($user->email_verified_at))
+        {
+            $user->update(['email_verified_at' =>date('Y-m-d H:i:s')]);
+            $message = 'تم التحقق من البريد الإلكتروني بنجاح يمكنك تسجيل الدخول الآن';
+        }
+        else
+        {
+           $message = 'تم التحقق من البريد الإلكتروني بالفعل يمكنك تسجيل الدخول الآن';
+        }
+        return $this->successResponse($message);
+    }
 
 
 }

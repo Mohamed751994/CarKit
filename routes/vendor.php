@@ -25,6 +25,7 @@ Route::namespace('App\Http\Controllers\VendorControllers')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('vendor.login');
     Route::post('/forget-password', [AuthController::class, 'forget_password'])->name('vendor.forget_password');
     Route::post('/reset-password', [AuthController::class, 'reset_password'])->name('vendor.reset_password');
+    Route::get('/verification-email/{id}', [AuthController::class, 'verification_email'])->name('vendor.verification_email');
 
     //****************END Not AUTH*******************************
     Route::middleware(['auth:sanctum'])->group(function () {
