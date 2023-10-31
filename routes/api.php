@@ -20,11 +20,15 @@ Route::get('/car/{car_id}', [CarController::class, 'get_single_car'])->name('ven
 Route::get('/get-all-cars-brands', [CarController::class, 'get_all_cars_brands'])->name('vendor.get_all_cars_brands');
 Route::get('/get-all-cars-brand-models', [CarController::class, 'get_all_cars_brand_models'])->name('vendor.get_all_brand_models');
 
+//Check Availability
+Route::get('/check-car-availability/{id}', [CarController::class, 'check_car_availability'])->name('vendor.check_car_availability');
+
 
 //Vendors In Website
 Route::get('/get-all-vendors', [VendorController::class, 'get_all_vendors'])->name('vendor.get_all_vendors');
 Route::get('/get-all-featured-vendors', [VendorController::class, 'get_all_featured_vendors'])->name('vendor.get_all_featured_vendors');
 Route::get('/get-single-featured-vendor/{id}', [VendorController::class, 'get_single_featured_vendor'])->name('vendor.get_single_featured_vendor');
+
 
 
 //User Profile

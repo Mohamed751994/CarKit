@@ -4,8 +4,6 @@ namespace App\Http\Controllers\WebsiteControllers;
 
 use App\Http\Requests\CarRequest;
 use App\Http\Requests\CarReservationRequest;
-
-
 use App\Models\Car;
 use App\Models\CarsBrand;
 use App\Models\CarsModel;
@@ -13,6 +11,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Tanant;
 use App\Traits\MainTrait;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +75,25 @@ class CarController extends Controller
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
+    }
+
+
+    //check_car_availability
+    public function check_car_availability($carID)
+    {
+        $tanant_car_exists = Tanant::where('car_id',$carID)->get();
+        $dates_of_car = [];
+        foreach ($tanant_car_exists as $val)
+        {
+            if($val->status =='approved')
+            {
+                $period = CarbonPeriod::create($val->from_date, $val->to_date);
+                foreach ($period as $date) {
+                    array_push($dates_of_car, $date->format('Y-m-d'));
+                }
+            }
+        }
+        return $this->successResponse('الأيام المحجوزة للسيارة', $dates_of_car);
     }
 
     //User Reserve car
