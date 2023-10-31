@@ -135,7 +135,7 @@ class AuthController extends Controller
     //Verification Email
     public function verification_email($id)
     {
-        $user = User::find($id);
+        $user = User::find(Crypt::decryptString($id));
         if($user && is_null($user->email_verified_at))
         {
             $user->update(['email_verified_at' =>date('Y-m-d H:i:s')]);
