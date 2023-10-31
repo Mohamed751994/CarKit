@@ -29,7 +29,7 @@ class VendorController extends Controller
     public function get_all_vendors()
     {
         try {
-            $vendors = Vendor::active()->orderBy('name')->select('user_id AS id', 'name')->get();
+            $vendors = Vendor::active()->orderBy('name')->select('user_id AS id', 'name', 'user_id')->get();
             return $this->successResponse('جميع المعارض', $vendors);
 
         } catch (\Throwable $th) {

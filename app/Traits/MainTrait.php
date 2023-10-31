@@ -10,6 +10,7 @@ use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 trait MainTrait
@@ -76,7 +77,7 @@ trait MainTrait
     //return auth user id
     public function user_id()
     {
-        return auth()->user()->id;
+        return (Auth::check()) ? auth()->user()->id : null;
     }
 
     //return total amount
@@ -115,9 +116,9 @@ trait MainTrait
 
 
     //get all dates between two dates
-    function get_dates_between_two_dates_for_car($car)
+    function get_dates_between_two_dates_for_car($carID)
     {
-        $tanant_car_exists = Tanant::where('car_id',$car->id)->get();
+        $tanant_car_exists = Tanant::where('car_id',$carID)->get();
         $dates_of_car = [];
         foreach ($tanant_car_exists as $val)
         {
@@ -129,15 +130,15 @@ trait MainTrait
         return $dates_of_car;
     }
     // check availability
-    function check_if_car_reserved_or_not($request , $car)
+    function check_if_car_reserved_or_not($fromDate, $toDate , $carID)
     {
-        $request_coming_dates = CarbonPeriod::create($request->from_date, $request->to_date);
-        foreach ($this->get_dates_between_two_dates_for_car($car) as $status_and_date)
+        $request_coming_dates = CarbonPeriod::create($fromDate, $toDate);
+        foreach ($this->get_dates_between_two_dates_for_car($carID) as $status_and_date)
         {
             foreach ($request_coming_dates as $requestDate) {
                 if($status_and_date['status'] == 'approved' && ($requestDate->format('Y-m-d') === $status_and_date['date']))
                 {
-                    return $this->errorResponse('عفواً السيارة محجوزة في الفترة الحالية');
+                    return $this->errorResponse('عفواً السيارة محجوزة في الفترة الحالية يمكنك الضغط علي الأيام المتاحة قبل الحجز');
                 }
             }
         }

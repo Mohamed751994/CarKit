@@ -69,6 +69,8 @@ class DashboardController extends Controller
             return $this->errorResponse($th->getMessage());
         }
     }
+
+    //Vendor Change Status of reservation
     public function change_reservation_status(ChangeReservationStatusRequest $request, $id)
     {
         try {
@@ -82,10 +84,16 @@ class DashboardController extends Controller
             {
                 return $this->errorResponse('عفواً تم تغيير الحالة من قبل');
             }
+            if($status == 'approved')
+            {
+                //Check if car reserved or not in the notice and status approved
+                $this->check_if_car_reserved_or_not($tanant->from_date, $tanant->to_date,$tanant->car_id);
+            }
             $tanant->update(['status'=>$status]);
             $type = 'user';
             $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
-            $this->sendEmail($tanant->normal_user?->email,'CarKits',$html, 'CarKits | Reservation Status');
+            $subject = ($status == 'approved') ? 'تم قبول طلب الحجز الخاص بك' : 'تم رفض طلب الحجز الخاص بك ';
+            $this->sendEmail($tanant->normal_user?->email,'CarKits',$html, "CarKits | $subject");
             return $this->successResponse('تم تعديل حالة الحجز بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());

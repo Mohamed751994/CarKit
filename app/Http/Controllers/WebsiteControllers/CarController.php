@@ -99,7 +99,7 @@ class CarController extends Controller
             }
 
             //Check if car reserved or not in the notice and status approved
-           // $this->check_if_car_reserved_or_not($request,$car);
+            $this->check_if_car_reserved_or_not($data['from_date'], $data['to_date'],$car->id);
 
             //Some Inputs like : days and total amount and discount
             $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);

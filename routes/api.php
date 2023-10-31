@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteControllers\CarController;
 
-
+//Route::post('/check', function (Request $request){
+//    $car = \App\Models\Car::find(1);
+//    return  check_if_car_reserved_or_not($request, $car->id);
+//});
 //Search in Home Page
 Route::get('/search-cars', [CarController::class, 'search_cars'])->name('vendor.search_cars');
 
