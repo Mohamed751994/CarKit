@@ -33,7 +33,7 @@ class AuthController extends Controller
             $user = User::create($data);
             $this->save_new_vendor_details($user);
             //Send Mail to Vendor
-            $link = url('/verification-email'). '/'.  Crypt::encryptString($user->id);
+            $link =  getSettings('website_url').'/verification-email/'.Crypt::encryptString($user->id);
             $html = view('emails.verification_email', compact('user', 'link'))->render();
             $this->sendEmail($user->email,'كاركيتس',$html, "كاركيتس | التحقق من البريد الإلكتروني");
             return $this->successResponse(
