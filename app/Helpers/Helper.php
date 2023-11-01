@@ -1,8 +1,10 @@
 <?php
 
 
+use App\Models\ActivityLog;
 use App\Models\Tanant;
 use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('getActiveLink'))
 {
@@ -36,5 +38,21 @@ if (!function_exists('getSettings')) {
     function getSettings($col)
     {
         return \App\Models\Setting::first()?->$col;
+    }
+}
+//activityLog
+if (!function_exists('activityLog')) {
+    function activityLog($method, $model, $item_json)
+    {
+        $data = [
+            'user_id' =>Auth::check() ? (auth()->user()->id) : 0,
+            'user_json' =>Auth::check() ? json_encode(auth()->user()) : null,
+            'ip' =>\request()->ip(),
+            'method' =>$method,
+            'model' =>$model,
+            'item_json' =>json_encode($item_json),
+            'user_agent' =>\Request::header('user-agent') ?? '',
+        ];
+        ActivityLog::create($data);
     }
 }
