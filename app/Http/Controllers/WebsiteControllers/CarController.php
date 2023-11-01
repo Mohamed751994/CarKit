@@ -130,8 +130,6 @@ class CarController extends Controller
             $data['vendor_user_id'] = $car->user_id;
             $data['car_details'] = json_encode($car);
             $tanant = Tanant::create($data);
-            $tanant['car_details'] =json_decode($tanant['car_details']);
-
             //Send Mail to Vendor
             $type = 'vendor';
             $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
