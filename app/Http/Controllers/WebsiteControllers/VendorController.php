@@ -9,6 +9,7 @@ use App\Http\Requests\CarReservationRequest;
 use App\Models\Car;
 use App\Models\CarsBrand;
 use App\Models\CarsModel;
+use App\Models\Rating;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Tanant;
