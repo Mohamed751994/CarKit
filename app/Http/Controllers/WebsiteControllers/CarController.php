@@ -116,6 +116,9 @@ class CarController extends Controller
                 return $this->errorResponse('السيارة غير موجودة');
             }
 
+            $data['from_date'] =  date('Y-m-d', strtotime($data['from_date']));
+            $data['to_date'] =  date('Y-m-d', strtotime($data['to_date']));
+
             //Check if car reserved or not in the notice and status approved
             $this->check_if_car_reserved_or_not($data['from_date'], $data['to_date'],$car->id);
 
