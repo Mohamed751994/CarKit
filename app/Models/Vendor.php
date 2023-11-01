@@ -53,7 +53,7 @@ class Vendor extends Model
         for ($i=1 ; $i<=5; $i++)
         {
             $rateNumber = Rating::where('type_id', $this->user_id)->whereType('vendor')->whereRate($i)->count();
-            $totalPercentage = ($rateNumber / $this->getCountRateAttribute()) * 100;
+            $totalPercentage = ($this->getCountRateAttribute() > 0) ? ($rateNumber / $this->getCountRateAttribute()) * 100 : 0;
             array_push($array , [$i => $totalPercentage]);
         }
         return $array ;
