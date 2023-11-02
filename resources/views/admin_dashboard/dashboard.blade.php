@@ -13,7 +13,7 @@
         }
     </style>
     <div class="row mb-5">
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-lg-2">
             <div class="card radius-10 bg-tiffany">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-lg-2">
             <div class="card radius-10 bg-purple">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-lg-2">
             <div class="card radius-10 bg-orange">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
@@ -46,14 +46,36 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
+        <div class="col-6 col-lg-2">
+            <div class="card radius-10 bg-warning">
+                <div class="card-body text-center">
+                    <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
+                        <i class="lni lni-offer"></i>
+                    </div>
+                    <h3 class="text-white">{{$reservations_pending}}</h3>
+                    <p class="mb-0 text-white">الحجوزات (في الأنتظار)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
             <div class="card radius-10 bg-success">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
                         <i class="lni lni-offer"></i>
                     </div>
-                    <h3 class="text-white">{{$reservations}}</h3>
-                    <p class="mb-0 text-white">الحجوزات</p>
+                    <h3 class="text-white">{{$reservations_approved}}</h3>
+                    <p class="mb-0 text-white">الحجوزات المؤكدة</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="card radius-10 bg-danger">
+                <div class="card-body text-center">
+                    <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
+                        <i class="lni lni-offer"></i>
+                    </div>
+                    <h3 class="text-white">{{$reservations_rejected}}</h3>
+                    <p class="mb-0 text-white">الحجوزات الملغية</p>
                 </div>
             </div>
         </div>

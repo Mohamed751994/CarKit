@@ -26,7 +26,9 @@ class DashboardController extends Controller
         $vendors = Vendor::count();
         $users = User::whereType(0)->count();
         $cars = Car::with('user.vendor')->vendorStatus()->count();
-        $reservations = Tanant::count();
+        $reservations_pending = Tanant::whereStatus('pending')->count();
+        $reservations_approved = Tanant::whereStatus('approved')->count();
+        $reservations_rejected = Tanant::whereStatus('rejected')->count();
         $latest_10_orders = Tanant::latest()->limit(10)->get();
 
         //Most Reserve Cars
@@ -42,9 +44,7 @@ class DashboardController extends Controller
             ->orderBy('count', 'DESC')
             ->limit(6)
             ->get();
-
-
-        $data = ['vendors' ,'users','cars','reservations','most_reserve_cars','most_reserve_vendors','latest_10_orders'];
+        $data = ['vendors' ,'users','cars','reservations_pending', 'reservations_rejected' , 'reservations_approved','most_reserve_cars','most_reserve_vendors','latest_10_orders'];
         return view('admin_dashboard.dashboard', compact($data));
     }
 
