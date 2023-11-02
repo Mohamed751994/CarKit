@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
+use App\Http\Requests\SettingRequest;
 use App\Models\CarsBrand;
 use App\Models\CarsModel;
 use App\Models\Setting;
@@ -30,10 +31,16 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Setting $setting)
+    public function update(SettingRequest $request, Setting $setting)
     {
         try {
-            $setting->update($request->except('_token'));
+            $data = $request->validated();
+            if($request->file('website_logo'))
+            {
+               $image = $this->uploadFile($request, 'website_logo', 'uploads/');
+                $data['website_logo'] = $image;
+            }
+            $setting->update($data);
             Session::flash('success', $this->updateMsg);
             return redirect()->back();
         } catch (\Exception $e) {
