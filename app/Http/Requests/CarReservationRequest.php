@@ -53,7 +53,8 @@ class CarReservationRequest extends FormRequest
             'phone.required' => 'الهاتف مطلوب',
             'phone.regex' => 'ادخل رقم الهاتف بطريقة صحيحة يجب أن يكون رقم مصري  ويبدأ ب 01',
             'address.required' => 'العنوان مطلوب',
-            'trip_num.required' => 'رقم الرحلة مطلوب',
+            'trip_num.required' => 'كود الحجز مطلوب',
+            'trip_num.unique' => 'كود الحجز مقرر اعد تحميل الصفحة ثم احجز مره اخري',
 
             'nid_img.required' => 'صوره الهوية الوطنية مطلوبة',
             'license_img.required' => 'صوره رخصة القيادة مطلوبة',
