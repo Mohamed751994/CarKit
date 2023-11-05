@@ -20,7 +20,7 @@ trait MainTrait
     public $deleteMsg = 'تم حذف العنصر بنجاح';
     public $error = 'يوجد مشكلة ما';
 
-    public $paginate = 50;
+    public $paginate = 10;
 
 
 

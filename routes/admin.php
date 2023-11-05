@@ -31,8 +31,8 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     Route::resource('cars', 'CarController');
     Route::resource('brands', 'BrandModelController');
     Route::get('model_of_brand/destroy/{id}', [\App\Http\Controllers\AdminControllers\BrandModelController::class,'modelDestroy'])->name('model.destroy');
-
     Route::resource('tanants', 'TanantController');
     Route::resource('settings', 'SettingController');
+    Route::resource('reports', 'ReportController');
 
 });

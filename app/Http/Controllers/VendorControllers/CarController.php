@@ -43,7 +43,7 @@ class CarController extends Controller
         try {
 
             $user_id = $this->user_id();
-            $cars = Car::where('user_id', $user_id)->latest()->get();
+            $cars = Car::where('user_id', $user_id)->latest()->paginate($this->paginate);
 
             $vendor_name = Auth::user()->name;
             return $this->successResponse("سيارات التاجر ($vendor_name)", $cars);

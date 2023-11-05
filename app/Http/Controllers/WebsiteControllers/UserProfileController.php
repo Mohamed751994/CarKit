@@ -57,7 +57,7 @@ class UserProfileController extends Controller
     public function my_reservations()
     {
         try {
-            $reservations = Tanant::where('user_id', $this->user_id())->latest()->get();
+            $reservations = Tanant::where('user_id', $this->user_id())->latest()->paginate($this->paginate);
             foreach ($reservations as $key => $reservation) {
                 $reservation['car_details'] = json_decode($reservation['car_details']);
             }
