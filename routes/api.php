@@ -16,6 +16,7 @@ Route::get('/search-cars', [CarController::class, 'search_cars'])->name('vendor.
 
 //Cars in website
 Route::get('/cars', [CarController::class, 'get_all_cars'])->name('vendor.get_all_cars');
+Route::get('/cars-pagination', [CarController::class, 'get_all_cars_pagination'])->name('vendor.get_all_cars_pagination');
 Route::get('/car/{car_id}', [CarController::class, 'get_single_car'])->name('vendor.get_single_car');
 Route::get('/get-all-cars-brands', [CarController::class, 'get_all_cars_brands'])->name('vendor.get_all_cars_brands');
 Route::get('/get-all-cars-brand-models', [CarController::class, 'get_all_cars_brand_models'])->name('vendor.get_all_brand_models');
@@ -40,6 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user-profile', [UserProfileController::class, 'profile'])->name('user.profile');
     Route::post('/user-change-password', [UserProfileController::class, 'user_change_password'])->name('user.user_change_password');
     Route::get('/user-reservations', [UserProfileController::class, 'my_reservations'])->name('user.my_reservations');
+    Route::get('/user-reservations-pagination', [UserProfileController::class, 'my_reservations_pagination'])->name('user.my_reservations_pagination');
     Route::get('/user-reserve/{id}', [UserProfileController::class, 'my_single_reserve'])->name('user.my_single_reserve');
 
     //User Rate Vendor or Car

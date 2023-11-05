@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use function Termwind\render;
 
 class ReportController extends Controller
 {
@@ -22,16 +23,16 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $vendors = User::with('vendor')->whereType(2)->latest()->get();
-        $users = User::whereType(0)->latest()->get();
+        $vendors = Vendor::latest()->pluck('user_id', 'name');
+        $users = User::whereType(0)->pluck('id', 'name');
         return view('admin_dashboard.reports.index' , compact('vendors','users'));
     }
 
 
-    public function show(ActivityLog $report)
+    public function report(Request $request)
     {
-        $content =  $report;
-        return view('admin_dashboard.reports.show', compact('content'));
+        $userID =  $request->userID;
+        return view('admin_dashboard.reports.show', compact('userID'))->render();
     }
 
 

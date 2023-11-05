@@ -41,15 +41,30 @@ class DashboardController extends Controller
     public function get_vendor_cars_reservation()
     {
         try {
+            $reservations = Tanant::where('vendor_user_id',$this->user_id())->latest()->get();
+
+            foreach ($reservations as $key => $reservation) {
+                $reservation['car_details'] = json_decode($reservation['car_details']);
+            }
+
+            return $this->successResponse('بيانات التأجير', $reservations);
+        } catch (\Throwable $th) {
+        return $this->errorResponse($th->getMessage());
+        }
+    }
+
+    public function get_vendor_cars_reservation_pagination()
+    {
+        try {
             $reservations = Tanant::where('vendor_user_id',$this->user_id())->latest()->paginate($this->paginate);
 
             foreach ($reservations as $key => $reservation) {
                 $reservation['car_details'] = json_decode($reservation['car_details']);
             }
 
-            return $this->successResponse('تم تعديل بيانات المعرض بنجاح', $reservations);
+            return $this->successResponse('بيانات التأجير', $reservations);
         } catch (\Throwable $th) {
-        return $this->errorResponse($th->getMessage());
+            return $this->errorResponse($th->getMessage());
         }
     }
 

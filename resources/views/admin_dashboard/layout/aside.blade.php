@@ -56,6 +56,15 @@
         </li>
 
 
+        <li class="@if(getActiveLink('reports')) mm-active @endif">
+            <a href="{{ route('reports.index')  }}">
+                <div class="parent-icon"><i class="bx bxs-file-pdf"></i>
+                </div>
+                <div class="menu-title">التقارير</div>
+            </a>
+        </li>
+
+
         <li class="@if(getActiveLink('settings')) mm-active @endif">
             <a href="{{ route('settings.index')  }}">
                 <div class="parent-icon"><i class="lni lni-cog"></i>

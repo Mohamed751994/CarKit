@@ -52,6 +52,16 @@ class CarController extends Controller
     public function get_all_cars(Request $request)
     {
         try {
+            $cars = Car::with(['user.vendor', 'brands'])->vendorStatus()->filter($request)->latest()->get();
+            return $this->successResponse('جميع السيارات', $cars);
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+    public function get_all_cars_pagination(Request $request)
+    {
+        try {
             $cars = Car::with(['user.vendor', 'brands'])->vendorStatus()->filter($request)->latest()->paginate($this->paginate);
             return $this->successResponse('جميع السيارات', $cars);
 
