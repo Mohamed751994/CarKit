@@ -40,6 +40,11 @@
            </div>
         </div>
     </div>
+    <div class="card my-5">
+        <div class="card-body" id="reportFile">
+            <!--Here Upcoming Data Of User Report-->
+        </div>
+    </div>
 
 
 @endsection
@@ -49,22 +54,35 @@
     <script src="{{ asset('admin_dashboard/assets/js/form-select2.js')}}"></script>
 
     <script>
-        $(document).on('change', '#vendors', function(){
-            const userID = $(this).val();
+
+        //Get Report Details
+        function ajaxChangeUsers(userID)
+        {
             $.ajax({
                 url: "{{route('reports.report')}}",
                 type: 'post',
                 data: {_token: '{{csrf_token()}}',userID:userID},
+                beforeSend: function() {
+                    $('#reportFile').html('<div class="loader"></div>');
+                },
                 success: function(response) {
-                    if(response.success)
-                    {
-
-                    }
+                    setTimeout(function (){
+                        $('#reportFile').html(response.report);
+                    },1000);
                 },
                 error: function (reject) {
 
                 },
             });
+        }
+
+        //Vendors
+        $(document).on('change', '.single-select', function(){
+          ajaxChangeUsers($(this).val());
         });
+
+        //Vendors
+
+
     </script>
 @endpush

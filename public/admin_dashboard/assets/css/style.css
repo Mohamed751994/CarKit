@@ -1958,6 +1958,75 @@ label.error
     margin-bottom: 7px;
     border-radius: 3px;
 }
+.loader
+{
+    width:50px;
+    height:50px;
+    margin:0 auto;
+    padding:0;
+    border-radius:100%;border:6px solid;
+    -webkit-animation:loader 1s ease-in-out infinite;
+    animation:loader 1s ease-in-out infinite;
+    border-color: #1e6cec #dedede #dedede #1e6cec
+}
+@keyframes loader{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+}
+@-webkit-keyframes loader{
+    from{-webkit-transform:rotate(0deg)}
+    to{-webkit-transform:rotate(360deg)}
+}
+
+.userInfoReport li
+{
+    margin: 20px;
+    display: flex;
+    align-items: center;
+}
+.userInfoReport li i
+{
+    font-size: 16px;
+    padding-left: 10px;
+    color: #00006c;
+    font-weight: bold;
+}
+.boxStats
+{
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ececec;
+    margin: 35px 0;
+    color: #00006c;
+    position: relative;
+}
+.boxStats .title
+{
+    color: #7b7b7b;
+    font-size: 13px;
+}
+.boxStats .count
+{
+    font-size: 30px;
+    color: black;
+}
+.boxStats .money
+{
+    font-weight: bold;
+    font-size: 27px;
+}
+.boxStats small
+{
+    font-size: 11px;
+}
+.boxStats i
+{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    font-size: 35px;
+    color: #e7e7e7;
+}
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {

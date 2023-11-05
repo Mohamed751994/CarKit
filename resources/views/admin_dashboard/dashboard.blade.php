@@ -107,7 +107,7 @@
                                             <div class="progress-bar bg-success" role="progressbar" @if($key == 0) style="width: 80%;"
                                                  @elseif($key ==1)  style="width: 70%;" @elseif($key == 2)  style="width: 60%;"
                                                  @elseif($key == 3)  style="width: 50%;"
-                                                 @elseif($key == 4)  style="width: 40%;" @endif></div>
+                                                 @elseif($key == 4)  style="width: 40%;" @elseif($key == 5)  style="width: 30%;" @endif></div>
                                         </div>
                                     </div>
                                     <p class="product-name mb-0 mt-2 fs-6">{{json_decode($val->car_details)->model}} <small>( {{json_decode($val->car_details)->user?->name}} )</small> <span class="float-end">{{$val->count}}</span></p>

@@ -56,3 +56,12 @@ if (!function_exists('activityLog')) {
         ActivityLog::create($data);
     }
 }
+if (!function_exists('getMoneyAndCountOfVendor')) {
+    function getMoneyAndCountOfVendor($user,$status, $userType)
+    {
+        $data = Tanant::where($userType,$user->id)->whereStatus($status);
+        $money_data = $data->sum('total_amount_after_discount');
+        $count_data = $data->count();
+        return ['count' =>$count_data,'money' =>$money_data];
+    }
+}

@@ -73,6 +73,7 @@ class User extends Authenticatable
     }
 
 
+
 //    protected static function booted()
 //    {
 //        static::created(function ($item) {
@@ -86,5 +87,10 @@ class User extends Authenticatable
 //            activityLog('delete',$item->getTable(), $item);
 //        });
 //    }
+
+    public function logs()
+    {
+        return $this->hasMany(ActivityLog::class, 'user_id');
+    }
 
 }
