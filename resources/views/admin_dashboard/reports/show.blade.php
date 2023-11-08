@@ -1,9 +1,10 @@
-<div class="row">
 
+<button type="button" class="btn btn-lg btn-success w-100 mb-3" id="printReportBtn"><i class="bx bx-printer mx-2"></i> طباعة التقرير</button>
+<div class="row" id="printReport">
     {{--User Info--}}
-    <section class="user_info">
+    <section  dir="rtl" class="user_info">
         <div class="col-12 text-center">
-            <h4 class="fw-bold">المعلومات الشخصية</h4>
+            <h4 class="fw-bold">{{$user->name}}</h4>
         </div>
         <div class="row m-0">
             <div class="{{$user->type == 'vendor' ? 'col-md-6' : 'col-md-12'}}">
@@ -37,10 +38,10 @@
 
 
     {{--User Stats--}}
-    <section class="user_info">
+    <section class="user_info" dir="rtl">
         <div class="row m-0 align-items-center">
             @if($user->type == 'vendor')
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <div class="boxStats">
                         <h5 class="title">عدد السيارات</h5>
                         <h1 class="count">{{$cars}} <small>سيارة</small></h1>
@@ -48,7 +49,7 @@
                     </div>
                 </div>
             @endif
-                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}">
+                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}  col-6">
                     <div class="boxStats">
                         <h5 class="title">الحجوزات (في الإنتظار)</h5>
                         <h1 class="count text-warning">{{$pending['count']}} <small>حجز</small> </h1>
@@ -56,7 +57,7 @@
                         <i class="bx bx-money"></i>
                     </div>
                 </div>
-                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}">
+                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}  col-6">
                     <div class="boxStats">
                         <h5 class="title">الحجوزات (المؤكدة)</h5>
                         <h1 class="count text-success">{{$approved['count']}} <small>حجز</small></h1>
@@ -64,7 +65,7 @@
                         <i class="bx bx-money"></i>
                     </div>
                 </div>
-                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}">
+                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}  col-6">
                     <div class="boxStats">
                         <h5 class="title">الحجوزات (المرفوضة)</h5>
                         <h1 class="count text-danger">{{$rejected['count']}} <small>حجز</small></h1>
@@ -75,5 +76,54 @@
         </div>
     </section>
 
+
+
+    @if(count($user->logs) > 0)
+    {{--Actions Details--}}
+    <section class="report_details mt-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4 class="fw-bold mb-4">السجلات</h4>
+            </div>
+            <div class="col-12 table-responsive">
+                <table class="table table-hover table-bordered" dir="rtl">
+                    <thead class="table-secondary">
+                    <th>الحدث</th>
+                    <th>العنصر</th>
+                    <th>IP address</th>
+                    <th>التاريخ والوقت</th>
+                    </thead>
+                    <tbody>
+                    @foreach($user->logs as $log)
+                    <tr>
+                        <td>
+                            قام المستخدم
+                            <strong class="text-danger">( {{json_decode($log->user_json)->email}} )</strong>
+                            @if($log->method == 'create') بإضافة
+                            @elseif($log->method == 'update') بتحديث و تغيير بيانات
+                            @elseif($log->method == 'delete') بحذف
+                            @endif
+                            عنصر في جدول
+                            <strong class="text-danger">( {{$log->model}} )</strong>
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach(json_decode($log->item_json) as $key => $item)
+                                    @if($key != 'created_at' && $key != 'updated_at')
+                                    <li>{{$key}} : {{$item}} </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{$log->ip}}</td>
+                        <td>{{$log->created_at}}</td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    @endif
 
 </div>

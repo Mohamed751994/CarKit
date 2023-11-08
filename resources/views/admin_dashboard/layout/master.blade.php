@@ -22,7 +22,7 @@
     <meta content="{{csrf_token()}}" name="csrf-token" />
     <!--Theme Styles-->
     <link href="{{ asset('admin_dashboard/assets/css/semi-dark.css')}}" rel="stylesheet" />
-    <title> @yield('Page_Title')   |  كاركيت سوبر ادمن </title>
+    <title> @yield('Page_Title')   |  كاركيتس ادمن </title>
     <style>
         .tox-notifications-container,.tox-statusbar__branding
         {

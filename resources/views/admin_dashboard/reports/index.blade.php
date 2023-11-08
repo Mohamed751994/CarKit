@@ -52,6 +52,7 @@
 @push('scripts')
     <script src="{{ asset('admin_dashboard/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{ asset('admin_dashboard/assets/js/form-select2.js')}}"></script>
+    <script src="{{ asset('admin_dashboard/assets/js/print.js')}}"></script>
 
     <script>
 
@@ -77,12 +78,21 @@
         }
 
         //Vendors
-        $(document).on('change', '.single-select', function(){
-          ajaxChangeUsers($(this).val());
+        $('#vendors').select2().on("change", function (e) {
+            $('#users').val('').select2();
+            ajaxChangeUsers($(this).val());
+        });
+        //Users
+        $('#users').select2().on("change", function (e) {
+            $('#vendors').val('').select2();
+            ajaxChangeUsers($(this).val());
         });
 
-        //Vendors
-
+        //print
+        $(document).on('click', '#printReportBtn',function(){
+            $('#printReport').printElement({
+            });
+        })
 
     </script>
 @endpush

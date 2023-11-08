@@ -10,4 +10,6 @@ class ActivityLog extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $casts = ['user_json' =>'json', 'item_json'=>'json'];
+
 }
