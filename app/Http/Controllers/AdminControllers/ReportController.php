@@ -38,22 +38,11 @@ class ReportController extends Controller
             $view = view('admin_dashboard.includes.no_data')->render();
             return response()->json(['success'=>false, 'report' =>$view]);
         }
-        if($user->type == 'vendor')
-        {
-            //Vendor
-            $cars = Car::where('user_id',$user->id)->count();
-            $pending = getMoneyAndCountOfVendor($user, 'pending','vendor_user_id');
-            $approved = getMoneyAndCountOfVendor($user, 'approved','vendor_user_id');
-            $rejected = getMoneyAndCountOfVendor($user, 'rejected','vendor_user_id');
-        }
-        else
-        {
-            //User
-            $cars = 0;
-            $pending = getMoneyAndCountOfVendor($user, 'pending','user_id');
-            $approved = getMoneyAndCountOfVendor($user, 'approved','user_id');
-            $rejected = getMoneyAndCountOfVendor($user, 'rejected','user_id');
-        }
+        $userType = ($user->type == 'vendor') ? 'vendor_user_id' : 'user_id';
+        $cars = ($user->type == 'vendor') ? Car::where('user_id',$user->id)->count() : 0;
+        $pending = getMoneyAndCountOfVendor($user, 'pending',$userType);
+        $approved = getMoneyAndCountOfVendor($user, 'approved',$userType);
+        $rejected = getMoneyAndCountOfVendor($user, 'rejected',$userType);
         $view = view('admin_dashboard.reports.show', compact('user','cars','pending','approved','rejected'))->render();
         return response()->json(['success'=>true, 'report' =>$view]);
     }
