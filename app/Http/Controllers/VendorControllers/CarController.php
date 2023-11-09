@@ -120,8 +120,9 @@ class CarController extends Controller
             {
                 return $this->errorResponse('هذه السيارة غير موجودة');
             }
-            $car->delete();
-            return $this->successResponse('تم حذف السيارة بنجاح');
+            $car->update(['status'=>$request->status]);
+            $message = $request->status == 1 ? 'تم نشر السيارة بنجاح' : 'تم حذف السيارة من العرض بنجاح ';
+            return $this->successResponse($message);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
