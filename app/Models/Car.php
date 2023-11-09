@@ -21,6 +21,11 @@ class Car extends Model
             return $this->image_full_path($value);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

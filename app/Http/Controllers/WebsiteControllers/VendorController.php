@@ -60,7 +60,7 @@ class VendorController extends Controller
             {
                 return $this->errorResponse('الصفحة غير موجودة',404);
             }
-            $cars = Car::where('user_id', $vendor->user_id)->paginate($this->paginate);
+            $cars = Car::where('user_id', $vendor->user_id)->active()->paginate($this->paginate);
             return $this->successResponse('صفحة المعرض المميزة', ['vendor' =>$vendor, 'cars'=>$cars]);
 
         } catch (\Throwable $th) {

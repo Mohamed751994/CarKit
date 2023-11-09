@@ -52,7 +52,7 @@ class CarController extends Controller
     public function get_all_cars(Request $request)
     {
         try {
-            $cars = Car::with(['user.vendor', 'brands'])->vendorStatus()->filter($request)->latest()->get();
+            $cars = Car::with(['user.vendor', 'brands'])->active()->vendorStatus()->filter($request)->latest()->get();
             return $this->successResponse('جميع السيارات', $cars);
 
         } catch (\Throwable $th) {
@@ -62,7 +62,7 @@ class CarController extends Controller
     public function get_all_cars_pagination(Request $request)
     {
         try {
-            $cars = Car::with(['user.vendor', 'brands'])->vendorStatus()->filter($request)->latest()->paginate($this->paginate);
+            $cars = Car::with(['user.vendor', 'brands'])->active()->vendorStatus()->filter($request)->latest()->paginate($this->paginate);
             return $this->successResponse('جميع السيارات', $cars);
 
         } catch (\Throwable $th) {
@@ -75,7 +75,7 @@ class CarController extends Controller
     {
         try {
 
-            $car = Car::with(['user.vendor', 'brands'])->vendorStatus()->find($id);
+            $car = Car::with(['user.vendor', 'brands'])->active()->vendorStatus()->find($id);
             if(!$car)
             {
                 return $this->errorResponse('هذه العربية غير موجودة');
@@ -121,7 +121,7 @@ class CarController extends Controller
             }
             $data['user_id'] = (Auth::user())? Auth::user()->id : null;
             $data['status'] = 'pending';
-            $car = Car::with('user.vendor')->findOrFail($data['car_id']);
+            $car = Car::with('user.vendor')->active()->vendorStatus()->findOrFail($data['car_id']);
             if(empty($car)){
                 return $this->errorResponse('السيارة غير موجودة');
             }
@@ -144,8 +144,6 @@ class CarController extends Controller
             $type = 'vendor';
             $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
             $this->sendEmail($tanant->vendor_user?->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
-
-
             return $this->successResponse('تم إضافة الطلب بنجاح', $tanant);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
@@ -156,7 +154,7 @@ class CarController extends Controller
     //search_cars_in_home_page
     public function search_cars(Request $request)
     {
-        $cars = Car::search($request)->latest()->get();
+        $cars = Car::search($request)->active()->vendorStatus()->latest()->get();
         return $this->successResponse('السيارات المتاحة', $cars);
     }
 
