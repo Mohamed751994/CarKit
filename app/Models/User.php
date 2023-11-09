@@ -74,19 +74,19 @@ class User extends Authenticatable
 
 
 
-//    protected static function booted()
-//    {
-//        static::created(function ($item) {
-//            activityLog('create',$item->getTable(), $item);
-//        });
-//
-//        static::updated(function ($item) {
-//            activityLog('update',$item->getTable(), $item);
-//        });
-//        static::deleting(function ($item) {
-//            activityLog('delete',$item->getTable(), $item);
-//        });
-//    }
+    protected static function booted()
+    {
+        static::created(function ($item) {
+            activityLog('create',$item->getTable(), $item);
+        });
+
+        static::updated(function ($item) {
+            activityLog('update',$item->getTable(), $item);
+        });
+        static::deleting(function ($item) {
+            activityLog('delete',$item->getTable(), $item);
+        });
+    }
 
     public function logs()
     {
