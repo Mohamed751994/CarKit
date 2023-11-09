@@ -33,6 +33,7 @@
                         <th>#</th>
                         <th>السيارة</th>
                         <th>المعرض</th>
+                        <th>الحالة</th>
                         <th>عدد الحجوزات</th>
                         <th>التحكم</th>
                     </tr>
@@ -53,8 +54,11 @@
                                         <img src="{{ $con->user?->vendor?->image ? $con->user?->vendor?->image : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageList" alt="">
 
                                         <strong class="mx-2">{{$con->user?->vendor?->name}}</strong>
-                                        <strong class="mx-2 badge @if($con->user?->vendor?->status) bg-light-success text-success @else bg-light-danger text-danger @endif">({{$con->user?->vendor?->status ? 'مفعل' : 'غير مفعل'}})</strong>
+{{--                                        <strong class="mx-2 badge @if($con->user?->vendor?->status) bg-light-success text-success @else bg-light-danger text-danger @endif">({{$con->user?->vendor?->status ? 'مفعل' : 'غير مفعل'}})</strong>--}}
                                     </div>
+                                </td>
+                                <td>
+                                    <strong class="mx-2 badge @if($con->status) bg-light-success text-success @else bg-light-danger text-danger @endif">({{$con->status ? 'معروضة' : 'غير معروضة'}})</strong>
                                 </td>
                                 <td>
                                     <span class="carsCount">{{$con->reservations_count}}</span>

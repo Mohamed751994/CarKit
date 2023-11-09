@@ -25,7 +25,7 @@ class DashboardController extends Controller
         //Stats
         $vendors = Vendor::count();
         $users = User::whereType(0)->count();
-        $cars = Car::with('user.vendor')->vendorStatus()->count();
+        $cars = Car::with('user.vendor')->active()->vendorStatus()->count();
         $reservations_pending = Tanant::whereStatus('pending')->count();
         $reservations_approved = Tanant::whereStatus('approved')->count();
         $reservations_rejected = Tanant::whereStatus('rejected')->count();
