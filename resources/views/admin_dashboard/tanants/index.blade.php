@@ -12,47 +12,45 @@
 
 
             <div class="row my-3 align-items-center justify-content-between">
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <div class="card radius-10">
                         <div class="card-body text-center">
                             <div class="widget-icon mx-auto mb-3 bg-light-warning text-warning">
                                 <i class="bi bi-tags-fill"></i>
                             </div>
-                            <h3>{{tanantsStatusTypeCount('pending')}}</h3>
+                            <h3>{{tanantsStatusTypeCount('pending')['count']}}</h3>
                             <p class="mb-0">في الإنتظار</p>
+                            <div class="my-3">
+                                <strong>{{tanantsStatusTypeCount('pending')['money']}} جنية مصري</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
-{{--                <div class="col-6 col-md-2">--}}
-{{--                    <div class="card radius-10">--}}
-{{--                        <div class="card-body text-center">--}}
-{{--                            <div class="widget-icon mx-auto mb-3 bg-light-primary text-primary">--}}
-{{--                                <i class="bi bi-tags-fill"></i>--}}
-{{--                            </div>--}}
-{{--                            <h3>{{tanantsStatusTypeCount('payment_pending')}}</h3>--}}
-{{--                            <p class="mb-0">انتظار الدفع</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <div class="card radius-10">
                         <div class="card-body text-center">
                             <div class="widget-icon mx-auto mb-3 bg-light-success text-success">
                                 <i class="bi bi-tags-fill"></i>
                             </div>
-                            <h3>{{tanantsStatusTypeCount('approved')}}</h3>
+                            <h3>{{tanantsStatusTypeCount('approved')['count']}}</h3>
                             <p class="mb-0">تم التأكيد</p>
+                            <div class="my-3">
+                                <strong>{{tanantsStatusTypeCount('approved')['money']}} جنية مصري</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <div class="card radius-10">
                         <div class="card-body text-center">
                             <div class="widget-icon mx-auto mb-3 bg-light-orange text-orange">
                                 <i class="bi bi-tags-fill"></i>
                             </div>
-                            <h3>{{tanantsStatusTypeCount('rejected')}}</h3>
+                            <h3>{{tanantsStatusTypeCount('rejected')['count']}}</h3>
                             <p class="mb-0">مرفوض</p>
+                            <div class="my-3">
+                                <strong>{{tanantsStatusTypeCount('rejected')['money']}} جنية مصري</strong>
+                            </div>
                         </div>
                     </div>
                 </div>

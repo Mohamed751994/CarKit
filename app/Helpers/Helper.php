@@ -31,7 +31,10 @@ if (!function_exists('dateDiffInDays')) {
 if (!function_exists('tanantsStatusTypeCount')) {
     function tanantsStatusTypeCount($type)
     {
-        return \App\Models\Tanant::whereStatus($type)->count();
+        $data = \App\Models\Tanant::whereStatus($type);
+        $count_data = $data->count();
+        $money_data = $data->sum('total_amount_after_discount');
+        return ['count' =>$count_data,'money' =>$money_data];
     }
 }
 if (!function_exists('getSettings')) {
