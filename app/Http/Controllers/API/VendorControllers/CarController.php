@@ -112,7 +112,7 @@ class CarController extends Controller
     }
 
     //Vendor Delete his car
-    public function vendor_delete_his_car(Request $request,$id)
+    public function vendor_status_his_car(Request $request,$id)
     {
         try {
             $car = Car::where('user_id', $this->user_id())->find($id);
