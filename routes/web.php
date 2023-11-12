@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 All User Interface Routes List
 --------------------------------------------*/
 Route::get('/', [AuthController::class, 'login_page'])->name('admin.login_page');
+Route::get('/migrate', function (){
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+    return 'Migrated Successfully';
+});
 
 //Auth::routes();
 

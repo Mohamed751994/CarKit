@@ -15,4 +15,3 @@ jobs:
           username: carkit@carkitapi.nama-taiba.com
           password: JDDIAvrEAwIq
           server-dir: /
-          script: '../server_deploy.sh'
