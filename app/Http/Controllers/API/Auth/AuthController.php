@@ -30,8 +30,7 @@ class AuthController extends Controller
         try {
             $data = $request->validated();
             $data['type'] = ($data['type'] == 'vendor') ? 2 : 0;
-            if(isset($data['terms']) && $data['terms'] == 1)
-            {
+
                 $user = User::create($data);
                 $this->save_new_vendor_details($user);
                 //Send Mail to Vendor
@@ -41,11 +40,7 @@ class AuthController extends Controller
                 return $this->successResponse(
                     'تم إرسال رابط التحقق علي بريدك الإلكتروني'
                 );
-            }
-            else
-            {
-                return $this->errorResponse('يجب الموافقة علي الشروط والأحكام أولاً');
-            }
+
 
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());

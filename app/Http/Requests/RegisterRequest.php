@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
             'phone' => 'required|min:10|max:15|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
             'password' => 'required|min:8|max:25|confirmed',
             'type' => 'required|in:user,vendor',
-            'terms' => 'required',
+            'terms' => 'required|in:1',
         ];
     }
 
@@ -56,6 +56,7 @@ class RegisterRequest extends FormRequest
             'password.max' => 'يجب أن يكون  كلمة المرور أقل من أو يساوي 25 رقم أو حرف',
             'password.confirmed' => 'كلمة المرور غير متطابقة',
             'terms.required' => 'يجب الموافقة علي الشروط والأحكام',
+            'terms.in' => 'يجب الموافقة علي الشروط والأحكام',
 
         ];
     }
