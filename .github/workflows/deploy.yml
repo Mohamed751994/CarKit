@@ -15,7 +15,4 @@ jobs:
           username: carkit@carkitapi.nama-taiba.com
           password: JDDIAvrEAwIq
           server-dir: /
-
-      - name: Run Migration
-          run: |
-            php artisan migrate --force
+          script: 'cd /var/www/html && ./server_deploy.sh'
