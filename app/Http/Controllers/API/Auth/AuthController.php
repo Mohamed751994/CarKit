@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\VendorControllers;
+namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ForgetPasswordRequest;

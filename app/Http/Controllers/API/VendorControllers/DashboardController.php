@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\VendorControllers;
+namespace App\Http\Controllers\API\VendorControllers;
 
 use App\Http\Requests\ChangeReservationStatusRequest;
 use App\Http\Requests\VendorDetailsRequest;

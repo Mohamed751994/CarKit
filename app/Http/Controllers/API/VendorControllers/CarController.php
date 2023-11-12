@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\VendorControllers;
+namespace App\Http\Controllers\API\VendorControllers;
 
 use App\Http\Requests\CarRequest;
 use App\Http\Requests\CarUpdateRequest;

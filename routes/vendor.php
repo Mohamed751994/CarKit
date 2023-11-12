@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\VendorControllers\AuthController;
-use App\Http\Controllers\VendorControllers\CarController;
-use App\Http\Controllers\VendorControllers\DashboardController;
+use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\VendorControllers\CarController;
+use App\Http\Controllers\API\VendorControllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

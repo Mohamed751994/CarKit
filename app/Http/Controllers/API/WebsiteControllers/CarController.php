@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WebsiteControllers;
+namespace App\Http\Controllers\API\WebsiteControllers;
 
 use App\Http\Requests\CarRequest;
 use App\Http\Requests\CarReservationRequest;
@@ -111,6 +111,10 @@ class CarController extends Controller
         try {
 
             $data = $request->validated();
+            $car = Car::with('user.vendor')->active()->vendorStatus()->findOrFail($data['car_id']);
+            if(empty($car)){
+                return $this->errorResponse('السيارة غير موجودة');
+            }
             if ($request->hasFile('nid_img')) {
                 $image = $this->uploadFile($request, 'nid_img', 'uploads/');
                 $data['nid_img'] = $image;
@@ -119,20 +123,15 @@ class CarController extends Controller
                 $image = $this->uploadFile($request, 'license_img', 'uploads/');
                 $data['license_img'] = $image;
             }
-            $data['user_id'] = (Auth::user())? Auth::user()->id : null;
-            $data['status'] = 'pending';
-            $car = Car::with('user.vendor')->active()->vendorStatus()->findOrFail($data['car_id']);
-            if(empty($car)){
-                return $this->errorResponse('السيارة غير موجودة');
-            }
 
             $data['from_date'] =  date('Y-m-d', strtotime($data['from_date']));
             $data['to_date'] =  date('Y-m-d', strtotime($data['to_date']));
-
             //Check if car reserved or not in the notice and status approved
             $this->check_if_car_reserved_or_not($data['from_date'], $data['to_date'],$car->id);
 
-            //Some Inputs like : days and total amount and discount
+            //Some Inputs
+            $data['user_id'] = (Auth::user())? Auth::user()->id : null;
+            $data['status'] = 'pending';
             $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
             $data['discount_percentage'] =  getSettings('discount_percentage');
             $data['total_amount'] = $this->get_total_amount($data['days'] , $car->price_per_day);

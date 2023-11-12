@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\WebsiteControllers\UserProfileController;
-use App\Http\Controllers\WebsiteControllers\VendorController;
+use App\Http\Controllers\API\WebsiteControllers\UserProfileController;
+use App\Http\Controllers\API\WebsiteControllers\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WebsiteControllers\CarController;
+use App\Http\Controllers\API\WebsiteControllers\CarController;
 
 //Route::post('/check', function (Request $request){
 //    $car = \App\Models\Car::find(1);

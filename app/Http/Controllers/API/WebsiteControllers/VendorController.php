@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WebsiteControllers;
+namespace App\Http\Controllers\API\WebsiteControllers;
 
 use App\Http\Requests\CarRequest;
 use App\Http\Requests\CarReservationRequest;
