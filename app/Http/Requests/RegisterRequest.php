@@ -55,7 +55,7 @@ class RegisterRequest extends FormRequest
             'password.min' => 'يجب أن يكون كلمة المرور أكبر من أو يساوي 8 أرقام أو حروف',
             'password.max' => 'يجب أن يكون  كلمة المرور أقل من أو يساوي 25 رقم أو حرف',
             'password.confirmed' => 'كلمة المرور غير متطابقة',
-            'terms.required' => 'يجب الموافقة علي الشروط والأحكام أولاً',
+            'terms.required' => 'يجب الموافقة علي الشروط والأحكام',
 
         ];
     }
