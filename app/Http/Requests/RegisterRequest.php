@@ -31,6 +31,7 @@ class RegisterRequest extends FormRequest
             'phone' => 'required|min:10|max:15|unique:users,phone|regex:/(^01[0125][0-9]{8}$)/',
             'password' => 'required|min:8|max:25|confirmed',
             'type' => 'required|in:user,vendor',
+            'terms' => 'nullable',
         ];
     }
 
