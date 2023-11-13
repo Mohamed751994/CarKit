@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\WebsiteControllers\SettingController;
 use App\Http\Controllers\API\WebsiteControllers\UserProfileController;
 use App\Http\Controllers\API\WebsiteControllers\VendorController;
 use App\Http\Controllers\API\WebsiteControllers\WishlistController;
@@ -31,6 +32,8 @@ Route::get('/get-all-vendors', [VendorController::class, 'get_all_vendors'])->na
 Route::get('/get-all-featured-vendors', [VendorController::class, 'get_all_featured_vendors'])->name('vendor.get_all_featured_vendors');
 Route::get('/get-single-featured-vendor/{id}', [VendorController::class, 'get_single_featured_vendor'])->name('vendor.get_single_featured_vendor');
 
+//Settings
+Route::get('/settings/{col}', [SettingController::class, 'settings'])->name('website.settings');
 
 
 //User Profile
