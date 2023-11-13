@@ -93,4 +93,10 @@ class User extends Authenticatable
         return $this->hasMany(ActivityLog::class, 'user_id');
     }
 
+
+    public function wishlistsCar()
+    {
+        return $this->belongsToMany(Car::class, 'wishlists', 'user_id','car_id');
+    }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\MainTrait;
+use Illuminate\Support\Facades\Auth;
 
 class Car extends Model
 {
@@ -96,6 +97,12 @@ class Car extends Model
             activityLog('delete',$item->getTable(), $item);
         });
     }
+
+    public function wishlistsUser()
+    {
+        return $this->belongsToMany(User::class, 'wishlists', 'car_id', 'user_id');
+    }
+
 
 
 }

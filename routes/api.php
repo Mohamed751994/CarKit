@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\WebsiteControllers\UserProfileController;
 use App\Http\Controllers\API\WebsiteControllers\VendorController;
+use App\Http\Controllers\API\WebsiteControllers\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\WebsiteControllers\CarController;
@@ -46,5 +47,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //User Rate Vendor or Car
     Route::post('/rate', [UserProfileController::class, 'user_rate'])->name('user.user_rate');
+
+    //Wishlists
+    Route::post('/add-to-wishlist', [WishlistController::class, 'add_to_wishlist'])->name('user.add_to_wishlist');
+    Route::get('/wishlists', [WishlistController::class, 'wishlists'])->name('user.wishlists');
+
 
 });
