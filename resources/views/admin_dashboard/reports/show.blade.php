@@ -20,7 +20,7 @@
             @if($user->type == 'vendor')
                 <div class="col-md-4">
                     <ul class="list-unstyled userInfoReport">
-                        <li><i class="bx bx-map mx-1"></i> {{$user->address}}</li>
+                        <li><i class="bx bx-map mx-1"></i> {{$user->vendor?->address}}</li>
                         <li><i class="bx bx-check-circle mx-1"></i>  @if($user->vendor?->status) <strong class="text-success">الحساب مفعل</strong>
                             @else <strong class="text-danger">الحساب غير مفعل</strong>  @endif</li>
                         <li><i class="bx bx-check-circle mx-1"></i>  @if($user->vendor?->featured) <strong class="text-success">الحساب مميز</strong>
