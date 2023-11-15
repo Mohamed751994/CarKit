@@ -35,5 +35,6 @@ Route::middleware(['auth', 'user-access:admin'])->namespace('App\Http\Controller
     Route::resource('settings', 'SettingController');
     Route::resource('reports', 'ReportController');
     Route::post('reports/report', [\App\Http\Controllers\AdminControllers\ReportController::class,'report'])->name('reports.report');
+    Route::resource('seos', 'SeoController');
 
 });

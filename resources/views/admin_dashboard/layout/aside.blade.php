@@ -73,6 +73,14 @@
             </a>
         </li>
 
+        <li class="@if(getActiveLink('seos')) mm-active @endif">
+            <a href="{{ route('seos.index')  }}">
+                <div class="parent-icon"><i class="lni lni-search"></i>
+                </div>
+                <div class="menu-title">محركات البحث</div>
+            </a>
+        </li>
+
         <li class="">
             <a href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
                 <div class="parent-icon"><i class="bi bi-lock-fill"></i>
