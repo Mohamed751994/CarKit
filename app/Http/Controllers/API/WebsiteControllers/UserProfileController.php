@@ -8,6 +8,7 @@ use App\Http\Requests\CarReservationRequest;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\RatingRequest;
+use App\Http\Requests\UserUpdateProfileRequest;
 use App\Models\Car;
 use App\Models\CarsBrand;
 use App\Models\CarsModel;
@@ -37,6 +38,21 @@ class UserProfileController extends Controller
             $user = auth()->user();
             return $this->successResponse('حجوزاتي ', $user);
 
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+    public function update_profile(UserUpdateProfileRequest $request)
+    {
+        try {
+            $data = $request->validated();
+            if ($request->hasFile('image')) {
+                $image = $this->uploadFile($request,'image', 'uploads/');
+                $data['image'] = $image;
+            }
+            User::whereId($this->user_id())->update($data);
+            return $this->successResponse('تم تعديل البيانات بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
