@@ -22,6 +22,7 @@
                         <th>الأسم</th>
                         <th>البريد الإلكتروني</th>
                         <th> تاريخ التسجيل</th>
+                        <th> تحقق البريد الإلكتروني </th>
                         <th>التحكم</th>
                     </tr>
                     </thead>
@@ -32,6 +33,7 @@
                             <td>{{$con->name}}</td>
                             <td>{{$con->email}}</td>
                             <td>{{date('Y-m-d H:i A', strtotime($con->created_at))}}</td>
+                            <td>{!! $con->email_verified_at ? '<span class="badge bg-light-success text-success">محقق</span>' : '<span class="badge bg-light-danger text-danger">غير محقق</span>' !!}</td>
                             <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">
                                     <a href="{{route('users.show', $con->id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
