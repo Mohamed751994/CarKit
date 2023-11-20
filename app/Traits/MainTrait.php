@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,14 +48,42 @@ trait MainTrait
     //Main Upload File Method
     public function uploadFile($request,$fileInputName, $moveTo)
     {
-
         $file = $request->file($fileInputName);
         $fileUploaded=rand(1,99999999999).'__'.$file->getClientOriginalName();
         $file->move($moveTo, $fileUploaded);
         return $fileUploaded;
-
     }
 
+    //Main Upload Multiple File Method
+    public function uploadMultipleFile($request,$fileInputName, $moveTo)
+    {
+        $multiple = [];
+        foreach ($request->file($fileInputName) as $single)
+        {
+            $fileUploaded=rand(1,99999999999).'__'.$single->getClientOriginalName();
+            $single->move($moveTo, $fileUploaded);
+            array_push($multiple,$fileUploaded);
+        }
+        return $multiple;
+    }
+
+    //Full image path in array
+    public function image_full_path_for_array($value)
+    {
+        if(!$value)
+        {
+            return null;
+        }
+        else
+        {
+            $fullPath = [];
+            foreach(json_decode($value) as $v)
+            {
+                array_push($fullPath, $this->image_full_path($v));
+            }
+            return $fullPath;
+        }
+    }
 
     //Full image path
     public function image_full_path($image)
@@ -63,15 +92,28 @@ trait MainTrait
     }
 
     //Save Vendor Details when User Register
-    public function save_new_vendor_details($user)
+    public function save_new_vendor_details($user,$data,$request)
     {
-        if($user->type == 'vendor')
+        $vendorArray = [
+            'name'         => $data['exhibition_name'],
+            'user_id'      => $user->id,
+        ];
+        if($request->hasFile('id_images'))
         {
-            Vendor::create([
-                'user_id' => $user->id,
-                'name' => $user->name,
-            ]);
+            $image = $this->uploadMultipleFile($request, 'id_images', 'uploads/');
+            $vendorArray['id_images'] = $image;
         }
+        if($request->hasFile('commercial_images'))
+        {
+            $image = $this->uploadMultipleFile($request, 'commercial_images', 'uploads/');
+            $vendorArray['commercial_images'] = $image;
+        }
+        if($request->hasFile('tax_images'))
+        {
+            $image = $this->uploadMultipleFile($request, 'tax_images', 'uploads/');
+            $vendorArray['tax_images'] = $image;
+        }
+        Vendor::create($vendorArray);
     }
 
     //return auth user id

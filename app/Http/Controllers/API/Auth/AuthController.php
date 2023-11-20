@@ -12,6 +12,7 @@ use App\Models\Vendor;
 use App\Traits\MainTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -27,22 +28,33 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        DB::beginTransaction();
         try {
-            $data = $request->validated();
-            $data['type'] = ($data['type'] == 'vendor') ? 2 : 0;
+                $data = $request->validated();
+                $data['type'] = ($data['type'] == 'vendor') ? 2 : 0;
 
+                //Save User Table
                 $user = User::create($data);
-                $this->save_new_vendor_details($user);
+
+                //Save vendor if type vendor
+                if($user && $user->type == 'vendor')
+                {
+                    $this->save_new_vendor_details($user,$data, $request);
+                }
+
                 //Send Mail to Vendor
                 $link =  getSettings('website_url').'/verification-email/'.Crypt::encryptString($user->id);
                 $html = view('emails.verification_email', compact('user', 'link'))->render();
                 $this->sendEmail($user->email,'كاركيتس',$html, "كاركيتس | التحقق من البريد الإلكتروني");
+
+                DB::commit();
                 return $this->successResponse(
                     'تم إرسال رابط التحقق علي بريدك الإلكتروني'
                 );
 
 
         } catch (\Throwable $th) {
+            DB::rollBack();
             return $this->errorResponse($th->getMessage());
         }
     }

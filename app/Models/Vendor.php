@@ -13,6 +13,11 @@ class Vendor extends Model
     use HasFactory;
     protected $guarded = [];
     protected $appends = ['rate', 'count_rate', 'rate_percentage'];
+    protected $casts = [
+        'id_images' =>'array',
+        'commercial_images' =>'array',
+        'tax_images' =>'array',
+    ];
     public function user()
     {
         return  $this->belongsTo('App\Models\User', 'user_id');
@@ -24,6 +29,20 @@ class Vendor extends Model
             return null;
         else
             return $this->image_full_path($value);
+    }
+
+
+    public function getIdImagesAttribute($value)
+    {
+        return $this->image_full_path_for_array($value);
+    }
+    public function getCommercialImagesAttribute($value)
+    {
+        return $this->image_full_path_for_array($value);
+    }
+    public function getTaxImagesAttribute($value)
+    {
+        return $this->image_full_path_for_array($value);
     }
 
     public function scopeFeatured($query)
