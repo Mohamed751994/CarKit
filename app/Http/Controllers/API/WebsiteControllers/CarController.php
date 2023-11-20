@@ -130,7 +130,7 @@ class CarController extends Controller
             $this->check_if_car_reserved_or_not($data['from_date'], $data['to_date'],$car->id);
 
             //Some Inputs
-            $data['user_id'] = (Auth::user())? Auth::user()->id : null;
+            $data['user_id'] = (auth()->user())? auth()->user()->id : null;
             $data['status'] = ($car->automatic_approved == 1) ? 'approved' : 'pending';
             $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
             $data['discount_percentage'] =  getSettings('discount_percentage');
@@ -144,14 +144,14 @@ class CarController extends Controller
             if($car->automatic_approved == 1)
             {
                 //Send mail to user
-            }
-            else
-            {
-                //Send Mail to Vendor
-                $type = 'vendor';
+                $type = 'user';
                 $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
-                $this->sendEmail($tanant->vendor_user?->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
+                $this->sendEmail(auth()->user()->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
             }
+            //Send Mail to Vendor
+            $type = 'vendor';
+            $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
+            $this->sendEmail($tanant->vendor_user?->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
 
             return $this->successResponse('تم إضافة الطلب بنجاح', $tanant);
         } catch (\Throwable $th) {

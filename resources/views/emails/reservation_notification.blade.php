@@ -25,23 +25,13 @@
                         @if($type == 'vendor')
                             <h4 class="my-3 text-center">مرحباً {{$tanant->vendor_user?->name}} .</h4>
                             <h2 class="text-center mb-3">طلب حجز سيارة</h2>
-                            <table style="width: 100%">
-                                <thead>
-                                <th>كود الحجز</th>
-                                <th> السيارة</th>
-                                <th>عدد الأيام</th>
-                                <th>من - إلي</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{$tanant->trip_num}}</td>
-                                    <td> <img src="{{json_decode($tanant->car_details)->image}}" style="width: 150px; height: 150px;object-fit: cover;margin:0 10px;"> {{json_decode($tanant->car_details)->model}}</td>
-                                    <td>{{$tanant->days}} يوم</td>
-                                    <td>{{$tanant->from_date}} -> {{$tanant->to_date}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <strong style="margin-top: 20px;">يمكنك قبول أو رفض طلب الحجز من خلاص حجوزاتك في صفحتك الشخصية</strong>
+                            <ul style="width: 100%">
+                                <li style="margin-bottom: 10px;">كود الحجز : <strong>{{$tanant->trip_num}}</strong></li>
+                                <li style="margin-bottom: 10px;"> السيارة : <strong><img src="{{json_decode($tanant->car_details)->image}}" style="width: 70px; border-radius: 50%; height: 70px;object-fit: cover;margin:0 10px;"> {{json_decode($tanant->car_details)->model}}</strong></li>
+                                <li style="margin-bottom: 10px;">عدد الأيام : <strong>{{$tanant->days}} يوم</strong></li>
+                                <li style="margin-bottom: 10px;">من - إلي : <strong>{{$tanant->from_date}} -> {{$tanant->to_date}}</strong></li>
+                            </ul>
+                            <strong style="margin-top: 20px;">يمكنك متابعة الحجز من خلاص حجوزاتك في صفحتك الشخصية</strong>
                         @else
                         <h4 class="my-3 text-center">مرحباً {{$tanant->normal_user?->name}} .</h4>
                         <strong>
