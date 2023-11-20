@@ -119,6 +119,10 @@ class UserProfileController extends Controller
     {
         try {
             $reservation = Tanant::where('user_id', $this->user_id())->find($id);
+            if(!$reservation)
+            {
+                return $this->errorResponse('الحجز غير موجود');
+            }
             if(date('Y-m-d', strtotime(Carbon::createFromDate($reservation->from_date)->subDays(1))) > date('Y-m-d', strtotime(Carbon::today())))
             {
                 $reservation->update(['status' =>'cancelled']);
