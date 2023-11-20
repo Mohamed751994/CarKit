@@ -12,7 +12,7 @@ class Vendor extends Model
     use MainTrait;
     use HasFactory;
     protected $guarded = [];
-    protected $appends = ['rate', 'count_rate', 'rate_percentage'];
+    protected $appends = ['rate', 'count_rate', 'rate_percentage', 'completed'];
     protected $casts = [
         'id_images' =>'array',
         'commercial_images' =>'array',
@@ -76,6 +76,25 @@ class Vendor extends Model
             array_push($array , [$i => $totalPercentage]);
         }
         return $array ;
+    }
+
+    //Check if vendor completed information
+    public function getCompletedAttribute()
+    {
+        $status =  '';
+        if( ( is_null($this->id_images) || is_null($this->commercial_images) || is_null($this->tax_images) ) && (!$this->status))
+        {
+            $status =  'not_completed';
+        }
+        elseif((!is_null($this->id_images) && !is_null($this->commercial_images) && !is_null($this->tax_images)) && (!$this->status))
+        {
+            $status =  'pending';
+        }
+        elseif((!is_null($this->id_images) && !is_null($this->commercial_images) && !is_null($this->tax_images)) && ($this->status))
+        {
+            $status =  'approved';
+        }
+        return $status;
     }
 
 }
