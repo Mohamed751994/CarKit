@@ -21,7 +21,8 @@
                         <th>اللوجو</th>
                         <th>الأسم</th>
                         <th> تاريخ التسجيل</th>
-                        <th> حالة الحساب </th>
+                        <th> تحقق البريد الإلكتروني </th>
+                        <th> الحالة </th>
                         <th> مميز </th>
                         <th>التحكم</th>
                     </tr>
@@ -34,8 +35,9 @@
                                     <img src="{{ $con->vendor?->image ? $con->vendor?->image : '/admin_dashboard/assets/images/no_image.png' }}" class="rounded-circle imageList" alt="">
                                 </div>
                             </td>
-                            <td>{{$con->name}}</td>
+                            <td>{{$con->vendor?->name}}</td>
                             <td>{{date('Y-m-d H:i A', strtotime($con->created_at))}}</td>
+                            <td>{!! $con->email_verified_at ? '<span class="badge bg-light-success text-success">محقق</span>' : '<span class="badge bg-light-danger text-danger">غير محقق</span>' !!}</td>
                             <td>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input customSliderCheckbox" type="checkbox"

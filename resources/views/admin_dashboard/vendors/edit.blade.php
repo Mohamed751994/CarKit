@@ -96,7 +96,7 @@
 
 
                                                 <div class="col-12 mt-3">
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">تفعيل الحساب</label>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">تنشيط الحساب</label>
                                                     <div class="form-check form-switch mt-2">
                                                         <input class="form-check-input customSliderCheckbox" type="checkbox"
                                                                name="status" id="flexSwitchCheckChecked" @if($content->vendor?->status == 1) checked="" value="1" @else value="0" @endif  >

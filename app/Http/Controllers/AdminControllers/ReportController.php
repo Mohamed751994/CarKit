@@ -42,8 +42,9 @@ class ReportController extends Controller
         $cars = ($user->type == 'vendor') ? Car::where('user_id',$user->id)->count() : 0;
         $pending = getMoneyAndCountOfVendor($user, 'pending',$userType);
         $approved = getMoneyAndCountOfVendor($user, 'approved',$userType);
+        $cancelled = getMoneyAndCountOfVendor($user, 'cancelled',$userType);
         $rejected = getMoneyAndCountOfVendor($user, 'rejected',$userType);
-        $view = view('admin_dashboard.reports.show', compact('user','cars','pending','approved','rejected'))->render();
+        $view = view('admin_dashboard.reports.show', compact('user','cars','pending','approved', 'cancelled','rejected'))->render();
         return response()->json(['success'=>true, 'report' =>$view]);
     }
 

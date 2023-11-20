@@ -41,15 +41,15 @@
     <section class="user_info" dir="rtl">
         <div class="row m-0 align-items-center">
             @if($user->type == 'vendor')
-                <div class="col-md-3 col-6">
-                    <div class="boxStats">
+                <div class="col-md-12">
+                    <div class="boxStats mb-0">
                         <h5 class="title">عدد السيارات</h5>
                         <h1 class="count">{{$cars}} <small>سيارة</small></h1>
                         <i class="bx bx-car"></i>
                     </div>
                 </div>
             @endif
-                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}  col-6">
+                <div class="col-md-3  col-6">
                     <div class="boxStats">
                         <h5 class="title">الحجوزات (في الإنتظار)</h5>
                         <h1 class="count text-warning">{{$pending['count']}} <small>حجز</small> </h1>
@@ -57,7 +57,7 @@
                         <i class="bx bx-money"></i>
                     </div>
                 </div>
-                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}  col-6">
+                <div class="col-md-3  col-6">
                     <div class="boxStats">
                         <h5 class="title">الحجوزات (المؤكدة)</h5>
                         <h1 class="count text-success">{{$approved['count']}} <small>حجز</small></h1>
@@ -65,7 +65,15 @@
                         <i class="bx bx-money"></i>
                     </div>
                 </div>
-                <div class="{{$user->type == 'vendor' ? 'col-md-3' : 'col-md-4'}}  col-6">
+                <div class="col-md-3  col-6">
+                    <div class="boxStats">
+                        <h5 class="title">الحجوزات (الملغية)</h5>
+                        <h1 class="count text-danger">{{$cancelled['count']}} <small>حجز</small></h1>
+                        <h1 class="money text-danger">{{$cancelled['money']}} <small>جنية</small></h1>
+                        <i class="bx bx-money"></i>
+                    </div>
+                </div>
+                <div class="col-md-3  col-6">
                     <div class="boxStats">
                         <h5 class="title">الحجوزات (المرفوضة)</h5>
                         <h1 class="count text-danger">{{$rejected['count']}} <small>حجز</small></h1>

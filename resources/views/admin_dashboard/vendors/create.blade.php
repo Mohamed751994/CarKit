@@ -79,7 +79,7 @@
 
 
                                         <div class="col-12 mt-3">
-                                            <label class="form-check-label" for="flexSwitchCheckChecked">تفعيل الحساب</label>
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">تنشيط الحساب</label>
                                             <div class="form-check form-switch mt-2">
                                                 <input class="form-check-input customSliderCheckbox" type="checkbox"
                                                        name="status" value="1" id="flexSwitchCheckChecked" checked="">

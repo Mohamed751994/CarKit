@@ -46,6 +46,20 @@
                             <div class="widget-icon mx-auto mb-3 bg-light-orange text-orange">
                                 <i class="bi bi-tags-fill"></i>
                             </div>
+                            <h3>{{tanantsStatusTypeCount('cancelled')['count']}}</h3>
+                            <p class="mb-0">ملغي</p>
+                            <div class="my-3">
+                                <strong>{{tanantsStatusTypeCount('cancelled')['money']}} جنية مصري</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card radius-10">
+                        <div class="card-body text-center">
+                            <div class="widget-icon mx-auto mb-3 bg-light-danger text-danger">
+                                <i class="bi bi-tags-fill"></i>
+                            </div>
                             <h3>{{tanantsStatusTypeCount('rejected')['count']}}</h3>
                             <p class="mb-0">مرفوض</p>
                             <div class="my-3">
@@ -54,17 +68,8 @@
                         </div>
                     </div>
                 </div>
-{{--                <div class="col-6 col-md-2">--}}
-{{--                    <div class="card radius-10">--}}
-{{--                        <div class="card-body text-center">--}}
-{{--                            <div class="widget-icon mx-auto mb-3 bg-light-danger text-danger">--}}
-{{--                                <i class="bi bi-tags-fill"></i>--}}
-{{--                            </div>--}}
-{{--                            <h3>{{tanantsStatusTypeCount('cancelled')}}</h3>--}}
-{{--                            <p class="mb-0">ملغي</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+
+
             </div>
 
 

@@ -59,7 +59,8 @@
                                                         <li> الأسم : <strong class="text-primary">{{$content->vendor?->name}}</strong> </li>
                                                         <li> رقم الهاتف : <strong class="text-primary">{{$content->phone}}</strong> </li>
                                                         <li> رابط الخريطة : <strong class="text-primary">{{$content->vendor?->google_map ?? 'لا يوجد'}}</strong> </li>
-                                                        <li>  حالة الحساب : <strong class="@if($content->vendor?->status) text-primary @else text-danger @endif">{{$content->vendor?->status ? 'مفعل ' : 'غير مفعل'}}</strong> </li>
+                                                        <li>  حالة الحساب : <strong class="@if($content->vendor?->status) text-success @else text-danger @endif">{{$content->vendor?->status ? 'نشط ' : 'غير نشط'}}</strong> </li>
+                                                        <li>تحقق البريد الإلكتروني : {!! $content->email_verified_at ? '<span class="badge bg-light-success text-success">محقق</span>' : '<span class="badge bg-light-danger text-danger">غير محقق</span>' !!}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -73,6 +74,36 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            @if(count($content->vendor?->id_images) > 0)
+                                            <div class="col-md-4 my-4">
+                                                <div class="box">
+                                                    <h4 class="my-3">صور البطاقة الشخصية</h4>
+                                                    @foreach($content->vendor?->id_images as $id_image)
+                                                        <a class="btn btn-sm btn-success" href="{{$id_image}}" download>تحميل</a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if(count($content->vendor?->commercial_images) > 0)
+                                                <div class="col-md-4 my-4">
+                                                    <div class="box">
+                                                        <h4 class="my-3">صور السجل التجاري</h4>
+                                                        @foreach($content->vendor?->commercial_images as $commercial_image)
+                                                            <a class="btn btn-sm btn-success" href="{{$commercial_image}}" download>تحميل</a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if(count($content->vendor?->tax_images) > 0)
+                                                <div class="col-md-4 my-4">
+                                                    <div class="box">
+                                                        <h4 class="my-3">صور البطاقة الضريبية</h4>
+                                                        @foreach($content->vendor?->tax_images as $tax_image)
+                                                            <a class="btn btn-sm btn-success" href="{{$tax_image}}" download>تحميل</a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     {{--Cars of vendor--}}
