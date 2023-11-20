@@ -92,27 +92,12 @@ trait MainTrait
     }
 
     //Save Vendor Details when User Register
-    public function save_new_vendor_details($user,$data,$request)
+    public function save_new_vendor_details($user)
     {
         $vendorArray = [
-            'name'         => $data['exhibition_name'],
+            'name'         => $user->name,
             'user_id'      => $user->id,
         ];
-        if($request->hasFile('id_images'))
-        {
-            $image = $this->uploadMultipleFile($request, 'id_images', 'uploads/');
-            $vendorArray['id_images'] = $image;
-        }
-        if($request->hasFile('commercial_images'))
-        {
-            $image = $this->uploadMultipleFile($request, 'commercial_images', 'uploads/');
-            $vendorArray['commercial_images'] = $image;
-        }
-        if($request->hasFile('tax_images'))
-        {
-            $image = $this->uploadMultipleFile($request, 'tax_images', 'uploads/');
-            $vendorArray['tax_images'] = $image;
-        }
         Vendor::create($vendorArray);
     }
 

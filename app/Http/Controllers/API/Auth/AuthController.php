@@ -39,7 +39,7 @@ class AuthController extends Controller
                 //Save vendor if type vendor
                 if($user && $user->type == 'vendor')
                 {
-                    $this->save_new_vendor_details($user,$data, $request);
+                    $this->save_new_vendor_details($user);
                 }
 
                 //Send Mail to Vendor

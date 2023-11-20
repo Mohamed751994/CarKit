@@ -27,6 +27,21 @@ class DashboardController extends Controller
                 $image = $this->uploadFile($request,'image', 'uploads/');
                 $data['image'] = $image;
             }
+            if($request->hasFile('id_images'))
+            {
+                $image = $this->uploadMultipleFile($request, 'id_images', 'uploads/');
+                $data['id_images'] = $image;
+            }
+            if($request->hasFile('commercial_images'))
+            {
+                $image = $this->uploadMultipleFile($request, 'commercial_images', 'uploads/');
+                $data['commercial_images'] = $image;
+            }
+            if($request->hasFile('tax_images'))
+            {
+                $image = $this->uploadMultipleFile($request, 'tax_images', 'uploads/');
+                $data['tax_images'] = $image;
+            }
             Vendor::where('user_id',$this->user_id())->update($data);
             return $this->successResponse('تم تعديل بيانات المعرض بنجاح');
         } catch (\Throwable $th) {

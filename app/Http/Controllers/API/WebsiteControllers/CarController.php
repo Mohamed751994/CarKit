@@ -112,7 +112,7 @@ class CarController extends Controller
 
             $data = $request->validated();
             $car = Car::with('user.vendor')->active()->vendorStatus()->findOrFail($data['car_id']);
-            if(empty($car)){
+            if(!$car){
                 return $this->errorResponse('السيارة غير موجودة');
             }
             if ($request->hasFile('nid_img')) {
@@ -124,14 +124,14 @@ class CarController extends Controller
                 $data['license_img'] = $image;
             }
 
+            //Check if car reserved or not in the notice and status approved
             $data['from_date'] =  date('Y-m-d', strtotime($data['from_date']));
             $data['to_date'] =  date('Y-m-d', strtotime($data['to_date']));
-            //Check if car reserved or not in the notice and status approved
             $this->check_if_car_reserved_or_not($data['from_date'], $data['to_date'],$car->id);
 
             //Some Inputs
             $data['user_id'] = (Auth::user())? Auth::user()->id : null;
-            $data['status'] = 'pending';
+            $data['status'] = ($car->automatic_approved == 1) ? 'approved' : 'pending';
             $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
             $data['discount_percentage'] =  getSettings('discount_percentage');
             $data['total_amount'] = $this->get_total_amount($data['days'] , $car->price_per_day);
@@ -139,10 +139,20 @@ class CarController extends Controller
             $data['vendor_user_id'] = $car->user_id;
             $data['car_details'] = json_encode($car);
             $tanant = Tanant::create($data);
-            //Send Mail to Vendor
-            $type = 'vendor';
-            $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
-            $this->sendEmail($tanant->vendor_user?->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
+
+            //Send Mail
+            if($car->automatic_approved == 1)
+            {
+                //Send mail to user
+            }
+            else
+            {
+                //Send Mail to Vendor
+                $type = 'vendor';
+                $html = view('emails.reservation_notification', compact('tanant', 'type'))->render();
+                $this->sendEmail($tanant->vendor_user?->email,'كاركيتس',$html, "كاركيتس | طلب حجز سيارة");
+            }
+
             return $this->successResponse('تم إضافة الطلب بنجاح', $tanant);
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
