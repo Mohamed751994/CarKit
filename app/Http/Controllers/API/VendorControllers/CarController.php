@@ -111,7 +111,7 @@ class CarController extends Controller
         }
     }
 
-    //Vendor Delete his car
+    //Vendor Active / Unactive his car
     public function vendor_status_his_car(Request $request,$id)
     {
         try {
@@ -129,5 +129,21 @@ class CarController extends Controller
     }
 
 
+    //Vendor Automatic Approved
+    public function automatic_approved(Request $request,$id)
+    {
+        try {
+            $car = Car::where('user_id', $this->user_id())->find($id);
+            if(!$car)
+            {
+                return $this->errorResponse('هذه السيارة غير موجودة');
+            }
+            $car->update(['automatic_approved'=>$request->automatic_approved]);
+            $message = $request->automatic_approved == 1 ? 'أصبح الحجز علي هذه السيارة موافقة تلقائية' : 'أصبح الحجز علي هذه السيارة ينتظر الموافقة ';
+            return $this->successResponse($message);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
 
 }

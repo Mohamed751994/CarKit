@@ -38,6 +38,7 @@ Route::namespace('App\Http\Controllers\VendorControllers')->group(function () {
         Route::post('/status-his-car/{id}', [CarController::class, 'vendor_status_his_car'])->name('vendor.vendor_status_his_car');
         Route::get('/get-vendor-cars', [CarController::class, 'get_vendor_cars'])->name('vendor.get_vendor_cars');
         Route::get('/get-vendor-cars-pagination', [CarController::class, 'get_vendor_cars_pagination'])->name('vendor.get_vendor_cars_pagination');
+        Route::post('/automatic-approved', [CarController::class, 'automatic_approved'])->name('vendor.automatic_approved');
         Route::get('/cars-reservations', [DashboardController::class, 'get_vendor_cars_reservation'])->name('vendor.get_vendor_cars_reservation');
         Route::get('/cars-reservations-pagination', [DashboardController::class, 'get_vendor_cars_reservation_pagination'])->name('vendor.get_vendor_cars_reservation_pagination');
         Route::get('/reserve/{id}', [DashboardController::class, 'get_vendor_single_reserve'])->name('vendor.get_vendor_single_reserve');
