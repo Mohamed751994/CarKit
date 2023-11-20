@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Tanant;
 use App\Traits\MainTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +114,25 @@ class UserProfileController extends Controller
         }
     }
 
+    //reserve_cancellation
+    public function reserve_cancellation(Request $request, $id)
+    {
+        try {
+            $reservation = Tanant::where('user_id', $this->user_id())->find($id);
+            if(date('Y-m-d', strtotime(Carbon::createFromDate($reservation->from_date)->subDays(1))) > date('Y-m-d', strtotime(Carbon::today())))
+            {
+                $reservation->update(['status' =>'cancelled']);
+                return $this->successResponse(' تم إلغاء الحجز بنجاح');
+            }
+            else
+            {
+                return $this->errorResponse('عفواً يمكنك الإلغاء قبل 24 ساعة فقط في حالة أي مشكلة يمكنك التواصل مع خدمة العملاء ');
+            }
+
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
 
     //Rating
     public function user_rate(RatingRequest $request)

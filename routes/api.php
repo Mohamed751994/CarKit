@@ -4,13 +4,21 @@ use App\Http\Controllers\API\WebsiteControllers\SettingController;
 use App\Http\Controllers\API\WebsiteControllers\UserProfileController;
 use App\Http\Controllers\API\WebsiteControllers\VendorController;
 use App\Http\Controllers\API\WebsiteControllers\WishlistController;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\WebsiteControllers\CarController;
 
-//Route::post('/check', function (Request $request){
-//    $car = \App\Models\Car::find(1);
-//    return  check_if_car_reserved_or_not($request, $car->id);
+//Route::get('/check', function (Request $request){
+//    $tanant = \App\Models\Tanant::find(5);
+//    if(date('Y-m-d', strtotime(Carbon::createFromDate($tanant->from_date)->subDays(1))) > date('Y-m-d', strtotime(Carbon::today())))
+//    {
+//        return 'can cancel';
+//    }
+//    else
+//    {
+//        return 'not cancel';
+//    }
 //});
 //Search in Home Page
 Route::get('/search-cars', [CarController::class, 'search_cars'])->name('vendor.search_cars');
@@ -48,6 +56,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user-reservations', [UserProfileController::class, 'my_reservations'])->name('user.my_reservations');
     Route::get('/user-reservations-pagination', [UserProfileController::class, 'my_reservations_pagination'])->name('user.my_reservations_pagination');
     Route::get('/user-reserve/{id}', [UserProfileController::class, 'my_single_reserve'])->name('user.my_single_reserve');
+    Route::post('/user-reserve-cancellation/{id}', [UserProfileController::class, 'reserve_cancellation'])->name('user.reserve_cancellation');
 
     //User Rate Vendor or Car
     Route::post('/rate', [UserProfileController::class, 'user_rate'])->name('user.user_rate');
