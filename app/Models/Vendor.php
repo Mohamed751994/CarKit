@@ -90,7 +90,7 @@ class Vendor extends Model
         {
             $status =  'pending';
         }
-        elseif((!is_null($this->id_images) && !is_null($this->commercial_images) && !is_null($this->tax_images)) && ($this->status))
+        elseif((!is_null($this->id_images) && !is_null($this->commercial_images) && !is_null($this->tax_images)) && ($this->status) || ($this->status))
         {
             $status =  'approved';
         }
