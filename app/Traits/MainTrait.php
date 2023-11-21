@@ -97,6 +97,7 @@ trait MainTrait
         $vendorArray = [
             'name'         => $user->name,
             'user_id'      => $user->id,
+            'status'       =>0
         ];
         Vendor::create($vendorArray);
     }
