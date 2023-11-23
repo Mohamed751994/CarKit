@@ -28,9 +28,14 @@ class CarController extends Controller
                 $image = $this->uploadFile($request, 'image', 'uploads/');
                 $data['image'] = $image;
             }
-            $data['user_id'] = $this->user_id();
-            $data['additions'] =  isset($data['additions']) ? implode(",", $data['additions']) : null;
-            $data['features'] =  isset($data['features']) ? implode(",", $data['features']) : null;
+            if ($request->hasFile('imagesList')) {
+                $multipleImages = $this->uploadMultipleFile($request,'imagesList', 'uploads/');
+                $data['imagesList'] = $multipleImages;
+            }
+            if ($request->hasFile('license')) {
+                $license = $this->uploadMultipleFile($request,'license', 'uploads/');
+                $data['license'] = $license;
+            }
             $car = Car::create($data);
             return $this->successResponse('تم إضافة السيارة بنجاح', [$car]);
         } catch (\Throwable $th) {
@@ -96,13 +101,13 @@ class CarController extends Controller
                 $image = $this->uploadFile($request, 'image', 'uploads/');
                 $data['image'] = $image;
             }
-            if(isset($data['additions']))
-            {
-                $data['additions'] = implode(",", $data['additions']);
+            if ($request->hasFile('imagesList')) {
+                $multipleImages = $this->uploadMultipleFile($request,'imagesList', 'uploads/');
+                $data['imagesList'] = $multipleImages;
             }
-            if(isset($data['features']))
-            {
-                $data['features'] = implode(",", $data['features']);
+            if ($request->hasFile('license')) {
+                $license = $this->uploadMultipleFile($request,'license', 'uploads/');
+                $data['license'] = $license;
             }
             Car::where('user_id', $this->user_id())->whereId($id)->update($data);
             return $this->successResponse('تم تعديل السيارة بنجاح');

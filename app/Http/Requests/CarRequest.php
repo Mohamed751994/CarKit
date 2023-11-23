@@ -40,6 +40,12 @@ class CarRequest extends FormRequest
             'price_per_day'=> 'required|max:255',
             'central_point_pickup'=> 'required|max:255',
             'features'=> 'nullable|max:255',
+            'comfort_additions'=> 'nullable',
+            'safety_additions'=> 'nullable',
+            'sound_additions'=> 'nullable',
+            'imagesList.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
+            'license.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff,pdf,doc,docx|max:5000',
+
         ];
     }
 
@@ -61,6 +67,10 @@ class CarRequest extends FormRequest
             'central_point_pickup.required' => ' عنوان التسليم والتسلم  مطلوب',
             'image.mimes' =>'يجب أن تكون صيغة الصورة (png - jpg - jpeg - webp - svg - gif) ',
             'image.max' =>'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
+            'imagesList.*.mimes' =>'يجب أن تكون صيغة الصور  (png - jpg - jpeg - webp - svg - gif ) ',
+            'imagesList.*.max' =>'يجب أن لا تتعدي حجم الصوره  5 ميجا بايت',
+            'license.*.mimes' =>'يجب أن تكون صيغة صورة  الرخصة (png - jpg - jpeg - webp - svg - gif - pdf - doc - docx) ',
+            'license.*.max' =>'يجب أن لا تتعدي حجم صورة الرخصة 5 ميجا بايت',
         ];
     }
 

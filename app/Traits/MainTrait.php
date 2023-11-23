@@ -67,6 +67,7 @@ trait MainTrait
         return $multiple;
     }
 
+
     //Full image path in array
     public function image_full_path_for_array($value)
     {

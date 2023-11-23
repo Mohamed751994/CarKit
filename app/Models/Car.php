@@ -13,7 +13,10 @@ class Car extends Model
     use HasFactory;
     use MainTrait;
     protected $guarded = [];
-
+    protected $casts = [
+        'imagesList' =>'array',
+        'license' =>'array',
+    ];
     public function getImageAttribute($value)
     {
         if(!$value)
@@ -84,6 +87,36 @@ class Car extends Model
             ])->whereBetween('price_per_day', [$params['price_from'], $params['price_to']]);
     }
 
+
+
+    public function wishlistsUser()
+    {
+        return $this->belongsToMany(User::class, 'wishlists', 'car_id', 'user_id');
+    }
+
+    public function getImagesAttribute($value)
+    {
+        if(!$value)
+        {
+            return null;
+        }
+        else
+        {
+            $fullPath = [];
+            foreach(json_decode($value) as $v)
+            {
+                array_push($fullPath, $this->image_full_path($v));
+            }
+             array_unshift( $fullPath,$this->image);
+            return $fullPath;
+        }
+    }
+    public function getLicenseAttribute($value)
+    {
+        return $this->image_full_path_for_array($value);
+    }
+
+    //Booted
     protected static function booted()
     {
         static::created(function ($item) {
@@ -97,12 +130,6 @@ class Car extends Model
             activityLog('delete',$item->getTable(), $item);
         });
     }
-
-    public function wishlistsUser()
-    {
-        return $this->belongsToMany(User::class, 'wishlists', 'car_id', 'user_id');
-    }
-
 
 
 }
