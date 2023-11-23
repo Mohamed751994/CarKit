@@ -21,7 +21,12 @@ class TanantController extends Controller
      */
     public function index()
     {
-        $content = Tanant::latest()->paginate($this->paginate);
+        $content = Tanant::latest();
+        if(request('live_search') && request('live_search') != '')
+        {
+            $content =$content->where('trip_num', 'LIKE', '%'.request('live_search').'%');
+        }
+        $content = $content->paginate($this->paginate);
         return view('admin_dashboard.tanants.index' , compact('content'));
     }
 

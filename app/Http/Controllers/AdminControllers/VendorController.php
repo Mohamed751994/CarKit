@@ -21,7 +21,12 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $content = User::with('vendor')->whereType(2)->latest()->paginate($this->paginate);
+        $content = User::with('vendor')->whereType(2);
+        if(request('live_search') && request('live_search') != '')
+        {
+            $content =$content->where('email', 'LIKE', '%'.request('live_search').'%');
+        }
+        $content = $content->latest()->paginate($this->paginate);
         return view('admin_dashboard.vendors.index' , compact('content'));
     }
 

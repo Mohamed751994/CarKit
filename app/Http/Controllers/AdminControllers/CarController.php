@@ -25,6 +25,10 @@ class CarController extends Controller
         {
             $content = $content->where('user_id', $request->vendor);
         }
+        if(request('live_search') && request('live_search') != '')
+        {
+            $content =$content->where('model', 'LIKE', '%'.request('live_search').'%');
+        }
         $content = $content->paginate($this->paginate);
         $vendors = Vendor::pluck('name','user_id');
         return view('admin_dashboard.cars.index', compact('content','vendors'));

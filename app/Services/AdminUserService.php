@@ -10,7 +10,12 @@ class AdminUserService
     use MainTrait;
     public function index()
     {
-        return User::whereType(0)->latest()->paginate($this->paginate);
+        $content = User::whereType(0)->latest();
+        if(request('live_search') && request('live_search') != '')
+        {
+            $content =$content->where('email', 'LIKE', '%'.request('live_search').'%');
+        }
+        return $content =$content->paginate($this->paginate);
     }
     public function store($request)
     {

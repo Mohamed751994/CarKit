@@ -21,7 +21,12 @@ class BrandModelController extends Controller
      */
     public function index()
     {
-        $content = CarsBrand::with('models')->paginate($this->paginate);
+        $content = CarsBrand::with('models');
+        if(request('live_search') && request('live_search') != '')
+        {
+            $content =$content->where('brand_name', 'LIKE', '%'.request('live_search').'%');
+        }
+        $content = $content->paginate($this->paginate);
         return view('admin_dashboard.brands.index' , compact('content'));
     }
 
