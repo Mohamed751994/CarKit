@@ -30,6 +30,11 @@ class Car extends Model
         return $query->where('status', 1);
     }
 
+    public function features()
+    {
+        return $this->hasMany(CarFeature::class, 'car_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

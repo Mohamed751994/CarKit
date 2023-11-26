@@ -5,12 +5,14 @@ namespace App\Http\Controllers\API\VendorControllers;
 use App\Http\Requests\CarRequest;
 use App\Http\Requests\CarUpdateRequest;
 use App\Models\Car;
+use App\Models\CarFeature;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Traits\MainTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -22,6 +24,7 @@ class CarController extends Controller
     //Vendor Create new Car
     public function create_new_car(CarRequest $request)
     {
+        DB::beginTransaction();
         try {
             $data = $request->validated();
             if ($request->hasFile('image')) {
@@ -37,8 +40,17 @@ class CarController extends Controller
                 $data['license'] = $license;
             }
             $car = Car::create($data);
+            if(isset($data['features']) && $data['features'] != '')
+            {
+                foreach ($data['features'] as $feature)
+                {
+                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature->name, 'price' =>$feature->price]);
+                }
+            }
+            DB::commit();
             return $this->successResponse('تم إضافة السيارة بنجاح', [$car]);
         } catch (\Throwable $th) {
+            DB::rollback();
             return $this->errorResponse($th->getMessage());
         }
     }

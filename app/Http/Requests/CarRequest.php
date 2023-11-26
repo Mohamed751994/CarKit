@@ -35,17 +35,18 @@ class CarRequest extends FormRequest
             'seats'=> 'required|max:255',
             'doors'=> 'required|max:255',
             'outside_look'=> 'required|max:255',
+            'description'=> 'nullable',
+            'notes'=> 'nullable',
             'additions'=> 'nullable|max:255',
             'image' => 'required|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
             'price_per_day'=> 'required|max:255',
             'central_point_pickup'=> 'required|max:255',
-            'features'=> 'nullable|max:255',
+            'features'=> 'nullable',
             'comfort_additions'=> 'nullable',
             'safety_additions'=> 'nullable',
             'sound_additions'=> 'nullable',
             'imagesList.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
             'license.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff,pdf,doc,docx|max:5000',
-
         ];
     }
 
