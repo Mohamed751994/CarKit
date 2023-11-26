@@ -41,11 +41,11 @@ class CarUpdateRequest extends FormRequest
             'image' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
             'price_per_day'=> 'nullable|max:255',
             'central_point_pickup'=> 'nullable|max:255',
-            'features'=> 'nullable',
+            'features.*'=> 'nullable',
             'comfort_additions'=> 'nullable',
             'safety_additions'=> 'nullable',
             'sound_additions'=> 'nullable',
-            'imagesList.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
+            'images.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff|max:5000',
             'license.*' => 'nullable|mimes:png,jpg,jpeg,webp,svg,gif,jiff,pdf,doc,docx|max:5000',
         ];
     }
@@ -68,8 +68,8 @@ class CarUpdateRequest extends FormRequest
             'central_point_pickup.required' => ' عنوان التسليم والتسلم  مطلوب',
             'image.mimes' =>'يجب أن تكون صيغة الصورة (png - jpg - jpeg - webp - svg - gif) ',
             'image.max' =>'يجب أن لا تتعدي حجم الصورة 5 ميجا بايت',
-            'imagesList.*.mimes' =>'يجب أن تكون صيغة الصور  (png - jpg - jpeg - webp - svg - gif ) ',
-            'imagesList.*.max' =>'يجب أن لا تتعدي حجم الصوره  5 ميجا بايت',
+            'images.*.mimes' =>'يجب أن تكون صيغة الصور  (png - jpg - jpeg - webp - svg - gif ) ',
+            'images.*.max' =>'يجب أن لا تتعدي حجم الصوره  5 ميجا بايت',
             'license.*.mimes' =>'يجب أن تكون صيغة صورة  الرخصة (png - jpg - jpeg - webp - svg - gif - pdf - doc - docx) ',
             'license.*.max' =>'يجب أن لا تتعدي حجم صورة الرخصة 5 ميجا بايت',
         ];

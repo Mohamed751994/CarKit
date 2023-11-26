@@ -11,6 +11,7 @@ use App\Models\Vendor;
 use App\Traits\MainTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -31,20 +32,20 @@ class CarController extends Controller
                 $image = $this->uploadFile($request, 'image', 'uploads/');
                 $data['image'] = $image;
             }
-            if ($request->hasFile('imagesList')) {
-                $multipleImages = $this->uploadMultipleFile($request,'imagesList', 'uploads/');
-                $data['imagesList'] = $multipleImages;
+            if ($request->hasFile('images')) {
+                $multipleImages = $this->uploadMultipleFile($request,'images', 'uploads/');
+                $data['images'] = $multipleImages;
             }
             if ($request->hasFile('license')) {
                 $license = $this->uploadMultipleFile($request,'license', 'uploads/');
                 $data['license'] = $license;
             }
-            $car = Car::create($data);
+            $car = Car::create(Arr::except($data, ['features']));
             if(isset($data['features']) && $data['features'] != '')
             {
-                foreach ($data['features'] as $feature)
+                foreach ($data['features'] as $key=>$feature)
                 {
-                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature->name, 'price' =>$feature->price]);
+                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>$feature['price']]);
                 }
             }
             DB::commit();

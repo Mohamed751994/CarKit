@@ -14,7 +14,7 @@ class Car extends Model
     use MainTrait;
     protected $guarded = [];
     protected $casts = [
-        'imagesList' =>'array',
+        'images' =>'array',
         'license' =>'array',
     ];
     public function getImageAttribute($value)
