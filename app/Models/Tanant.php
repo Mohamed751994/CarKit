@@ -17,6 +17,7 @@ class Tanant extends Model
 
     protected $casts = [
         'car_details' => 'json',
+        'car_features'=>'array'
     ];
 
     public function car()
