@@ -43,15 +43,13 @@ class CarController extends Controller
             $car = Car::create(Arr::except($data, ['features']));
             if(isset($data['features']) && count($data['features']) > 0)
             {
-                $arrayTest = [];
                 foreach ($data['features'] as $feature)
                 {
-                    array_push($arrayTest, $feature);
-                    //CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
+                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
                 }
             }
          //   DB::commit();
-            return $this->successResponse('تم إضافة السيارة بنجاح', $arrayTest);
+            return $this->successResponse('تم إضافة السيارة بنجاح', $car);
 //        } catch (\Throwable $th) {
 //            DB::rollback();
 //            return $this->errorResponse($th->getMessage());
