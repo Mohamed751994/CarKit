@@ -25,8 +25,8 @@ class CarController extends Controller
     //Vendor Create new Car
     public function create_new_car(CarRequest $request)
     {
-        DB::beginTransaction();
-        try {
+//        DB::beginTransaction();
+//        try {
             $data = $request->validated();
             if ($request->hasFile('image')) {
                 $image = $this->uploadFile($request, 'image', 'uploads/');
@@ -48,12 +48,12 @@ class CarController extends Controller
                     CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>$feature['price']]);
                 }
             }
-            DB::commit();
+         //   DB::commit();
             return $this->successResponse('تم إضافة السيارة بنجاح', [$car]);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return $this->errorResponse($th->getMessage());
-        }
+//        } catch (\Throwable $th) {
+//            DB::rollback();
+//            return $this->errorResponse($th->getMessage());
+//        }
     }
 
     public function get_vendor_cars()
