@@ -29,7 +29,7 @@ class CarController extends Controller
         {
             $content =$content->where('model', 'LIKE', '%'.request('live_search').'%');
         }
-        $content = $content->paginate($this->paginate);
+        $content = $content->orderBy('reservations_count', 'desc')->paginate($this->paginate);
         $vendors = Vendor::pluck('name','user_id');
         return view('admin_dashboard.cars.index', compact('content','vendors'));
     }
@@ -38,6 +38,9 @@ class CarController extends Controller
     public function show(Car $car)
     {
         $content =  $car;
+        $content->comfort_additions = ($content->comfort_additions) ? $this->explodeData($content->comfort_additions) : [];
+        $content->sound_additions =  ($content->sound_additions) ? $this->explodeData($content->sound_additions): [];
+        $content->safety_additions =  ($content->safety_additions) ? $this->explodeData($content->safety_additions): [];
         return view('admin_dashboard.cars.show', compact('content'));
     }
 

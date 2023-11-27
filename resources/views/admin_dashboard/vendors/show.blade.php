@@ -74,7 +74,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            @if(count($content->vendor?->id_images) > 0)
+                                            @if(!is_null($content->vendor?->id_images))
                                             <div class="col-md-4 my-4">
                                                 <div class="box">
                                                     <h4 class="my-3">صور البطاقة الشخصية</h4>
@@ -84,7 +84,7 @@
                                                 </div>
                                             </div>
                                             @endif
-                                            @if(count($content->vendor?->commercial_images) > 0)
+                                            @if(!is_null($content->vendor?->commercial_images))
                                                 <div class="col-md-4 my-4">
                                                     <div class="box">
                                                         <h4 class="my-3">صور السجل التجاري</h4>
@@ -94,7 +94,7 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            @if(count($content->vendor?->tax_images) > 0)
+                                            @if(!is_null($content->vendor?->tax_images))
                                                 <div class="col-md-4 my-4">
                                                     <div class="box">
                                                         <h4 class="my-3">صور البطاقة الضريبية</h4>

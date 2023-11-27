@@ -103,7 +103,9 @@ class Car extends Model
     {
         if(!$value)
         {
-            return null;
+            $array = [];
+            array_push($array,$this->image);
+            return $array;
         }
         else
         {

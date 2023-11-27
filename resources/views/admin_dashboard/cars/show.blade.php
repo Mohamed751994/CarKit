@@ -2,7 +2,6 @@
 @section('Page_Title')
     تفاصيل السيارة
 @endsection
-
 @section('content')
 
     <div class="row">
@@ -48,15 +47,50 @@
                                     {{--Profile Info--}}
                                     <div class="tab-pane fade show active" id="primary-pills-home" role="tabpanel">
                                         <div class="row align-items-center">
-                                            <div class="col-md-3">
+                                            <div class="col-md-9 mx-auto">
                                                 <div class="vendor-img">
-                                                    <img src="{{ $content->image ? $content->image : '/admin_dashboard/assets/images/no_image.png' }}" class=" w-100" alt="">
+                                                    <h4 class="text-center">صور السيارة</h4>
+                                                    <div class="card">
+                                                        <div class="card-body carImages">
+                                                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                                                <div class="carousel-inner">
+                                                                    @foreach($content->images as $image)
+                                                                        <div class="carousel-item @if($loop->first) active @endif">
+                                                                            <img src="{{$image}}" class="d-block w-100" alt="">
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                    <span class="visually-hidden">Previous</span>
+                                                                </a>
+                                                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                    <span class="visually-hidden">Next</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="mt-4 text-center">
+                                            </div>
+                                            @if(isset($content->license) > 0 && !is_null($content->license))
+                                            <div class="col-md-9 mx-auto">
+                                                <div class="vendor-img">
+                                                    <h4 class="text-center">رخصة السيارة</h4>
+                                                    <div class="card">
+                                                        <ul class="card-body carImages list-unstyled">
+                                                            @foreach($content->license as $key=>$license)
+                                                                <li class="m-3"><a href="{{$license}}" download="">تحميل  صورة {{$key+1}}</a></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            <div class="col-md-9 mx-auto">
+                                                <div class="my-4 text-center">
                                                     <h3 class="text-primary">{{$content->price_per_day}} <small class="text-dark font-13">ج.م لليوم الواحد</small></h3>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
 
                                                 <div class="vendorInfo">
                                                     <ul class="list-unstyled">
@@ -64,10 +98,11 @@
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->year}}</strong> </li>
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->fuel_type}}</strong> </li>
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->motor_type}}</strong> </li>
+                                                        <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->outside_look}}</strong> </li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
 
                                                 <div class="vendorInfo">
                                                     <ul class="list-unstyled">
@@ -75,20 +110,66 @@
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->kilometers}} km</strong> </li>
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->color}}</strong> </li>
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->seats}} مقعد</strong> </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="vendorInfo">
-                                                    <ul class="list-unstyled">
-
                                                         <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->doors}} باب </strong> </li>
-                                                        <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->outside_look}}</strong> </li>
-                                                        <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->additions}}</strong> </li>
-                                                        <li> <i class="bx bx-car mx-2"></i>  <strong class="text-primary">{{$content->features}}</strong> </li>
+
                                                     </ul>
                                                 </div>
                                             </div>
+                                            @if(count($content->comfort_additions) > 0)
+                                            <div class="col-md-4">
+                                                <div class="vendorInfo">
+                                                    <h6 class="mt-4">وسائل الراحة :</h6>
+                                                    <ul class="list-unstyled">
+                                                        @foreach($content->comfort_additions as $item)
+                                                            <li><i class="lni lni-checkmark text-success mx-2"></i> {{$item}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if(count($content->safety_additions) > 0)
+                                            <div class="col-md-4">
+                                                <div class="vendorInfo">
+                                                    <h6 class="mt-4">وسائل الأمان :</h6>
+                                                    <ul class="list-unstyled">
+                                                        @foreach($content->safety_additions as $item)
+                                                            <li><i class="lni lni-checkmark text-success mx-2"></i> {{$item}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if(count($content->sound_additions) > 0)
+                                            <div class="col-md-4">
+                                                <div class="vendorInfo">
+                                                    <h6 class="mt-4">الصوت :</h6>
+                                                    <ul class="list-unstyled">
+                                                        @foreach($content->sound_additions as $item)
+                                                            <li><i class="lni lni-checkmark text-success mx-2"></i> {{$item}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @endif
+
+                                            @if(count($content->features) > 0)
+                                                <h5 class="text-center mt-4 mb-2">المميزات الإضافية</h5>
+                                                <table class="text-center table table-bordered table-hover table-responsive">
+                                                    <thead>
+                                                    <th>اسم الميزة</th>
+                                                    <th>سعر الميزة</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($content->features as $feature)
+                                                    <tr>
+                                                        <td>{{$feature->name}} </td>
+                                                        <td>{{$feature->price}}  ج.م </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @endif
+
                                         </div>
                                     </div>
                                     {{--Cars of vendor--}}
