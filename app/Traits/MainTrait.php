@@ -67,6 +67,23 @@ trait MainTrait
         return $multiple;
     }
 
+    //transform from implode to explode
+    public function explodeData($value)
+    {
+        if(!$value)
+        {
+            return [];
+        }
+        else
+        {
+            $lists = [];
+            foreach (explode(',', $value) as $item)
+            {
+                array_push($lists, $item);
+            }
+            return $lists;
+        }
+    }
 
     //Full image path in array
     public function image_full_path_for_array($value)

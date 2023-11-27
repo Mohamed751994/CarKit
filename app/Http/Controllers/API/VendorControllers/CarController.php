@@ -45,7 +45,7 @@ class CarController extends Controller
             {
                 foreach ($data['features'] as $feature)
                 {
-                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature->name, 'price' =>($feature->price) ? $feature->price : 0]);
+                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
                 }
             }
          //   DB::commit();

@@ -121,6 +121,22 @@ class Car extends Model
         return $this->image_full_path_for_array($value);
     }
 
+
+    //
+    public function getComfortAdditionsAttribute($value)
+    {
+       return $this->explodeData($value);
+    }
+    public function getSafetyAdditionsAttribute($value)
+    {
+        return $this->explodeData($value);
+    }
+    public function getSoundAdditionsAttribute($value)
+    {
+        return $this->explodeData($value);
+    }
+
+
     //Booted
     protected static function booted()
     {
