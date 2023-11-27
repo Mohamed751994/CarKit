@@ -41,11 +41,11 @@ class CarController extends Controller
                 $data['license'] = $license;
             }
             $car = Car::create(Arr::except($data, ['features']));
-            if(isset($data['features']) && $data['features'] != '')
+            if(isset($data['features']) && count($data['features']) > 0)
             {
-                foreach ($data['features'] as $key=>$feature)
+                foreach ($data['features'] as $feature)
                 {
-                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>$feature['price']]);
+                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature->name, 'price' =>($feature->price) ? $feature->price : 0]);
                 }
             }
          //   DB::commit();
