@@ -17,7 +17,6 @@ class Tanant extends Model
 
     protected $casts = [
         'car_details' => 'json',
-        'car_features'=>'array'
     ];
 
     public function car()
@@ -101,6 +100,26 @@ class Tanant extends Model
 
         return $item;
     }
+
+
+//    //Car Features
+//    public function getCarFeaturesAttribute($value)
+//    {
+//        if(!$value)
+//        {
+//            return null;
+//        }
+//        else
+//        {
+//            $arr = [];
+//            foreach (json_decode($value) as $key)
+//            {
+//                array_push($arr, $key);
+//            }
+//            return $arr;
+//        }
+//    }
+
 
 
     protected static function booted()
