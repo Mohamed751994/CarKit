@@ -75,11 +75,14 @@ class CarController extends Controller
     {
         try {
 
-            $car = Car::with(['user.vendor', 'brands'])->active()->vendorStatus()->find($id);
+            $car = Car::with(['user.vendor', 'brands', 'features'])->active()->vendorStatus()->find($id);
             if(!$car)
             {
                 return $this->errorResponse('هذه العربية غير موجودة');
             }
+            $car->comfort_additions = ($car->comfort_additions) ? $this->explodeData($car->comfort_additions) : [];
+            $car->sound_additions =  ($car->sound_additions) ? $this->explodeData($car->sound_additions): [];
+            $car->safety_additions =  ($car->safety_additions) ? $this->explodeData($car->safety_additions): [];
             return $this->successResponse('بيانات السيارة', $car);
 
         } catch (\Throwable $th) {
