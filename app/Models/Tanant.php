@@ -103,22 +103,23 @@ class Tanant extends Model
 
 
 //    //Car Features
-//    public function getCarFeaturesAttribute($value)
-//    {
-//        if(!$value)
-//        {
-//            return null;
-//        }
-//        else
-//        {
-//            $arr = [];
-//            foreach (json_decode($value) as $key)
-//            {
-//                array_push($arr, $key);
-//            }
-//            return $arr;
-//        }
-//    }
+    public function getCarFeaturesAttribute($value)
+    {
+        if(!$value)
+        {
+            return null;
+        }
+        else
+        {
+            $features = [];
+            foreach (explode(',',$value) as $id)
+            {
+                $carFeature = CarFeature::find($id);
+                array_push($features, $carFeature);
+            }
+            return $features;
+        }
+    }
 
 
 
