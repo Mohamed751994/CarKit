@@ -123,18 +123,18 @@ class Car extends Model
 
 
     //
-    public function getComfortAdditionsAttribute($value)
-    {
-       return $this->explodeData($value);
-    }
-    public function getSafetyAdditionsAttribute($value)
-    {
-        return $this->explodeData($value);
-    }
-    public function getSoundAdditionsAttribute($value)
-    {
-        return $this->explodeData($value);
-    }
+//    public function getComfortAdditionsAttribute($value)
+//    {
+//       return $this->explodeData($value);
+//    }
+//    public function getSafetyAdditionsAttribute($value)
+//    {
+//        return $this->explodeData($value);
+//    }
+//    public function getSoundAdditionsAttribute($value)
+//    {
+//        return $this->explodeData($value);
+//    }
 
 
     //Booted
