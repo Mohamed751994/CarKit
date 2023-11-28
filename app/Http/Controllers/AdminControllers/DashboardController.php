@@ -33,6 +33,9 @@ class DashboardController extends Controller
         $reservations_rejected = Tanant::whereStatus('rejected')->count();
         $latest_10_orders = Tanant::latest()->limit(10)->get();
 
+        $vendorsDistinct = Vendor::whereFeatured(1)->count();
+        $vendorsNotDistinct = Vendor::whereFeatured(0)->count();
+
         //Most Reserve Cars
         $most_reserve_cars = Tanant::select('car_id', \DB::raw('COUNT(*) as `count`'), 'car_details')
             ->groupBy('car_id', 'car_details')
@@ -46,7 +49,7 @@ class DashboardController extends Controller
             ->orderBy('count', 'DESC')
             ->limit(6)
             ->get();
-        $data = ['vendors' ,'users','cars','reservations_count','reservations_pending', 'reservations_cancelled', 'reservations_rejected' , 'reservations_approved','most_reserve_cars','most_reserve_vendors','latest_10_orders'];
+        $data = ['vendors' ,'users','cars','vendorsDistinct', 'vendorsNotDistinct','reservations_count','reservations_pending', 'reservations_cancelled', 'reservations_rejected' , 'reservations_approved','most_reserve_cars','most_reserve_vendors','latest_10_orders'];
         return view('admin_dashboard.dashboard', compact($data));
     }
 

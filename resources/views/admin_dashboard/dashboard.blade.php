@@ -64,7 +64,7 @@
 
 
         {{--Chart1--}}
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card rounded-4 w-100">
                 <div class="card-header bg-transparent border-0">
                     <div class="row g-3 align-items-center">
@@ -82,7 +82,7 @@
         </div>
 
         {{--Chart2--}}
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card rounded-4 w-100">
                 <div class="card-header bg-transparent border-0">
                     <div class="row g-3 align-items-center">
@@ -245,17 +245,18 @@
             type: 'bar',
             data: {
                 labels: [
-                    'الحجوزات المرفوضة '+' ('+{{$reservations_rejected}}+')',
-                    'الحجوزات الملغية'+' ('+{{$reservations_cancelled}}+')',
+                    'كل الحجوزات  '+' ('+{{$reservations_count}}+')',
+                    'الحجوزات في الأنتظار'+' ('+{{$reservations_pending}}+')',
                     'الحجوزات المؤكدة'+' ('+{{$reservations_approved}}+')',
-                    'الحجوزات في الأنتظار'+' ('+{{$reservations_pending}}+')'
+                    'الحجوزات الملغية'+' ('+{{$reservations_cancelled}}+')',
+                    'الحجوزات المرفوضة '+' ('+{{$reservations_rejected}}+')'
                 ],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [{{$reservations_rejected}},{{$reservations_cancelled}},{{$reservations_approved}},{{$reservations_pending}}],
+                    label: " الحجوزات",
+                    data: [{{$reservations_count}},{{$reservations_pending}},{{$reservations_approved}},{{$reservations_cancelled}},{{$reservations_rejected}}],
                     borderWidth: 1,
-                    borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // Add custom color border
-                    backgroundColor: ['#ffcb32', '#12bf24','#ff6500', '#f03e0b'], // Add custom color background (Points and Fill)
+                    borderColor: ['#ffffff','#ffffff', '#ffffff', '#ffffff', '#ffffff'], // Add custom color border
+                    backgroundColor: ['#1940bb','#ffcb32', '#12bf24','#ff6500', '#f03e0b'], // Add custom color background (Points and Fill)
                 }]
             },
             options: {
@@ -274,16 +275,14 @@
             type: 'doughnut',
             data: {
                 labels: [
-                    'الحجوزات المرفوضة '+' ('+{{$reservations_rejected}}+')',
-                    'الحجوزات الملغية'+' ('+{{$reservations_cancelled}}+')',
-                    'الحجوزات المؤكدة'+' ('+{{$reservations_approved}}+')',
-                    'الحجوزات في الأنتظار'+' ('+{{$reservations_pending}}+')'
+                    'أصحاب المعارض المميزين '+' ('+{{$vendorsDistinct}}+')',
+                    'أصحاب المعارض الغير المميزين'+' ('+{{$vendorsNotDistinct}}+')'
                 ],
                 datasets: [{
-                    data: [{{$reservations_rejected}},{{$reservations_cancelled}},{{$reservations_approved}},{{$reservations_pending}}],
+                    data: [{{$vendorsDistinct}},{{$vendorsNotDistinct}}],
 
-                    borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // Add custom color border
-                    backgroundColor: ['#ffcb32', '#12bf24','#ff6500', '#f03e0b'], // Add custom color background (Points and Fill)
+                    borderColor: ['#ffffff', '#ffffff'], // Add custom color border
+                    backgroundColor: ['#12bf24','#ff6500'], // Add custom color background (Points and Fill)
                     borderWidth: 1 // Specify bar border width
                 }]},
             options: {
