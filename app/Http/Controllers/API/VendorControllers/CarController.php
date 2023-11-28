@@ -112,6 +112,11 @@ class CarController extends Controller
     public function vendor_update_his_car(CarUpdateRequest $request, $id)
     {
         try {
+            $car = Car::find($id);
+            if(!$car)
+            {
+                return $this->errorResponse('السيارة غير موجودة');
+            }
             $data = $request->validated();
             if ($request->hasFile('image')) {
                 $image = $this->uploadFile($request, 'image', 'uploads/');
@@ -125,7 +130,15 @@ class CarController extends Controller
                 $license = $this->uploadMultipleFile($request,'license', 'uploads/');
                 $data['license'] = $license;
             }
-            Car::where('user_id', $this->user_id())->whereId($id)->update($data);
+            if(isset($data['features']) && count($data['features']) > 0)
+            {
+                CarFeature::where('car_id', $car->id)->delete();
+                foreach ($data['features'] as $feature)
+                {
+                    CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
+                }
+            }
+            Car::where('user_id', $this->user_id())->whereId($car->id)->update($data);
             return $this->successResponse('تم تعديل السيارة بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
