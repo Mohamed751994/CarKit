@@ -92,7 +92,7 @@ class CarController extends Controller
     public function get_single_car($id)
     {
         try {
-            $car = Car::with(['user.vendor', 'brands'])->find($id);
+            $car = Car::with(['user.vendor', 'brands', 'features'])->find($id);
             if(!$car)
             {
                 return $this->errorResponse('هذه العربية غير موجودة');
@@ -114,9 +114,9 @@ class CarController extends Controller
                 $image = $this->uploadFile($request, 'image', 'uploads/');
                 $data['image'] = $image;
             }
-            if ($request->hasFile('imagesList')) {
-                $multipleImages = $this->uploadMultipleFile($request,'imagesList', 'uploads/');
-                $data['imagesList'] = $multipleImages;
+            if ($request->hasFile('images')) {
+                $multipleImages = $this->uploadMultipleFile($request,'images', 'uploads/');
+                $data['images'] = $multipleImages;
             }
             if ($request->hasFile('license')) {
                 $license = $this->uploadMultipleFile($request,'license', 'uploads/');
