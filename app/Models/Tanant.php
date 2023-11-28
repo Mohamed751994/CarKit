@@ -12,7 +12,7 @@ class Tanant extends Model
     use HasFactory;
     use MainTrait;
     protected $guarded = ['id'];
-    protected $appends = ['status_array'];
+    protected $appends = ['status_array', 'final_total'];
 
 
     protected $casts = [
@@ -103,24 +103,29 @@ class Tanant extends Model
     }
 
 
-//    //Car Features
-//    public function getCarFeaturesAttribute($value)
-//    {
-//        if(!$value)
-//        {
-//            return null;
-//        }
-//        else
-//        {
-//            $features = [];
-//            foreach (explode(',',$value) as $id)
-//            {
-//                $carFeature = CarFeature::find($id);
-//                array_push($features, $carFeature);
-//            }
-//            return $features;
-//        }
-//    }
+    //Car Features
+    public function getCarFeaturesAttribute($value)
+    {
+        if(!$value)
+        {
+            return null;
+        }
+        else
+        {
+            $features = [];
+            foreach (json_decode($value) as $item)
+            {
+                array_push($features, $item);
+            }
+            return $features;
+        }
+    }
+
+    //Final Total
+    public function getFinalTotalAttribute()
+    {
+        return  $this->total_amount_after_discount + collect($this->car_features)->sum('price');
+    }
 
 
 
