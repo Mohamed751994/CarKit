@@ -42,7 +42,7 @@ class CarObserver
      */
     public function updated(Car $car): void
     {
-        //
+        $this->additions($car);
     }
 
     /**

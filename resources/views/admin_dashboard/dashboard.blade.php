@@ -62,26 +62,27 @@
             </div>
         </div>
 
-        {{--Chart--}}
-        <div class="col-md-6">
+
+        {{--Chart1--}}
+        <div class="col-md-8">
             <div class="card rounded-4 w-100">
                 <div class="card-header bg-transparent border-0">
                     <div class="row g-3 align-items-center">
                         <div class="col">
-                            <h6 class=" mb-0 mt-3">الحجوزات</h6>
+                            <h6 class=" mb-0 mt-3"> الحجوزات</h6>
                         </div>
                     </div>
                 </div>
                 <div class="card-body py-4">
                     <div class="charts-payments">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="myChart1" class="w-100"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
         {{--Chart2--}}
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card rounded-4 w-100">
                 <div class="card-header bg-transparent border-0">
                     <div class="row g-3 align-items-center">
@@ -92,11 +93,12 @@
                 </div>
                 <div class="card-body py-4">
                     <div class="charts-payments">
-                        <canvas id="myChart2" class="w-100"></canvas>
+                        <canvas id="myChart2"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+
 
     </div>
 
@@ -237,9 +239,38 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        const ctx1 = document.getElementById('myChart1');
+
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'الحجوزات المرفوضة '+' ('+{{$reservations_rejected}}+')',
+                    'الحجوزات الملغية'+' ('+{{$reservations_cancelled}}+')',
+                    'الحجوزات المؤكدة'+' ('+{{$reservations_approved}}+')',
+                    'الحجوزات في الأنتظار'+' ('+{{$reservations_pending}}+')'
+                ],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [{{$reservations_rejected}},{{$reservations_cancelled}},{{$reservations_approved}},{{$reservations_pending}}],
+                    borderWidth: 1,
+                    borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // Add custom color border
+                    backgroundColor: ['#ffcb32', '#12bf24','#ff6500', '#f03e0b'], // Add custom color background (Points and Fill)
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
         Chart.defaults.font.size = 14;
-        var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
+        var ctx2 = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
                 labels: [
@@ -262,26 +293,5 @@
         });
 
     </script>
-    <script>
-        const ctx2 = document.getElementById('myChart2');
 
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['أصحاب المعارض الغير مميزين', 'أصحاب المعارض  مميزين'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
 @endpush
