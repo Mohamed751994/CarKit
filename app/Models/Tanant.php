@@ -17,6 +17,7 @@ class Tanant extends Model
 
     protected $casts = [
         'car_details' => 'json',
+        'car_features' => 'array',
     ];
 
     public function car()
@@ -103,23 +104,23 @@ class Tanant extends Model
 
 
 //    //Car Features
-    public function getCarFeaturesAttribute($value)
-    {
-        if(!$value)
-        {
-            return null;
-        }
-        else
-        {
-            $features = [];
-            foreach (explode(',',$value) as $id)
-            {
-                $carFeature = CarFeature::find($id);
-                array_push($features, $carFeature);
-            }
-            return $features;
-        }
-    }
+//    public function getCarFeaturesAttribute($value)
+//    {
+//        if(!$value)
+//        {
+//            return null;
+//        }
+//        else
+//        {
+//            $features = [];
+//            foreach (explode(',',$value) as $id)
+//            {
+//                $carFeature = CarFeature::find($id);
+//                array_push($features, $carFeature);
+//            }
+//            return $features;
+//        }
+//    }
 
 
 

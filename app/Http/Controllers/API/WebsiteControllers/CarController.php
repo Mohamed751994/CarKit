@@ -141,6 +141,16 @@ class CarController extends Controller
             $data['total_amount_after_discount'] = $this->get_total_amount_after_discount($data['total_amount'], $data['discount_percentage']);
             $data['vendor_user_id'] = $car->user_id;
             $data['car_details'] = json_encode($car);
+            if(isset($data['car_features']))
+            {
+                $features = [];
+                foreach ($data['car_features'] as $feature)
+                {
+                    array_push($features, $feature);
+                }
+                $data['car_features'] =  $features;
+            }
+
             $tanant = Tanant::create($data);
 
             //Send Mail
