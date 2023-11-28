@@ -97,7 +97,8 @@
                 <table class="table table-hover table-bordered" dir="rtl">
                     <thead class="table-secondary">
                     <th>الحدث</th>
-                    <th>العنصر</th>
+                    <th>الجدول</th>
+                    <th>رقم العنصر</th>
                     <th>IP address</th>
                     <th>التاريخ والوقت</th>
                     </thead>
@@ -111,16 +112,14 @@
                             @elseif($log->method == 'update') بتحديث و تغيير بيانات
                             @elseif($log->method == 'delete') بحذف
                             @endif
-                            عنصر في جدول
+                            عنصر
+                        </td>
+                        <td>
                             <strong class="text-danger">( {{$log->model}} )</strong>
                         </td>
                         <td>
                             <ul>
-                                @foreach(json_decode($log->item_json) as $key => $item)
-                                    @if($key != 'created_at' && $key != 'updated_at')
-                                    <li>{{$key}} : {{$item}} </li>
-                                    @endif
-                                @endforeach
+                                {{json_decode($log->item_json)->id}}
                             </ul>
                         </td>
                         <td>{{$log->ip}}</td>
