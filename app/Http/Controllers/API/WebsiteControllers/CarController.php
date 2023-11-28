@@ -144,7 +144,7 @@ class CarController extends Controller
             if(isset($data['car_features']))
             {
                 $features = [];
-                foreach ($data['car_features'] as $feature)
+                foreach ((array) $data['car_features'] as $feature)
                 {
                     array_push($features, $feature);
                 }
