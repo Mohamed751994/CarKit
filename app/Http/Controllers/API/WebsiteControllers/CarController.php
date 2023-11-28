@@ -135,10 +135,6 @@ class CarController extends Controller
             //Some Inputs
             $data['user_id'] = (auth()->user())? auth()->user()->id : null;
             $data['status'] = ($car->automatic_approved == 1) ? 'approved' : 'pending';
-            $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
-            $data['discount_percentage'] =  getSettings('discount_percentage');
-            $data['total_amount'] = $this->get_total_amount($data['days'] , $car->price_per_day);
-            $data['total_amount_after_discount'] = $this->get_total_amount_after_discount($data['total_amount'], $data['discount_percentage']);
             $data['vendor_user_id'] = $car->user_id;
             $data['car_details'] = json_encode($car);
             if(isset($data['car_features']) && count($data['car_features']) > 0)
@@ -149,8 +145,16 @@ class CarController extends Controller
                     array_push($features , $feature);
                 }
                 $data['car_features'] = $features;
+                $data['prices_features'] =  collect($features)->sum('price');
             }
-
+            else { $data['prices_features'] = 0; }
+            //Prices & Total
+            $data['days'] =  dateDiffInDays($data['from_date'],$data['to_date']);
+            $data['price_per_day'] =  $car->price_per_day;
+            $data['price_in_days'] =  $data['price_per_day'] * $data['days'];
+            $data['total_amount'] = $this->get_total_amount($data['prices_features'] , $data['price_in_days']);
+            $data['discount_percentage'] =  getSettings('discount_percentage');
+            $data['total_amount_after_discount'] = $this->get_total_amount_after_discount($data['total_amount'], $data['discount_percentage']);
             $tanant = Tanant::create($data);
 
             //Send Mail

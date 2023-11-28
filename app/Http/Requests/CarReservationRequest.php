@@ -38,7 +38,7 @@ class CarReservationRequest extends FormRequest
             'car_id' => 'required|max:255',
             'vendor_user_id' => 'nullable|max:255',
             'car_details' => 'nullable',
-            'car_features' => 'nullable',
+            'car_features.*' => 'nullable',
         ];
     }
 

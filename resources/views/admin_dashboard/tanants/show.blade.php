@@ -56,10 +56,15 @@
                                                 <li>بداية الحجز : <strong class="text-primary">{{$content->from_date}}</strong></li>
                                                 <li>نهاية الحجز : <strong class="text-primary">{{$content->to_date}}</strong></li>
                                                 <li>عدد الأيام : <strong class="text-primary">{{ $content->days}}</strong></li>
-                                                <li>سعر اليوم الواحد : <strong class="text-primary">{{ json_decode($content->car_details)->price_per_day}} جنية</strong></li>
+                                                <li>سعر اليوم الواحد : <strong class="text-primary">{{ json_decode($content->car_details)->price_per_day}} ج.م</strong></li>
+                                                @if($content->car_features)
+                                                    @foreach($content->car_features as $feature)
+                                                        <li>{{$feature->name}} : <strong class="text-primary">{{$feature->price}} ج.م</strong></li>
+                                                    @endforeach
+                                                @endif
+                                                <li>السعر قبل الخصم : <strong class="text-primary">{{$content->total_amount + $content->feature_total_price}} ج.م</strong></li>
                                                 <li>نسبة الخصم : <strong class="text-primary">{{$content->discount_percentage}} %</strong></li>
-                                                <li>السعر قبل الخصم : <strong class="text-primary">{{$content->total_amount}} جنية</strong></li>
-                                                <li>السعر بعد الخصم : <strong class="text-primary">{{$content->total_amount_after_discount}} جنية</strong></li>
+                                                <li>السعر بعد الخصم : <strong class="text-primary">{{$content->final_total}} ج.م</strong></li>
                                             </ul>
                                         </div>
                                         <div class="">

@@ -127,9 +127,9 @@ trait MainTrait
     }
 
     //return total amount
-    public function get_total_amount($days, $price_per_day)
+    public function get_total_amount($featuresPrices, $price_in_days)
     {
-        return ($days * $price_per_day);
+        return ($featuresPrices + $price_in_days);
     }
 
     //return total amount after discount

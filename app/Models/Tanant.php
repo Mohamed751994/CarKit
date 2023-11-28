@@ -12,7 +12,7 @@ class Tanant extends Model
     use HasFactory;
     use MainTrait;
     protected $guarded = ['id'];
-    protected $appends = ['status_array', 'final_total'];
+    protected $appends = ['status_array'];
 
 
     protected $casts = [
@@ -121,11 +121,6 @@ class Tanant extends Model
         }
     }
 
-    //Final Total
-    public function getFinalTotalAttribute()
-    {
-        return  $this->total_amount_after_discount + collect($this->car_features)->sum('price');
-    }
 
 
 
