@@ -143,7 +143,7 @@ class CarController extends Controller
             $data['car_details'] = json_encode($car);
             $data['car_features'] = ($data['car_features']) ? json_decode($data['car_features']) : null;
 
-
+            return $data['car_features'];
             $tanant = Tanant::create($data);
 
             //Send Mail
