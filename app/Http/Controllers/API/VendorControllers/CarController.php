@@ -138,7 +138,7 @@ class CarController extends Controller
                     CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
                 }
             }
-            Car::where('user_id', $this->user_id())->whereId($car->id)->update($data);
+            Car::where('user_id', $this->user_id())->whereId($car->id)->update(Arr::except($data, ['features']));
             return $this->successResponse('تم تعديل السيارة بنجاح');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());

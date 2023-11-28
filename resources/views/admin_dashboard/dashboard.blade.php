@@ -2,7 +2,7 @@
 
 @section('Page_Title')  لوحة التحكم @endsection
 
-@section('content')
+@push('styles')
     <style>
         .mostVendorImg
         {
@@ -12,8 +12,12 @@
             margin: 5px;
         }
     </style>
-    <div class="row mb-5">
-        <div class="col-6 col-lg-4">
+@endpush
+
+@section('content')
+
+    <div class="row mb-2">
+        <div class="col-6 col-lg-3">
             <div class="card radius-10 bg-tiffany">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
@@ -24,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-4">
+        <div class="col-6 col-lg-3">
             <div class="card radius-10 bg-purple">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
@@ -35,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-4">
+        <div class="col-6 col-lg-3">
             <div class="card radius-10 bg-orange">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
@@ -47,53 +51,56 @@
             </div>
         </div>
         <div class="col-6 col-lg-3">
-            <div class="card radius-10 bg-warning">
+            <div class="card radius-10 bg-bronze">
                 <div class="card-body text-center">
                     <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
-                        <i class="lni lni-offer"></i>
+                        <i class="lni lni-car"></i>
                     </div>
-                    <h3 class="text-white">{{$reservations_pending}}</h3>
-                    <p class="mb-0 text-white">الحجوزات (في الأنتظار)</p>
+                    <h3 class="text-white">{{$reservations_count}}</h3>
+                    <p class="mb-0 text-white">عدد الحجوزات</p>
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
-            <div class="card radius-10 bg-success">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
-                        <i class="lni lni-offer"></i>
+
+        {{--Chart--}}
+        <div class="col-md-6">
+            <div class="card rounded-4 w-100">
+                <div class="card-header bg-transparent border-0">
+                    <div class="row g-3 align-items-center">
+                        <div class="col">
+                            <h6 class=" mb-0 mt-3">الحجوزات</h6>
+                        </div>
                     </div>
-                    <h3 class="text-white">{{$reservations_approved}}</h3>
-                    <p class="mb-0 text-white">الحجوزات المؤكدة</p>
+                </div>
+                <div class="card-body py-4">
+                    <div class="charts-payments">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-6 col-lg-3">
-            <div class="card radius-10 bg-danger">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
-                        <i class="lni lni-offer"></i>
+
+        {{--Chart2--}}
+        <div class="col-md-6">
+            <div class="card rounded-4 w-100">
+                <div class="card-header bg-transparent border-0">
+                    <div class="row g-3 align-items-center">
+                        <div class="col">
+                            <h6 class=" mb-0 mt-3">أصحاب المعارض</h6>
+                        </div>
                     </div>
-                    <h3 class="text-white">{{$reservations_cancelled}}</h3>
-                    <p class="mb-0 text-white">الحجوزات الملغية</p>
                 </div>
-            </div>
-        </div>
-        <div class="col-6 col-lg-3">
-            <div class="card radius-10 bg-danger">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-white-1 text-white">
-                        <i class="lni lni-offer"></i>
+                <div class="card-body py-4">
+                    <div class="charts-payments">
+                        <canvas id="myChart2" class="w-100"></canvas>
                     </div>
-                    <h3 class="text-white">{{$reservations_rejected}}</h3>
-                    <p class="mb-0 text-white">الحجوزات المرفوضة</p>
                 </div>
             </div>
         </div>
 
     </div>
 
-
+    {{--Most car reserved && Most Vendors Reserved--}}
     <div class="row mb-5">
         <div class="col-12 col-lg-6 d-flex">
             <div class="card rounded-4 w-100">
@@ -165,7 +172,7 @@
         </div>
     </div><!--end row-->
 
-
+    {{--Last 10 car reserved--}}
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-12 d-flex">
             <div class="card radius-10 w-100">
@@ -228,4 +235,53 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        Chart.defaults.font.size = 14;
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'الحجوزات المرفوضة '+' ('+{{$reservations_rejected}}+')',
+                    'الحجوزات الملغية'+' ('+{{$reservations_cancelled}}+')',
+                    'الحجوزات المؤكدة'+' ('+{{$reservations_approved}}+')',
+                    'الحجوزات في الأنتظار'+' ('+{{$reservations_pending}}+')'
+                ],
+                datasets: [{
+                    data: [{{$reservations_rejected}},{{$reservations_cancelled}},{{$reservations_approved}},{{$reservations_pending}}],
+
+                    borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'], // Add custom color border
+                    backgroundColor: ['#ffcb32', '#12bf24','#ff6500', '#f03e0b'], // Add custom color background (Points and Fill)
+                    borderWidth: 1 // Specify bar border width
+                }]},
+            options: {
+                responsive: true, // Instruct chart js to respond nicely.
+                maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+            }
+        });
+
+    </script>
+    <script>
+        const ctx2 = document.getElementById('myChart2');
+
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['أصحاب المعارض الغير مميزين', 'أصحاب المعارض  مميزين'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 @endpush
