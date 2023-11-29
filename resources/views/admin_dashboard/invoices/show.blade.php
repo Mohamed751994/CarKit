@@ -21,11 +21,21 @@
                                         <div class="invoice-section">
                                             <div class="row invoice-head justify-content-between align-items-center">
                                                 <div class="col-12">
-                                                    <div class="col"></div>
-                                                    <h6>فاتورة</h6>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h6>فاتورة</h6>
+                                                        <h6>كاركيتس</h6>
+                                                    </div>
                                                 </div>
-                                                <div class="col-8">
-
+                                                <div class="col-12">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="info">
+                                                            <ul class="list-unstyled">
+                                                                <li>رقم الفاتورة : <strong>{{$content->trip_num}}</strong></li>
+                                                                <li>تاريخ الحجز : <strong>{{$content->from_date}} <i class="mx-2 lni lni-arrow-left"></i> {{$content->to_date}}</strong></li>
+                                                                <li> عدد الأيام : <strong>{{$content->days}} يوم</strong></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -61,7 +61,7 @@ class CarController extends Controller
         try {
 
             $user_id = $this->user_id();
-            $cars = Car::where('user_id', $user_id)->latest()->get();
+            $cars = Car::with(['user.vendor', 'brands', 'features'])->where('user_id', $user_id)->latest()->get();
 
             $vendor_name = Auth::user()->name;
             return $this->successResponse("سيارات التاجر ($vendor_name)", $cars);
@@ -77,7 +77,7 @@ class CarController extends Controller
         try {
 
             $user_id = $this->user_id();
-            $cars = Car::where('user_id', $user_id)->latest()->paginate($this->paginate);
+            $cars = Car::with(['user.vendor', 'brands', 'features'])->where('user_id', $user_id)->latest()->paginate($this->paginate);
 
             $vendor_name = Auth::user()->name;
             return $this->successResponse("سيارات التاجر ($vendor_name)", $cars);
@@ -138,9 +138,9 @@ class CarController extends Controller
                     CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
                 }
             }
-            $car->safety_additions = (isset($data['safety_additions'])) ? implode(",", $data['safety_additions']) : null;
-            $car->comfort_additions = (isset($data['comfort_additions'])) ? implode(",", $data['comfort_additions']) : null;
-            $car->sound_additions = (isset($data['sound_additions'])) ? implode(",", $data['sound_additions']) : null;
+            $data['safety_additions'] = (isset($data['safety_additions'])) ? implode(",", $data['safety_additions']) : null;
+            $data['comfort_additions'] = (isset($data['comfort_additions'])) ? implode(",", $data['comfort_additions']) : null;
+            $data['sound_additions'] = (isset($data['sound_additions'])) ? implode(",", $data['sound_additions']) : null;
             Car::where('user_id', $this->user_id())->whereId($car->id)->update(Arr::except($data, ['features']));
             return $this->successResponse('تم تعديل السيارة بنجاح');
         } catch (\Throwable $th) {
