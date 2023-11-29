@@ -114,7 +114,7 @@ class CarController extends Controller
         try {
 
             $data = $request->validated();
-            $car = Car::with('user.vendor')->active()->vendorStatus()->findOrFail($data['car_id']);
+            $car = Car::with(['user.vendor', 'brands'])->active()->vendorStatus()->findOrFail($data['car_id']);
             if(!$car){
                 return $this->errorResponse('السيارة غير موجودة');
             }

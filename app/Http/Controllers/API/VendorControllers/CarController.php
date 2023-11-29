@@ -130,17 +130,27 @@ class CarController extends Controller
                 $license = $this->uploadMultipleFile($request,'license', 'uploads/');
                 $data['license'] = $license;
             }
+            CarFeature::where('car_id', $car->id)->delete();
             if(isset($data['features']) && count($data['features']) > 0)
             {
-                CarFeature::where('car_id', $car->id)->delete();
                 foreach ($data['features'] as $feature)
                 {
                     CarFeature::create(['car_id' =>$car->id,'name'=> $feature['name'], 'price' =>($feature['price']) ? $feature['price'] : 0]);
                 }
             }
-            $data['safety_additions'] = (isset($data['safety_additions'])) ? implode(",", $data['safety_additions']) : null;
-            $data['comfort_additions'] = (isset($data['comfort_additions'])) ? implode(",", $data['comfort_additions']) : null;
-            $data['sound_additions'] = (isset($data['sound_additions'])) ? implode(",", $data['sound_additions']) : null;
+            if( (isset($data['safety_additions'])))
+            {
+                $data['safety_additions'] = implode(",", $data['safety_additions']);
+            }
+            if( (isset($data['comfort_additions'])))
+            {
+                $data['comfort_additions'] = implode(",", $data['comfort_additions']);
+            }
+            if( (isset($data['sound_additions'])))
+            {
+                $data['sound_additions'] = implode(",", $data['sound_additions']);
+            }
+
             Car::where('user_id', $this->user_id())->whereId($car->id)->update(Arr::except($data, ['features']));
             return $this->successResponse('تم تعديل السيارة بنجاح');
         } catch (\Throwable $th) {

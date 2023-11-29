@@ -2040,7 +2040,40 @@ label.error
     top: 0;
     bottom: inherit;
 }
+.invoice-section
+{
+    background: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #e7e7e7;
+}
+.invoice-section .invoice-head
+{
+    padding: 30px 0;
+}
 
+.invoice-section .invoice-body .info-list
+{
+    margin-bottom: 35px;
+    width: 100%;
+}
+.invoice-section .invoice-body .info-list h5
+{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-decoration: underline;
+}
+.invoice-section .invoice-body .info-list li
+{
+    padding-bottom: 15px;
+}
+.invoice-section .invoice-body .info-list.prices li
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {
