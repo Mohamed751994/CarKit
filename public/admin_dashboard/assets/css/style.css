@@ -2054,7 +2054,7 @@ label.error
 
 .invoice-section .invoice-body .info-list
 {
-    margin-bottom: 35px;
+    margin-bottom: 20px;
     width: 100%;
 }
 .invoice-section .invoice-body .info-list h5
@@ -2074,9 +2074,32 @@ label.error
     justify-content: space-between;
     align-items: center;
 }
+.totalInvoices li
+{
+    width: 100%;
+    text-align: center;
+    background: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 1px;
+    color: #0a58ca;
+}
+@media print {
+
+    #printInvoice { /* Or specify a table class */
+        max-height: 100%;
+        overflow: hidden;
+        page-break-after: always;
+    }
+
+}
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {
 		display: none
 	}
+    .invoice-section .invoice-body .d-flex
+    {
+        flex-wrap: wrap;
+    }
 }

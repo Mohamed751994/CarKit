@@ -22,6 +22,12 @@
                         </select>
                     </form>
                 </div>
+                <div class="col-md-8">
+                    <ul class="totalInvoices list-unstyled d-flex justify-content-around align-items-center mb-0">
+                        <li><strong>عدد الفواتير : {{$content->total()}}</strong></li>
+                        <li><strong>إجمالي الفواتير : {{$sumTotal}} ج.م </strong></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="table-responsive mt-4">
@@ -43,13 +49,13 @@
                             </td>
                             <td>{{$con->total_amount_after_discount}} ج.م</td>
                             <td>
-                                <a href="{{route('invoices.show', $con->id)}}" class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                <a href="{{route('invoices.show', $con->id)}}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 ><i class="bi bi-eye-fill mx-2"></i> عرض الفاتورة</a>
                             </td>
                         </tr>
                     @empty
                         <tr class="text-center">
-                            <td colspan="3">لا يوجد فواتير حتي الآن</td>
+                            <td colspan="4">لا يوجد فواتير حتي الآن</td>
                         </tr>
                     @endforelse
                     </tbody>

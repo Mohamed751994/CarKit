@@ -24,17 +24,16 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $content = Tanant::whereStatus('approved');
+        $content = Tanant::whereStatus('approved')->where('from_date', '<=',date('Y-m-d', strtotime(Carbon::tomorrow())));
         if($request->vendor && !is_null($request->vendor))
         {
             $content = $content->where('vendor_user_id', $request->vendor);
         }
-        $content = $content
-            ->where('from_date', '<=',date('Y-m-d', strtotime(Carbon::tomorrow())))
-            ->orderBy('from_date','desc')
-            ->paginate($this->paginate);
+        $sumTotal = $content->sum('total_amount_after_discount');
+        $content = $content->orderBy('from_date','desc')->paginate($this->paginate);
         $vendors = Vendor::pluck('name','user_id');
-        return view('admin_dashboard.invoices.index' , compact('content','vendors'));
+
+        return view('admin_dashboard.invoices.index' , compact('content','vendors','sumTotal'));
     }
 
 

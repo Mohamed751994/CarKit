@@ -15,10 +15,11 @@
                 <div class="card-body">
                     <div class="row g-3 mt-4">
                         <div class="col-12">
-                            <div class="card shadow-none bg-light border p-5">
+                            <div class="card shadow-none bg-light border p-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="invoice-section">
+                                        <button type="button" class="btn btn-success w-100" id="printInvoiceBtn"><i class="bx bx-printer mx-2"></i> طباعة الفاتورة</button>
+                                        <div id="printInvoice"  dir="rtl" class="invoice-section">
                                             <!--Head-->
                                             <div class="row invoice-head">
                                                 <div class="col-12">
@@ -126,3 +127,14 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('admin_dashboard/assets/js/print.js')}}"></script>
+    <script>
+        //print
+        $(document).on('click', '#printInvoiceBtn',function(){
+            $('#printInvoice').printElement({
+            });
+        })
+    </script>
+@endpush
