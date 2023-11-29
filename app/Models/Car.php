@@ -32,7 +32,7 @@ class Car extends Model
 
     public function features()
     {
-        return $this->hasMany(CarFeature::class, 'car_id')->select('name', 'price');
+        return $this->hasMany(CarFeature::class, 'car_id');
     }
 
     public function user()

@@ -9,5 +9,6 @@ class CarFeature extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $visible = ['name', 'price'];
 
 }

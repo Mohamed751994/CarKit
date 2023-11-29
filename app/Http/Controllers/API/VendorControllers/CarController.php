@@ -92,7 +92,7 @@ class CarController extends Controller
     public function get_single_car($id)
     {
         try {
-            $car = Car::with(['user.vendor', 'brands', 'features'])->find($id);
+            $car = Car::with(['user.vendor', 'brands','features'])->find($id);
             if(!$car)
             {
                 return $this->errorResponse('هذه العربية غير موجودة');

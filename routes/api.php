@@ -24,7 +24,8 @@ use App\Http\Controllers\API\WebsiteControllers\CarController;
 Route::get('/search-cars', [CarController::class, 'search_cars'])->name('vendor.search_cars');
 
 //Route::get('/tenant', function(){
-//    return \App\Models\Tanant::find(8);
+//
+//    return \App\Models\Car::with('features')->find(26);
 //});
 
 //Cars in website
