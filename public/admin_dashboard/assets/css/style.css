@@ -2040,6 +2040,7 @@ label.error
     top: 0;
     bottom: inherit;
 }
+
 @media screen and (max-width:520px) {
 	.chat-footer-menu,
 	.chat-top-header-menu {

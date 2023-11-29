@@ -56,6 +56,15 @@
         </li>
 
 
+        <li class="@if(getActiveLink('invoices')) mm-active @endif">
+            <a href="{{ route('invoices.index')  }}">
+                <div class="parent-icon"><i class="lni lni-printer"></i>
+                </div>
+                <div class="menu-title">الفواتير</div>
+            </a>
+        </li>
+
+
         <li class="@if(getActiveLink('reports')) mm-active @endif">
             <a href="{{ route('reports.index')  }}">
                 <div class="parent-icon"><i class="bx bxs-file-pdf"></i>
